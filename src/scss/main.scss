@@ -1,0 +1,12 @@
+@import 'bootstrap/scss/_functions';
+@import 'bootstrap/scss/_variables';
+@import 'bootstrap/scss/_mixins';
+
+@import 'bootstrap/scss/_grid';  //  引入栅格
+@import 'bootstrap/scss/_reboot';  //  引入样式重置
+
+$logoCol: #383e96;
+body{background-image: url("../images/bg_point.png");}
+.hori{
+    white-space: nowrap;
+}
