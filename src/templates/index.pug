@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
+    title 风氢扬科技
+  body
+    p.scale
+    .c-page
+      .c-header
+      .o-scroll
+        main
+          //- div(data-scroll-section)
+          //-   section(class="c-section" data-scroll data-scroll-repeat)
+          div(data-scroll-section)
+            section(class="c-section" data-scroll data-scroll-repeat)
+              .o-container
+                .p0-linebg
+                  //canvas#line-bg(width=1500 height=337)
+                .p0-plus-bg()
+                  .p0-plus-wrapper
+                    .p0-plus-image
+
+                .p0-logo(data-scroll data-scroll-direction="horizontal" data-scroll-speed=-1)
+                  img(src=require("../images/p0_ltlogo.png"))
+                
+                .o-center-wrapper-logo
+                  .p0-mainlogo
+                    .p0-mainlogo-wrapper
+                      .p0-mainlogo-image
+                  .p0-logotext
+                    span HIGH POWER
+                    br
+                    span NO CARBON EMISSION
+                    br
+                    span LONG ENDURANCE
+
+                  
+          div(data-scroll-section)
+            section(class="c-section" data-scroll data-scroll-repeat)
+
+    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js")
+    script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")
+    script(nomodule src="https://polyfill.io/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous")

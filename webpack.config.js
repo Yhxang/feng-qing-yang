@@ -12,7 +12,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, "dist"), 
         filename: "[name].[contenthash:5].js",
-        publicPath: "/"
+        publicPath: "/dist/"
     },
     mode: "development",
     optimization: {
@@ -22,7 +22,7 @@ const config = {
         contentBase: path.join(__dirname, 'dist'),
         //compress: true,
         port: 9000,
-        publicPath: '/'
+        //publicPath: '/'
     },
     module: {
         rules: [
@@ -39,7 +39,7 @@ const config = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                           publicPath: ''
+                           publicPath: '../', // 生成地址
                         }
                     },
                     'css-loader',
@@ -54,19 +54,14 @@ const config = {
                 test: /\.(png|svg|jpg|gif|webp)$/,
                 use: [
                     {
-                        loader: "file-loader",
-                        options: {
-                            name: '[name].[ext]?[hash]',
-                            publicPath: '../images',
-                            outputPath: "images"
-                        }
-                    },
-                    {
                         loader: "url-loader",
                         options: {
+                            name: '[name].[ext]?[hash]',
+                            //publicpath: '/dist/',
                             //publicPath: '../images',// 最终生成的css代码中,图片url前缀
-                            //outputPath: 'images',// 图片输出的实际路径(相对于dist)
-                            limit: 0 // 当小于某KB时转为base64
+                            outputPath: 'images',// 图片输出的实际路径(相对于dist)
+                            limit: 0, // 当小于某KB时转为base64
+                            esModule: false // 否则就要require('src').default
                         }
                     }
                 ]
@@ -90,7 +85,7 @@ const pages = Object.keys(config.entry);
 config.plugins = config.plugins.concat(pages.map(page => {
     return new HtmlWebpackPlugin({
         filename: page === "index" ? `${page}.html` : `${page}/index.html`,
-        template: path.resolve(__dirname, `./templates/${page}.pug`),
+        template: path.resolve(__dirname, `./src/templates/${page}.pug`),
         chunks: [ page ]
     })
 }))

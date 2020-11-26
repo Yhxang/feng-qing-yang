@@ -1,3 +1,5 @@
+@import 'bootstrap.custom.scss'; //自定义bootstrap
+
 @import 'bootstrap/scss/_functions';
 @import 'bootstrap/scss/_variables';
 @import 'bootstrap/scss/_mixins';
@@ -6,7 +8,209 @@
 @import 'bootstrap/scss/_reboot';  //  引入样式重置
 
 $logoCol: #383e96;
-body{background-image: url("../images/bg_point.png");}
-.hori{
-    white-space: nowrap;
+
+
+// html {
+//     @media (max-width: 699px) {
+//         font-size:15.5px;
+//     }
+//     @media (min-width: 700px) and (max-width:999px) {
+//         font-size:16px
+//     }
+//     @media (min-width: 1000px) and (max-width:1199px) {
+//         font-size:16px
+//     }
+//     @media (min-width: 1200px) and (max-width:1599px) {
+//         font-size:16px
+//     }
+//     @media (min-width: 1600px) and (max-width:1999px) {
+//         font-size:18px
+//     }
+//     @media (min-width: 2000px) and (max-width:2399px) {
+//         font-size:20px
+//     }
+//     @media (min-width: 2400px) {
+//         font-size:21.5px
+//     }
+// }
+
+html {
+  font-size: 1rem;
+  font-family: Helvetica;
+  .scale{
+    position: fixed;
+    right:0;
+     top:0;
+    opacity:0.2;
+    :after{
+      content: 'xs'
+    }
+  }
+}
+@include media-breakpoint-up(xs) {
+  html {
+    font-size: 1rem;
+    .scale:after{
+      content: 'xs'
+    }
+  }
+}
+  
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.1rem;
+    .scale:after{
+      content: 'sm'
+    }
+  }
+}
+   
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.2rem;
+    .scale:after{
+      content: 'md'
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.3rem;
+    .scale:after{
+      content: 'lg'
+    }
+  }
+}
+@include media-breakpoint-up(xl) {
+  html {
+    font-size: 1.3rem;
+    .scale:after{
+      content: 'xl'
+    }
+  }
+}
+@include media-breakpoint-up(xxl) {
+  html {
+    font-size: 20px; //1.3rem;
+    .scale:after{
+      content: 'xxl'
+    }
+  }
+  .c-section{
+    margin{
+      left: 1.25rem;
+      right: 1.25rem;
+    }
+  }
+  .p0-logo{
+    padding-top: 2.75rem;
+  }
+}
+  
+body{
+  background: url("../images/bg_point.png") 0 0 repeat;
+  background-attachment: fixed;
+}
+.p0-logo{
+  position: relative;
+}
+.o-scroll{
+  min-height: 100vh;
+}
+.c-section{
+  position: relative;
+  height: 100vh;
+  margin{
+    left: auto;
+    right: auto;
+  }
+  img{
+    width: 100%;
+  }
+}
+#line-bg{
+  position: absolute;
+  width: 100%;
+}
+#line-bg{
+  width: 100%;
+  overflow: hidden;
+}
+.p0-plus-bg{
+  position: absolute;
+  left:27.4%;
+  width: 32.4%;
+}
+%img-resize-wrapper{
+  width: 100%;
+  position: relative;
+  padding-bottom: 100%;
+}
+.p0-plus-wrapper{
+  @extend %img-resize-wrapper;
+  padding-bottom: 72.8%;
+}
+%img-resize-full{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: url("../images/p0_plus.png") 0 0 repeat;
+}
+.p0-plus-image{
+  @extend %img-resize-full;
+  background: url("../images/p0_plus.png") 0 0 repeat;
+}
+.p0-logo{
+  padding-top: 2.75rem;
+  width: 21rem;
+}
+.o-center-wrapper-logo{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  margin: auto
+}
+
+.p0-mainlogo{
+  margin: auto;
+  margin-top: -10rem;// -7.75rem;
+  transition: all 0.5s;
+  width:100%;
+  
+  @include media-breakpoint-up(sm) {
+    width: 24.35rem;
+  }
+}
+.p0-mainlogo-wrapper{
+  @extend %img-resize-wrapper;
+  padding-bottom: 63.9%;
+}
+.p0-mainlogo-image{
+  @extend %img-resize-full;
+  background: url("../images/p0_mainlogo.png") 0 0 repeat;
+  background-size: cover;
+}
+.p0-logotext{
+  margin: auto;
+  margin-top: 7.4rem;
+  //margin-top: 14rem;
+  width: 12rem;
+  font-size: 0;
+}
+.p0-logotext span{
+  display: inline-block;
+  color:#fff;
+  padding: 0 0.25rem;
+  margin-bottom: 1px;
+  font: { 
+    size: 1rem;
+    weight: bold;
+  }
+  line-height: 1.3rem;;
+  background-color: $logoCol;
 }
