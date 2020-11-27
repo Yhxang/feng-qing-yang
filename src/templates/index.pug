@@ -16,16 +16,17 @@ html(lang="en")
             section(class="c-section" data-scroll data-scroll-repeat)
               .o-container
                 .p0-linebg
+                  .p0-linebg-wrapper
                   //canvas#line-bg(width=1500 height=337)
                 .p0-plus-bg()
                   .p0-plus-wrapper
                     .p0-plus-image
 
-                .p0-logo(data-scroll data-scroll-direction="horizontal" data-scroll-speed=-1)
+                .p0-ltlogo(data-scroll data-scroll-direction="horizontal" data-scroll-speed=5 data-scroll-position="right")
                   img(src=require("../images/p0_ltlogo.png"))
                 
-                .o-center-wrapper-logo
-                  .p0-mainlogo
+                .o-center-wrapper-logo( data-scroll data-scroll-speed=3)
+                  .p0-mainlogo(class="animate__bounceIn")
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image
                   .p0-logotext

@@ -103,7 +103,7 @@ html {
       right: 1.25rem;
     }
   }
-  .p0-logo{
+  .p0-ltlogo{
     padding-top: 2.75rem;
   }
 }
@@ -112,7 +112,7 @@ body{
   background: url("../images/bg_point.png") 0 0 repeat;
   background-attachment: fixed;
 }
-.p0-logo{
+.p0-ltlogo{
   position: relative;
 }
 .o-scroll{
@@ -129,27 +129,10 @@ body{
     width: 100%;
   }
 }
-#line-bg{
-  position: absolute;
-  width: 100%;
-}
-#line-bg{
-  width: 100%;
-  overflow: hidden;
-}
-.p0-plus-bg{
-  position: absolute;
-  left:27.4%;
-  width: 32.4%;
-}
 %img-resize-wrapper{
   width: 100%;
   position: relative;
   padding-bottom: 100%;
-}
-.p0-plus-wrapper{
-  @extend %img-resize-wrapper;
-  padding-bottom: 72.8%;
 }
 %img-resize-full{
   position: absolute;
@@ -158,15 +141,42 @@ body{
   right: 0;
   bottom: 0;
   overflow: hidden;
-  background: url("../images/p0_plus.png") 0 0 repeat;
+  //background: url("../images/p0_plus.png") 0 0 repeat;
 }
+.p0-linebg{
+  position: absolute;
+  width: 100%;
+  padding-bottom: 17.2%;
+  top: calc(60vh - 165px);
+  overflow: hidden;
+}
+.p0-linebg-wrapper{
+  @extend %img-resize-full;
+
+  //canvas {width: 100%;}
+}
+
+.p0-plus-bg{
+  position: absolute;
+  left:27.4%;
+  width: 32.4%;
+}
+
+.p0-plus-wrapper{
+  @extend %img-resize-wrapper;
+  padding-bottom: 72.8%;
+}
+
 .p0-plus-image{
   @extend %img-resize-full;
   background: url("../images/p0_plus.png") 0 0 repeat;
 }
-.p0-logo{
+.p0-ltlogo{
   padding-top: 2.75rem;
-  width: 21rem;
+  width: 60vw;
+  @include media-breakpoint-up(sm) {
+    width: 21rem;
+  }
 }
 .o-center-wrapper-logo{
   position: absolute;
@@ -180,10 +190,13 @@ body{
   margin: auto;
   margin-top: -10rem;// -7.75rem;
   transition: all 0.5s;
-  width:100%;
+  width:80vw;
   
   @include media-breakpoint-up(sm) {
     width: 24.35rem;
+  }
+  @include media-breakpoint-up(md) {
+
   }
 }
 .p0-mainlogo-wrapper{
@@ -197,7 +210,8 @@ body{
 }
 .p0-logotext{
   margin: auto;
-  margin-top: 7.4rem;
+  margin-top: 12.5vh;
+  //margin-top: 7.4rem;
   //margin-top: 14rem;
   width: 12rem;
   font-size: 0;
