@@ -6,30 +6,73 @@ html(lang="en")
     title 风氢扬科技
   body
     p.scale
-    .c-page
-      .c-header
+    div#loading(data-scroll-section)
+      .spinner
+        -for (var x=1; x<=5; x++)
+          div(class="rect"+x)
+    .c-page#page-scroll
+      .c-header-btn
+        .menu-on
+        .menu-off
+      .c-menubox
+        .menu-area
+          .menu-logo-box
+            a.menu-logo(href="#") 风氢扬科技
+          nav.menu-nav
+            ul.menu-ul
+              li 
+                a(href="#")
+                  span Products
+              li 
+                a(href="#")
+                  span Application
+              li 
+                a(href="#")
+                  span Support
+              li 
+                a(href="#")
+                  span Media
+              li 
+                a(href="#")
+                  span Join us
+        .menu-bottom
+          img(src=require("../images/menu_bottom.png"))
+      
       .o-scroll
         main
           //- div(data-scroll-section)
           //-   section(class="c-section" data-scroll data-scroll-repeat)
-          div(data-scroll-section)
-            section(class="c-section" data-scroll data-scroll-repeat)
+          
+          div#section0(data-scroll-section)
+            section(class="c-section" data-scroll )
               .o-container
+                
                 .p0-linebg
                   .p0-linebg-wrapper
-                  //canvas#line-bg(width=1500 height=337)
-                .p0-plus-bg()
+
+                .p0-plus-bg
                   .p0-plus-wrapper
                     .p0-plus-image
 
-                .p0-ltlogo(data-scroll data-scroll-direction="horizontal" data-scroll-speed=5 data-scroll-position="right")
-                  img(src=require("../images/p0_ltlogo.png"))
+                .p0-ltlogo#p0-ltlogo(data-scroll)
+                 
+                  img(src=require("../images/p0_ltlogo.png") 
+                    data-scroll 
+                    data-scroll-direction="horizontal" 
+                    data-scroll-speed=-5 
+                    data-scroll-sticky 
+                    data-scroll-target="#p0-ltlogo")
                 
-                .o-center-wrapper-logo( data-scroll data-scroll-speed=3)
-                  .p0-mainlogo(class="animate__bounceIn")
+                .o-center-wrapper-logo(data-scroll data-scroll-speed=0.5)
+                  .p0-mainlogo()
                     .p0-mainlogo-wrapper
-                      .p0-mainlogo-image
-                  .p0-logotext
+                      .p0-mainlogo-image#p0-mainlogo-image
+                        //- img#logoimg( src=
+                        //-   rel:animated_src=require("../images/logo_anim.gif")
+                        //-   rel:auto_play="0"
+                        //-   width="960"
+                        //-   height="645")
+                  .p0-logotext#p0-logotext
                     span HIGH POWER
                     br
                     span NO CARBON EMISSION
@@ -37,8 +80,43 @@ html(lang="en")
                     span LONG ENDURANCE
 
                   
-          div(data-scroll-section)
-            section(class="c-section" data-scroll data-scroll-repeat)
+          div#section1(data-scroll-section)
+            section(class="c-section")
+              .p0-blueline-bg#p0-bluebg(data-scroll)
+                img(src=require("../images/p0_blueline_bg.png") 
+                  data-scroll 
+                  data-scroll-id="hey" 
+                  data-scroll-speed=50
+                  data-scroll-delay=0.1 )
+              .p1-holder
+                .p1-contents(data-scroll data-scroll-repeat)
+                  #p1-content-target
+                  .contentholder(
+                    data-scroll 
+                    data-scroll-speed=1 
+                    \\data-scroll-sticky
+                    \\data-scroll-target="#p1-content-target"
+                    data-scroll-call="yoyo, mod")
+
+          div#section2(data-scroll-section)
+            section(class="c-section")
+              .p2-bg
+                img.p2-machine(src=require("../images/p2_machine.png")
+                  data-scroll
+                  data-scroll-speed=2)
+                img.p2-machine-warn(src=require("../images/p2_machine_warn.png") 
+                  data-scroll
+                  data-scroll-speed=1)
+              .p2-contents#p2-contents
+                h2.p2-title
+                  img(src=require("../images/p2_title.png")
+                    data-scroll
+                    data-scroll-sticky
+                    data-scroll-target="#p2-contents"
+                  )
+                p.p2-desc(data-scroll)
+                  span 风氢扬氢能科技（上海）有限公司由创始人涂蒙于2020-07-06在嘉定区市场监管局注册成立，主要经营一般项目：新兴能源技术研发；工程和技术研究和试验发展；汽车零部件研发；汽车零配件零售；汽车零配件批发；电池销售；电子元器件与机电组件设备销售；电子专用材料研发；电子专用材料销售；新能源汽车整车销售；光伏设备及元器件销售；新能源汽车电附件销售；电力电子元器件销售电气机械设备销售；物联网设备销售；金属密封件销售；物联网技术研发；能量回收系统研发；在线能源监测技术研发。
+
 
     //- script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js")
     script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")

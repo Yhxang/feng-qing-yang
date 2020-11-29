@@ -1,0 +1,75 @@
+.spinner {
+  margin: 100px auto;
+  margin-top: 49vh;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px !important;
+}
+
+.spinner>div {
+  background-color: #fff;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  margin: 0 1px;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(0.4)
+  }
+
+  20% {
+    -webkit-transform: scaleY(1.0)
+  }
+}
+
+@keyframes stretchdelay {
+
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+@font-face {
+  font-family: "Source Han Sans CN Regular";
+  src: url("../fonts/Source_Han_Sans_CN_Regular.woff2") format("woff2"),
+    url("../fonts/Source_Han_Sans_CN_Regular.woff") format("woff"),
+    url("../fonts/Source_Han_Sans_CN_Regular.ttf") format("truetype"),
+    url("../fonts/Source_Han_Sans_CN_Regular.eot") format("embedded-opentype"),
+    url("../fonts/Source_Han_Sans_CN_Regular.svg") format("svg");
+}

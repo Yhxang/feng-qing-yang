@@ -1,19 +1,100 @@
+//import "animate.css"
+import "../css/loading.css"
 import "../scss/main.scss"
-import "animate.css"
 
 import "/node_modules/locomotive-scroll/dist/locomotive-scroll.css"
+
+import SuperGif from "../lib/libgif"
 
 import bgcanvas from './bgcanvas'
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-//
-window.onload = function () {
+(function () {
+    const $$ = $sel => document.querySelector($sel);
+    const docEl = $$('html');
+    
+    
+    
     document.querySelector(".p0-linebg-wrapper").appendChild(bgcanvas.app.view);
-    window.scroll1 = new LocomotiveScroll({
-        el: document,//.querySelector(".container-fluid"),//.querySelector('[data-scroll-container]'),
-        smooth: true,
-        //direction: "horizontal"
-    });
-}
+    let scroll ;
+    setTimeout(() => {
+        //return
+        scroll = new LocomotiveScroll({
+            el: document.querySelector("#page-scroll"),
+            smooth: true,
+            scrollFromAnywhere: true,
+            repeat: true,
+            getSpeed: true,
+            getDirection: true
+            //direction: "horizontal"
+        });
+        window.scroll = scroll;
+        scroll.on('scroll', (args) => {
+            // Get all current elements : args.currentElements
+            if (typeof args.currentElements['mediapage'] === 'object') {
+                let progress = args.currentElements['mediapage'].progress;
+                console.log(progress);
+                // ouput log example: 0.34
+                // gsap example : myGsapAnimation.progress(progress);
+            }
+        })
+        let logogifimg = require("../images/logo_anim.gif");
+        let logogif = new Image();
+        logogif.src = logogifimg;
 
+        setTimeout(() => {
+            // scroll.scrollTo(document.querySelector('#section0'), {
+            //     duration: 400,
+            //     callback: function () {
+            //         console.log('scroll to #section0');
+            //         scroll.stop()
+            //     }
+            // })
+            docEl.classList.add("is-loaded");
+            setTimeout(() => {
+                document.getElementById("p0-mainlogo-image").appendChild(logogif);
+            }, 500)
+        }, 500);
+        // window.scroll.on('call', func => {
+        //     // Using modularJS
+        //     this.call(...func);
+        //     // Using jQuery events
+        //     //$(document).trigger(func);
+        //     // Or do it your own way 😎
+        // });
+        scroll.on('call', function (value, way, obj) {
+            console.log(value, way, obj)
+            // Using modularJS
+            //this.call(...func);
+            // Using jQuery events
+            //$(document).trigger(func);
+            // Or do it your own way 😎
+        });
+        // const sup1 = new SuperGif({ 
+        //     gif: document.getElementById('logoimg'),
+        //     loop_mode: false,
+        // } );
+        // sup1.load();
+        // window.sup1 = sup1;
+    }, 100)
+
+    
+
+    $$(".c-header-btn").addEventListener('click', e => {
+        if (!docEl.classList.contains('nav-on')) {
+            docEl.classList.add('nav-on');
+        } else {
+            docEl.classList.remove('nav-on');
+        }
+    })
+
+    document.querySelectorAll(".menu-ul li").forEach((li, index) => {
+        li.querySelector("a").addEventListener("click", e => {
+            e.preventDefault();
+            scroll.scrollTo(document.querySelector("#section" + (index + 1)));
+            $$(".c-header-btn").dispatchEvent(new Event('click'));
+        })
+    })
+
+})()
