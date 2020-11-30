@@ -10,14 +10,17 @@ import bgcanvas from './bgcanvas'
 
 import LocomotiveScroll from 'locomotive-scroll';
 
+import Swiper from 'swiper'; 
+import "/node_modules/swiper/swiper-bundle.min.css" 
+
 (function () {
     const $$ = $sel => document.querySelector($sel);
     const docEl = $$('html');
-    
-    
-    
+
+
+
     document.querySelector(".p0-linebg-wrapper").appendChild(bgcanvas.app.view);
-    let scroll ;
+    let scroll;
     setTimeout(() => {
         //return
         scroll = new LocomotiveScroll({
@@ -29,12 +32,18 @@ import LocomotiveScroll from 'locomotive-scroll';
             getDirection: true
             //direction: "horizontal"
         });
+        scroll.stop();
         window.scroll = scroll;
         scroll.on('scroll', (args) => {
             // Get all current elements : args.currentElements
-            if (typeof args.currentElements['mediapage'] === 'object') {
-                let progress = args.currentElements['mediapage'].progress;
-                console.log(progress);
+            if (typeof args.currentElements['tar'] === 'object') {
+                let progress = args.currentElements['tar'].progress;
+                
+                let prg = progress >= 0.5 ? 1 : progress / 0.5;
+                console.log(`translate(${-prg}%,0,0)`);
+                let p0BluebgImg =  document.querySelector(".p0-bluebg-img");
+                p0BluebgImg.style.transform = `translate3d(${(prg - 1) * 100}%,0,0)`;
+                p0BluebgImg.style.opacity = prg;
                 // ouput log example: 0.34
                 // gsap example : myGsapAnimation.progress(progress);
             }
@@ -54,6 +63,12 @@ import LocomotiveScroll from 'locomotive-scroll';
             docEl.classList.add("is-loaded");
             setTimeout(() => {
                 document.getElementById("p0-mainlogo-image").appendChild(logogif);
+                setTimeout(() => {
+                    scroll.start();
+                    scroll.scrollTo("#section1", {
+                        duration: 400,
+                    })
+                }, 8000)
             }, 500)
         }, 500);
         // window.scroll.on('call', func => {
@@ -79,7 +94,7 @@ import LocomotiveScroll from 'locomotive-scroll';
         // window.sup1 = sup1;
     }, 100)
 
-    
+
 
     $$(".c-header-btn").addEventListener('click', e => {
         if (!docEl.classList.contains('nav-on')) {
@@ -92,9 +107,22 @@ import LocomotiveScroll from 'locomotive-scroll';
     document.querySelectorAll(".menu-ul li").forEach((li, index) => {
         li.querySelector("a").addEventListener("click", e => {
             e.preventDefault();
-            scroll.scrollTo(document.querySelector("#section" + (index + 1)));
+            scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
+                direction:600
+            });
             $$(".c-header-btn").dispatchEvent(new Event('click'));
         })
     })
+
+    var mySwiper = new Swiper('.swiper-container', { 
+        direction: "horizontal",
+        speed: 850,
+        parallax: !0,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
 
 })()

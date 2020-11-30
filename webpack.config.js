@@ -65,11 +65,11 @@ const config = {
       },
       {
 
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|svg)$/,
         use: [{
           loader: "file-loader",
           options: {
-            name: './fonts/[name].[ext]',
+            name: '[name].[ext]',
             outputPath: 'fonts',
           }
         }]
