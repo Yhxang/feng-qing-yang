@@ -1,28 +1,29 @@
 //import "animate.css"
-import "../css/loading.css"
-import "../scss/main.scss"
+import "../css/loading.css";
 
-import "/node_modules/locomotive-scroll/dist/locomotive-scroll.css"
+//import "locomotive-scroll/dist/locomotive-scroll.css"
+//import LocomotiveScroll from 'locomotive-scroll';
 
-import SuperGif from "../lib/libgif"
+//import SuperGif from "../lib/libgif" 
 
-import bgcanvas from './bgcanvas'
+import bgcanvas from './bgcanvas';
 
-import LocomotiveScroll from 'locomotive-scroll';
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
-import Swiper from 'swiper'; 
-import "/node_modules/swiper/swiper-bundle.min.css" 
+import "swiper/swiper.scss";
+//import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
+//import "../scss/scroll.scss" // But if copy it to ./src/ and import it, it worked, why???
+
+import "../scss/main.scss";
 
 (function () {
     const $$ = $sel => document.querySelector($sel);
     const docEl = $$('html');
 
-
-
     document.querySelector(".p0-linebg-wrapper").appendChild(bgcanvas.app.view);
     let scroll;
     setTimeout(() => {
-        //return
+        /*
         scroll = new LocomotiveScroll({
             el: document.querySelector("#page-scroll"),
             smooth: true,
@@ -48,29 +49,6 @@ import "/node_modules/swiper/swiper-bundle.min.css"
                 // gsap example : myGsapAnimation.progress(progress);
             }
         })
-        let logogifimg = require("../images/logo_anim.gif");
-        let logogif = new Image();
-        logogif.src = logogifimg;
-
-        setTimeout(() => {
-            // scroll.scrollTo(document.querySelector('#section0'), {
-            //     duration: 400,
-            //     callback: function () {
-            //         console.log('scroll to #section0');
-            //         scroll.stop()
-            //     }
-            // })
-            docEl.classList.add("is-loaded");
-            setTimeout(() => {
-                document.getElementById("p0-mainlogo-image").appendChild(logogif);
-                setTimeout(() => {
-                    scroll.start();
-                    scroll.scrollTo("#section1", {
-                        duration: 400,
-                    })
-                }, 8000)
-            }, 500)
-        }, 500);
         // window.scroll.on('call', func => {
         //     // Using modularJS
         //     this.call(...func);
@@ -86,6 +64,54 @@ import "/node_modules/swiper/swiper-bundle.min.css"
             //$(document).trigger(func);
             // Or do it your own way 😎
         });
+        */
+        let logogifimg = require("../images/logo_anim.gif");
+        let logogif = new Image();
+        logogif.src = logogifimg;
+
+        // setTimeout(() => {
+        //     // scroll.scrollTo(document.querySelector('#section0'), {
+        //     //     duration: 400,
+        //     //     callback: function () {
+        //     //         console.log('scroll to #section0');
+        //     //         scroll.stop()
+        //     //     }
+        //     // })
+        //     docEl.classList.add("is-loaded");
+        //     setTimeout(() => {
+        //         document.getElementById("p0-mainlogo-image").appendChild(logogif);
+        //         setTimeout(() => {
+        //             scroll.start();
+        //             scroll.scrollTo("#section1", {
+        //                 duration: 400,
+        //             })
+        //         }, 8000)
+        //     }, 500)
+        // }, 500);
+
+        function timeout(ms) {
+            return new Promise((resolve, reject) => {
+                setTimeout(resolve, ms, 'done');
+            })
+        }
+
+        timeout(500).then(value => {
+            docEl.classList.add("is-loaded");
+            console.log('loaded')
+            return timeout(500);
+        }).then(value => {
+            document.getElementById("p0-mainlogo-image").appendChild(logogif);
+            console.log('logo gif start playing')
+            return timeout(8000);
+        }).then(value => {
+            console.log('start scroll')
+            // scroll.start();
+            // scroll.scrollTo("#section1", {
+            //     duration: 400,
+            // })
+        })
+
+
         // const sup1 = new SuperGif({ 
         //     gif: document.getElementById('logoimg'),
         //     loop_mode: false,
@@ -94,6 +120,63 @@ import "/node_modules/swiper/swiper-bundle.min.css"
         // window.sup1 = sup1;
     }, 100)
 
+    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History]); // Install modules
+    var mainSwiper = new Swiper('.o-scroll', {
+        direction: 'vertical', // 垂直切换选项
+        //loop: true, // 循环模式选项
+        speed: 600,
+
+        mousewheel: true,
+
+        parallax: true,
+
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        navigation:{
+            nextEl: null,
+            prevEl: null
+        },
+
+        on: {
+            slideChangeTransitionEnd: function(){
+                console.log(this.slides, this.realIndex, this.slides[this.realIndex])
+                this.slides[this.realIndex].classList.add("first-active");
+                if( this.realIndex == 1 ){
+                    this.allowSlidePrev= false;
+                }else{
+                    this.allowSlidePrev= true;
+                }
+            }
+        },
+        history: {
+            replaceState: true,
+        },
+    })
+
+    var mediaSwiper = new Swiper('.p1-contents', {
+        speed: 800,
+        loop: true,
+        parallax: true,
+        nested: true, // 阻止父级切换
+        resistanceRatio: 0,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        // mousewheel: {
+        //     releaseOnEdges: true,
+        //     eventsTarged: '#p1-contents',
+        // },
+        on: {
+            slideChangeTransitionStart: function(){
+                mainSwiper.mousewheel.disable();
+            },
+            slideChangeTransitionEnd: function(){
+                mainSwiper.mousewheel.enable();
+            }
+        }
+    })
 
 
     $$(".c-header-btn").addEventListener('click', e => {
@@ -107,22 +190,16 @@ import "/node_modules/swiper/swiper-bundle.min.css"
     document.querySelectorAll(".menu-ul li").forEach((li, index) => {
         li.querySelector("a").addEventListener("click", e => {
             e.preventDefault();
-            scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
-                direction:600
-            });
+            mediaSwiper.slideTo(index + 1)
+            // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
+            //     direction:600
+            // });
             $$(".c-header-btn").dispatchEvent(new Event('click'));
         })
     })
 
-    var mySwiper = new Swiper('.swiper-container', { 
-        direction: "horizontal",
-        speed: 850,
-        parallax: !0,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+
+
+    
 
 })()

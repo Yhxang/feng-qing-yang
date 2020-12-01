@@ -104,7 +104,7 @@ function onAssertsLoaded(){
 
     let count = 0;
     app.ticker.add(() => {
-        count += 0.05;
+        count += 0.01;
     
         let topointer1 = pointers1.map(fromToMap(20, count));
         let topointer2 = pointers2.map(fromToMap(10, count));
@@ -184,9 +184,9 @@ function onAssertsLoaded(){
         imgsprites[1].x = topointer1[2].x;
         imgsprites[1].y = topointer1[2].y + 5;
     
-        imgsprites[0].alpha = Math.abs(Math.sin(count * 8)) * .5;
-        imgsprites[1].alpha = Math.abs(Math.cos(count * 4)) * .5;
-        imgsprites[2].alpha = Math.abs(Math.sin(count * 6)) * .5;
+        imgsprites[0].alpha = Math.abs(Math.sin(count * 10)) * .5;
+        imgsprites[1].alpha = Math.abs(Math.cos(count * 8)) * .5;
+        imgsprites[2].alpha = Math.abs(Math.sin(count * 9)) * .5;
         ringSprite.scale.x = ringSprite.scale.y = Math.sin(count /2) * .25 + .75;
     })
     resize(app)();

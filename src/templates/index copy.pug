@@ -38,11 +38,15 @@ html(lang="en")
         .menu-bottom
           img(src=require("../images/menu_bottom.png"))
       
-      .o-scroll.swiper-container
-        main.swiper-wrapper
-          div#section0.swiper-slide
-            section(class="c-section")
+      .o-scroll
+        main
+          //- div(data-scroll-section)
+          //-   section(class="c-section" data-scroll data-scroll-repeat)
+          
+          div#section0(data-scroll-section)
+            section(class="c-section" data-scroll )
               .o-container
+                
                 .p0-linebg
                   .p0-linebg-wrapper
 
@@ -50,41 +54,67 @@ html(lang="en")
                   .p0-plus-wrapper
                     .p0-plus-image
 
-                .p0-ltlogo#p0-ltlogo
-                  img(src=require("../images/p0_ltlogo.png"))
+                .p0-ltlogo#p0-ltlogo(data-scroll)
+                 
+                  img(src=require("../images/p0_ltlogo.png") 
+                    data-scroll 
+                    data-scroll-direction="horizontal" 
+                    data-scroll-speed=-5 
+                    data-scroll-sticky 
+                    data-scroll-target="#p0-ltlogo")
                 
                 .o-center-wrapper-logo
                   .p0-mainlogo
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image#p0-mainlogo-image(data-scroll data-scroll-speed=3 data-scroll-position="top")
+                        //- img#logoimg( src=
+                        //-   rel:animated_src=require("../images/logo_anim.gif")
+                        //-   rel:auto_play="0"
+                        //-   width="960"
+                        //-   height="645")
                   .p0-logotext#p0-logotext
                     each val, index in ["HIGH POWER", "NO CARBON EMISSION", "LONG ENDURANCE"]
                       span.p0-logo-textline
                         span(data-scroll data-scroll-speed=(3-index)/2 data-scroll-position="top" data-scroll-delay=0.02)=val
+                    //- span.p0-logo-textline HIGH POWER
+                    //- br
+                    //- span.p0-logo-textline NO CARBON EMISSION
+                    //- br
+                    //- span.p0-logo-textline LONG ENDURANCE
+          //- div#section1a(data-scroll-section)
+          //-   section(class="c-section")
+          //-     .p0-blueline-bg#p0-bluebg
+          //-       //- #p1-bg-target
+          //-       img(src=require("../images/p0_blueline_bg.png"))
+          //-     .pp-bluebg-holder(data-scroll)
+          //-       .pp-bg-target
              
-          div#section1.swiper-slide(data-scroll-section)
+          div#section1(data-scroll-section)
             section(class="c-section")
               .bg-holder.p0-blueline-bg
-                img.p0-bluebg-img(src=require("../images/p0_blueline_bg.png"))
-              .p1-holder-pos
-                .p1-contents-height
-                  #p1-contents.p1-contents.swiper-container
-                    .swiper-wrapper
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                    .swiper-button-prev
-                    .swiper-button-next
-              .p1-ltlogo
-                img(src=require("../images/p1_ltlogo.png"))
-              .p1-lb-icon
-                img(src=require("../images/p1_lb_icon.png"))
+                #p1-bg-target
+                img.p0-bluebg-img(src=require("../images/p0_blueline_bg.png") 
+                  \\data-scroll 
+                  \\data-scroll-direction="horizontal" 
+                  \\data-scroll-id="hey"
+                  \\data-scroll-position="top"
+                  \\data-scroll-sticky 
+                  \\data-scroll-target="#p1-bg-target"
+                  \\data-scroll-speed=180)
+              .p1-holder(data-scroll data-scroll-id="tar")
+                .p1-contents(data-scroll data-scroll-repeat)
+                  #p1-content-target
+                  .contentholder(
+                    data-scroll 
+                    data-scroll-speed=1 
+                    \\data-scroll-sticky
+                    \\data-scroll-target="#p1-content-target"
+                    data-scroll-call="yoyo, mod")
 
-          div#section2.swiper-slide(data-scroll-section)
+          div#section2(data-scroll-section)
             section(class="c-section")
+              //- .bg-holder.p2-blueline-bg
+              //-   img.p2-bluebg-img(src=require("../images/p1_blueline_bg.png"))
               .p2-bg
                 img.p2-machine(src=require("../images/p2_machine.png")
                   data-scroll
@@ -103,7 +133,7 @@ html(lang="en")
                 p.p2-desc(data-scroll data-scroll-direction="horizontal")
                   span 风氢扬氢能科技（上海）有限公司由创始人涂蒙于2020-07-06在嘉定区市场监管局注册成立，主要经营一般项目：新兴能源技术研发；工程和技术研究和试验发展；汽车零部件研发；汽车零配件零售；汽车零配件批发；电池销售；电子元器件与机电组件设备销售；电子专用材料研发；电子专用材料销售；新能源汽车整车销售；光伏设备及元器件销售；新能源汽车电附件销售；电力电子元器件销售电气机械设备销售；物联网设备销售；金属密封件销售；物联网技术研发；能量回收系统研发；在线能源监测技术研发。
                 img.p2-bluebg-img(src=require("../images/p1_blueline_bg.png"))
-          div#section3.swiper-slide(data-scroll-section)
+          div#section3(data-scroll-section)
             section(class="c-section")
               .bg-holder.p3-blueline-bg
                 img.p3-bluebg-img(src=require("../images/p3_blueline_bg.png"))
@@ -113,19 +143,19 @@ html(lang="en")
                     data-scroll
                     data-scroll-speed=3
                     data-scroll-direction="horizontal")
-              //- .swiper-container
-              //-   .swiper-wrapper
-              //-     .swiper-slide 
-              //-       img(src=require("../images/p3_proxy.png"))
-              //-     .swiper-slide 
-              //-       img(src=require("../images/p3_proxy.png"))
-              //-     .swiper-slide 
-              //-       img(src=require("../images/p3_proxy.png"))
-              //-   .swiper-button-prev
-              //-   .swiper-button-next
-        .swiper-scrollbar
+              .swiper-container
+                .swiper-wrapper
+                  .swiper-slide 
+                    img(src=require("../images/p3_proxy.png"))
+                  .swiper-slide 
+                    img(src=require("../images/p3_proxy.png"))
+                  .swiper-slide 
+                    img(src=require("../images/p3_proxy.png"))
+                .swiper-button-prev
+                .swiper-button-next
+
 
 
     //- script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js")
-    //script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")
-    //script(nomodule src="https://polyfill.io/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous")
+    script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")
+    script(nomodule src="https://polyfill.io/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous")

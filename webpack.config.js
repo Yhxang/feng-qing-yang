@@ -12,7 +12,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash:5].js",
+    filename: "js/[name].js?[contenthash:5]",
     publicPath: "/dist/"
   },
   mode: "development",
@@ -30,7 +30,8 @@ const config = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          'postcss-loader'
         ]
       },
       {
@@ -42,7 +43,16 @@ const config = {
             }
           },
           'css-loader',
-          'sass-loader'
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sassOptions: {
+                outputStyle: "expanded"
+              }
+            }
+          }
         ]
       },
       {
@@ -79,9 +89,11 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin({
+    //   cleanStaleWebpackAssets: false
+    // }),
     new MiniCssExtractPlugin({
-      filename: './css/[name].[contenthash:5].css'
+      filename: './css/[name].css?[contenthash:5]'
     }),
     // new HtmlWebpackPlugin({
     //     //filename: '[name].pug'

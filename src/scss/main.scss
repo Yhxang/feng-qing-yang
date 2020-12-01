@@ -7,7 +7,23 @@
 @import "bootstrap/scss/_grid"; //  引入栅格
 @import "bootstrap/scss/_reboot"; //  引入样式重置
 
+@import "~swiper/components/scrollbar/scrollbar.scss"; // ??? index.js中import失败
+@import "~swiper/components/navigation/navigation.scss";
+
 $logoCol: #383e96;
+@mixin transition-opc-trf{
+  transition: opacity 0s cubic-bezier(0.215, 0.61, 0.355, 1),
+    transform 0s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@mixin transition-trf{
+  transition: transform 0s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@function myease(){
+  @return cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.swiper-slide{
+  overflow: visible;
+}
 
 ul,
 li {
@@ -55,17 +71,27 @@ $lg-font-size: 18px;
 $xl-font-size: 20px;
 $xxl-font-size: 20px;
 
-$xxl-design-width: 1920px;
-$xxl-design-height: 1080px;
+// 设计稿尺寸 初期用1920*1080做的，中途改为了1400*800
+$design-width: (
+  xxl: 1920px,
+  xl: 1400px
+);
+$design-height: (
+  xxl: 1080px,
+  xl: 800px
+);
 
+// pxToRem 用在固定大小，只在break point跟随字体大小变化
 @function pxToRem($px, $point: $xs-font-size) {
   @return $px / $point * 1rem;
 }
-@function pxToVw($px, $design-width: $xxl-design-width) {
-  @return $px / $design-width * 100vw;
+
+// pxToVw / pxToVh 用在自适应大小，随时占屏幕固定百分比
+@function pxToVw($px, $design-width-key: xxl) {
+  @return $px / map-get($design-width, $design-width-key) * 100vw;
 }
-@function pxToVh($px, $design-width: $xxl-design-height) {
-  @return $px / $xxl-design-height * 100vh;
+@function pxToVh($px, $design-height-key: xxl) {
+  @return $px / map-get($design-height, $design-height-key) * 100vh;
 }
 
 :root {
@@ -149,7 +175,8 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: $logoCol;
-  transition: all 1s cubic-bezier(0.86, 0, 0.07, 0.995);
+  @include transition-trf;
+  transition-duration: 0.8s;
   z-index: 150;
 
   .is-loaded & {
@@ -157,305 +184,18 @@ body {
   }
 }
 
-.p0-ltlogo {
-  position: relative;
-}
-
-.o-scroll {
-  min-height: 100vh;
-  overflow: hidden;
-  main > div {
-    //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-}
-
-.c-section {
-  position: relative;
-  height: 100vh;
-  //overflow: hidden;
-  display: flex;
-
-  margin {
-    left: auto;
-    right: auto;
-  }
-  @include media-breakpoint-up(xxl) {
-    margin {
-      left: 1.25rem;
-      right: 1.25rem;
-    }
-  }
-  img {
-    //width: 100%;
-  }
-}
-
-%img-resize-wrapper {
-  width: 100%;
-  position: relative;
-  padding-bottom: 100%;
-}
-
-%img-resize-full {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  //background: url("../images/p0_plus.png") 0 0 repeat;
-}
-.bg-holder{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  pointer-events: none;
-}
-.p0-blueline-bg {
-  //overflow: hidden;
-}
-$p2-top: 66px;
-.p0-bluebg-img{
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
-  margin-left: pxToVw(370px);
-  width: pxToVw(1357px);
-  height: calc(#{pxToRem($p2-top - 6px)} + 100vh);
-  transition: all .1s ;
-}
-#p1-bg-target{
-  position: absolute;
-  left: 0;
-  top: -90vh;
-  width: 100vw;
-  height: 60vh; 
-}
-.p2-bluebg-img{
-  //margin-left: pxToVw(320px);
-  width: pxToVw(801px);
-  height: pxToVh(641px);
-}
-.p3-bluebg-img{
-  margin-top: pxToVh(340px);
-  margin-left: pxToVw(847px);
-  width: pxToVw(1028px);
-  height: pxToVh(575px);
-}
-
-.p0-linebg {
-  position: absolute;
-  width: 100%;
-  padding-bottom: 17.2%;
-  top: calc(60vh - 165px);
-  overflow: hidden;
-}
-
-.p0-linebg-wrapper {
-  @extend %img-resize-full;
-
-  //canvas {width: 100%;}
-}
-
-.p0-plus-bg {
-  position: absolute;
-  left: 27.4%;
-  width: 32.4%;
-}
-
-.p0-plus-wrapper {
-  @extend %img-resize-wrapper;
-  padding-bottom: 72.8%;
-}
-
-.p0-plus-image {
-  @extend %img-resize-full;
-  background: url("../images/p0_plus.png") 0 0 repeat;
-}
-
-.p0-ltlogo {
-  position: absolute;
-  //top: 2.75rem;
-  left: 0;
-  height: 30vh;
-  //margin-top: 2.75rem;
-  padding-top: 2.75rem;
-  width: 60vw;
-
-  @include media-breakpoint-up(sm) {
-    width: 21rem;
-  }
-}
-
-
-
-.o-center-wrapper-logo {
-  position: absolute;
-  left: 0;
-  top: pxToVh(540px);
-  width: 100%;
-  margin: auto;
-  margin-top: pxToRem(-180px); //-10rem; // -7.75rem;
-}
-
-$logo-static-width: 425px; // gif 最后落版宽高
-$logo-static-height: 273px;
-$logo-stage-width: 680px; // gif 舞台宽高
-$logo-stage-height: 457px;
-$logo-layout-width: 425px; //487px; // 设计稿宽高 // 不按设计稿，按老黄给的gif尺寸来
-$logo-layout-height: 273px; //311px;
-
-.p0-mainlogo {
-  position: relative;
-  margin: auto;
-  transition: all 0.5s;
-  width: 80vw;
-
-  @include media-breakpoint-up(sm) {
-    width: pxToRem($logo-layout-width);
-    height: pxToRem($logo-layout-height);
-  }
-  @include media-breakpoint-up(md) {
-  }
-}
-
-.p0-mainlogo-wrapper {
-  //@extend %img-resize-wrapper;
-  //padding-bottom: 645px / 960px * 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: $logo-stage-width * $logo-layout-width / $logo-static-width;
-  height: $logo-stage-height * $logo-layout-height / $logo-static-height;
-  transform: translate3d(-50%, -50%, 0);
-}
-
-.p0-mainlogo-image {
-  @extend %img-resize-full;
-  img {
-    width: auto;
-    margin: 0 auto;
-  }
-  //background: url("../images/p0_mainlogo.png") 0 0 repeat;
-  //background-size: cover;
-}
-
-.p0-logotext {
-  margin: auto;
-  margin-top: pxToVh(154px); //12.5vh;
-  width: 12rem;
-  font-size: 0;
-}
-
-.p0-logo-textline {
-  display: block;
-  margin-bottom: 1px;
-  opacity: 0;
-  transform-origin: 50% 0;
-  transform-style: preserve-3d;
-  transform: translateY(100%) rotateX(-80deg);
-  transition: opacity 0s cubic-bezier(0.215, 0.61, 0.355, 1),
-    transform 0s cubic-bezier(0.215, 0.61, 0.355, 1);
-  
-  &:first-of-type{
-    transition-delay: 2.6s;
-  }
-  &:nth-of-type(2){
-    transition-delay: 2.7s;
-  }
-  &:nth-of-type(3){
-    transition-delay: 2.8s;
-  }
-  span{
-    display: inline-block;
-    padding: 0 0.25rem;
-    line-height: 1.3rem;
-    color: #fff;
-    font: {
-      size: 1rem;
-      //weight: bold;
-    }
-    background-color: $logoCol;
-  }
-
-  .is-loaded & {
-    transform: none;
-    opacity: 1;
-    transition-duration: 0.8s;
-  }
-}
-
-.pp-bluebg-holder{
-  position: absolute;
-  left:0;
-  top: 50vh;
-  width:100vw;
-  height:100vh;
-  overflow: hidden;
-}
-.pp-bg-target{
-  position: fixed;
-  left:0;
-  top: 0;
-  width:100vw;
-  height:100vh;
-  background-color: $logoCol;
-  transform: translate3d(100%,0,0);
-  transition: all 1s;
-  .is-inview>&{
-    transform: none;
-  }
-}
-
-#section2 {
-  //background: rgba(0, 0, 0, .2);
-}
-
-.p1-holder {
-  position: relative;
-  margin-top: 17vh;
-  width: 100vw;
-}
-
-.p1-contents {
-  position: relative;
-  width: 100vw;
-  overflow: hidden;
-  padding-bottom: 33.8%; //59.16%;
-}
-
-#p1-content-target {
-  position: absolute;
-  top: -100vh;
-  left: 0;
-  right: 0;
-  bottom: -100vh;
-}
-
-.contentholder {
-  position: absolute;
-  //top: -100vh;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background-image: url("../images/p1_proxy.png");
-  background-size: cover;
-  background-position: 50%;
-}
-
 .c-header-btn {
   position: fixed;
-  right: 7.5rem;
-  top: 2.2rem;
-  width: 5rem;
-  height: 5rem;
+  right: pxToVw(30px, xl); //7.5rem;
+  top: pxToVh(30px, xl);//2.2rem;
+  width: pxToRem(80px);//5rem;
+  height: pxToRem(80px);//5rem;
   z-index: 100;
   cursor: pointer;
 }
 
 .menu-on {
-  @extend %img-resize-full;
+  @extend %resize-full;
 
   background: url("../images/menu_open_btn.png") 50% 50% no-repeat;
   opacity: 1;
@@ -468,7 +208,7 @@ $logo-layout-height: 273px; //311px;
 }
 
 .menu-off {
-  @extend %img-resize-full;
+  @extend %resize-full;
 
   background: url("../images/menu_close_btn.png") 50% 50% no-repeat;
   opacity: 0;
@@ -542,6 +282,320 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
+.o-scroll {
+  // min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  //overflow: hidden;
+  main > div {
+    //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.c-section {
+  position: relative;
+  height: 100vh;
+  //overflow: hidden;
+  display: flex;
+
+  margin {
+    left: auto;
+    right: auto;
+  }
+  @include media-breakpoint-up(xxl) {
+    margin {
+      left: 1.25rem;
+      right: 1.25rem;
+    }
+  }
+  img {
+    //width: 100%;
+  }
+}
+
+%img-resize-wrapper {
+  width: 100%;
+  position: relative;
+  padding-bottom: 100%;
+}
+
+%resize-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  //overflow: hidden;
+  //background: url("../images/p0_plus.png") 0 0 repeat;
+}
+.bg-holder{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+}
+$p2-top: 66px;
+.p0-blueline-bg {
+  height: 0;
+  //opacity: 0;
+  overflow: hidden;
+  
+  .first-active &{
+    transition: height 1s cubic-bezier(.79,.02,.66,1) .1s;
+    //height: 100vh;
+    height: calc(#{pxToRem($p2-top - 6px)} + 100vh);  
+    opacity: 1;
+  }
+  img{
+    height: calc(#{pxToRem($p2-top - 6px)} + 100vh); 
+  }
+}
+
+.p0-bluebg-img{
+  //transform: translate3d(-100%, 0, 0);
+  //opacity: 0;
+  margin-left: pxToVw(370px);
+  width: pxToVw(1357px);
+  
+}
+
+.p2-bluebg-img{
+  //margin-left: pxToVw(320px);
+  width: pxToVw(801px);
+  height: pxToVh(641px);
+}
+.p3-bluebg-img{
+  margin-top: pxToVh(340px);
+  margin-left: pxToVw(847px);
+  width: pxToVw(1028px);
+  height: pxToVh(575px);
+}
+
+.p0-linebg {
+  position: absolute;
+  width: 100%;
+  padding-bottom: 17.2%;
+  top: calc(60vh - 165px);
+  overflow: hidden;
+}
+
+.p0-linebg-wrapper {
+  @extend %resize-full;
+  overflow: hidden;
+  canvas {
+    
+  }
+}
+
+.p0-plus-bg {
+  position: absolute;
+  left: 27.4%;
+  width: 32.4%;
+}
+
+.p0-plus-wrapper {
+  @extend %img-resize-wrapper;
+  padding-bottom: 72.8%;
+}
+
+.p0-plus-image {
+  @extend %resize-full;
+  background: url("../images/p0_plus.png") 0 0 repeat;
+}
+
+.p0-ltlogo {
+  position: absolute;
+  //top: 2.75rem;
+  left: 0;
+  height: 30vh;
+  //margin-top: 2.75rem;
+  padding-top: 2.75rem;
+  width: 60vw;
+
+  @include media-breakpoint-up(sm) {
+    width: 21rem;
+  }
+}
+
+
+
+.o-center-wrapper-logo {
+  position: absolute;
+  left: 0;
+  top: pxToVh(540px);
+  width: 100%;
+  margin: auto;
+  margin-top: pxToRem(-180px); //-10rem; // -7.75rem;
+}
+
+$logo-static-width: 425px; // gif 最后落版宽高
+$logo-static-height: 273px;
+$logo-stage-width: 680px; // gif 舞台宽高
+$logo-stage-height: 457px;
+$logo-layout-width: 425px; //487px; // 设计稿宽高 // 不按设计稿，按老黄给的gif尺寸来
+$logo-layout-height: 273px; //311px;
+
+.p0-mainlogo {
+  position: relative;
+  margin: auto;
+  transition: all 0.5s;
+  width: 80vw;
+
+  @include media-breakpoint-up(sm) {
+    width: pxToRem($logo-layout-width);
+    height: pxToRem($logo-layout-height);
+  }
+  @include media-breakpoint-up(md) {
+  }
+}
+
+.p0-mainlogo-wrapper {
+  //@extend %img-resize-wrapper;
+  //padding-bottom: 645px / 960px * 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: $logo-stage-width * $logo-layout-width / $logo-static-width;
+  height: $logo-stage-height * $logo-layout-height / $logo-static-height;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.p0-mainlogo-image {
+  @extend %resize-full;
+  img {
+    width: auto;
+    margin: 0 auto;
+  }
+  //background: url("../images/p0_mainlogo.png") 0 0 repeat;
+  //background-size: cover;
+}
+
+.p0-logotext {
+  margin: auto;
+  margin-top: pxToVh(154px); //12.5vh;
+  width: 12rem;
+  font-size: 0;
+}
+
+.p0-logo-textline {
+  display: block;
+  margin-bottom: 1px;
+  opacity: 0;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  transform: translateY(100%) rotateX(-80deg);
+  @include transition-opc-trf;
+  
+  &:first-of-type{
+    transition-delay: 2.6s;
+  }
+  &:nth-of-type(2){
+    transition-delay: 2.7s;
+  }
+  &:nth-of-type(3){
+    transition-delay: 2.8s;
+  }
+  span{
+    display: inline-block;
+    padding: 0 0.25rem;
+    line-height: 1.3rem;
+    color: #fff;
+    font: {
+      size: 1rem;
+      //weight: bold;
+    }
+    background-color: $logoCol;
+  }
+
+  .is-loaded & {
+    transform: none;
+    opacity: 1;
+    transition-duration: 0.8s;
+  }
+}
+
+.pp-bluebg-holder{
+  position: absolute;
+  left:0;
+  top: 50vh;
+  width:100vw;
+  height:100vh;
+  overflow: hidden;
+}
+.pp-bg-target{
+  position: fixed;
+  left:0;
+  top: 0;
+  width:100vw;
+  height:100vh;
+  background-color: $logoCol;
+  transform: translate3d(100%,0,0);
+  transition: all 1s;
+  .is-inview>&{
+    transform: none;
+  }
+}
+
+#section2 {
+  //background: rgba(0, 0, 0, .2);
+}
+
+.p1-holder-pos {
+  position: relative;
+  margin-top: pxToVh(394px, xl);
+  width: 100vw;
+  //opacity: 0;/
+}
+
+.p1-contents-height {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  top: -50%;
+  padding-bottom: 33.8%; //59.16%;
+}
+
+.p1-contents {
+  @extend %resize-full;
+  --swiper-navigation-color: #fff;
+
+  .swiper-button-prev, .swiper-button-next{
+    width: pxToRem(30px);
+    height: pxToRem(80px);
+    background: url(../images/prev_white.png) center center no-repeat;
+    background-size: contain;
+
+    &::after{
+      opacity: 0;
+    }
+  }
+  .swiper-button-next{
+    transform: scaleX(-1);
+  }
+}
+
+.media-slide{
+  img{
+    width: 100%;
+  }
+}
+
+.p1-ltlogo{
+  position: absolute;
+  left: pxToVw(88px, xl);
+  top: pxToVh(48px, xl);
+}
+.p1-lb-icon{
+  position: absolute;
+  left: pxToVw(89px, xl);
+  bottom: pxToVh(46px, xl);
+  width: pxToRem(216px);
+  height: pxToRem(52px);
+}
+
 .p2-contents {
   margin: pxToRem(66px) auto auto;
   padding-right: pxToRem(230px);
@@ -586,7 +640,7 @@ $logo-layout-height: 273px; //311px;
   width: pxToRem(417px);
 }
 .swiper-container{
-  margin: pxToVh(330px) auto 0;
-  width: pxToRem(1329px);
-  height: pxToRem(619px);
+  // margin: pxToVh(330px) auto 0;
+  // width: pxToRem(1329px);
+  // height: pxToRem(619px);
 }
