@@ -57,7 +57,14 @@ const config = {
       },
       {
         test: /\.pug$/,
-        use: ['pug-loader']
+        use: [
+          {
+            loader: 'pug-loader',
+            options: {
+              pretty: true // 可能出错，后期删除此配置
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif|webp)$/,

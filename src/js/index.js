@@ -8,7 +8,7 @@ import "../css/loading.css";
 
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
 import "swiper/swiper.scss";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
@@ -120,9 +120,10 @@ import "../scss/main.scss";
         // window.sup1 = sup1;
     }, 100)
 
-    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History]); // Install modules
+    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation]); // Install modules
     var mainSwiper = new Swiper('.o-scroll', {
         direction: 'vertical', // 垂直切换选项
+        //freeMode:true,
         //loop: true, // 循环模式选项
         speed: 600,
 
@@ -139,8 +140,13 @@ import "../scss/main.scss";
         },
 
         on: {
+            init: function(){
+                //console.log(this.$wrapperEl[0].style.transitionDuration)
+                //this.$wrapperEl[0].style.transitionDuration = "1.2s !important";
+                //console.log(this.$wrapperEl[0].style.transitionDuration)
+            },
             slideChangeTransitionEnd: function(){
-                console.log(this.slides, this.realIndex, this.slides[this.realIndex])
+                //.log(this.slides, this.realIndex, this.slides[this.realIndex])
                 this.slides[this.realIndex].classList.add("first-active");
                 if( this.realIndex == 1 ){
                     this.allowSlidePrev= false;
@@ -149,10 +155,29 @@ import "../scss/main.scss";
                 }
             }
         },
-        history: {
-            replaceState: true,
-        },
+        // hashNavigation: {
+        //     watchState: true,
+        //     hashChange: true
+        // }
+        // history: {
+        //     //replaceState: true,
+        //     key: 'sub'
+        // },
     })
+    // function onMouseWheel(e) {
+    //     console.log(e);
+    //     clearTimeout(e.target.getAttribute('data-timer'));
+    //     //clearTimeout($.data(this, 'timer'));
+    //     document.querySelector('.swiper-wrapper').classList.add('mousewheel')
+    //     //$(".swiper-wrapper").addClass('mousewheel');
+    //     e.target.setAttribute('data-timer', setTimeout(() => {
+    //         document.querySelector('.swiper-wrapper').classList.remove('mousewheel')
+    //     }, 200))
+
+    // }
+  
+    // window.addEventListener( 'mousewheel', onMouseWheel, false )
+    // window.addEventListener( 'DOMMouseScroll', onMouseWheel, false )
 
     var mediaSwiper = new Swiper('.p1-contents', {
         speed: 800,
@@ -174,6 +199,35 @@ import "../scss/main.scss";
             },
             slideChangeTransitionEnd: function(){
                 mainSwiper.mousewheel.enable();
+            }
+        }
+    })
+
+    var techSwiper = new Swiper('.p2-contents', {
+        speed: 800,
+        loop: true,
+        spaceBetween : 800,
+        parallax: true,
+        nested: true, // 阻止父级切换
+        resistanceRatio: 0,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        // mousewheel: {
+        //     releaseOnEdges: true,
+        //     eventsTarged: '#p1-contents',
+        // },
+        on: {
+            slideChangeTransitionStart: function(){
+                mainSwiper.mousewheel.disable();
+                
+            },
+            slideChangeTransitionEnd: function(){
+                mainSwiper.mousewheel.enable();
+            },
+            transitionStart:function(){
+                //mainSwiper.destroy(false)
             }
         }
     })
