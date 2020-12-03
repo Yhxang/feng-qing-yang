@@ -10,7 +10,7 @@
 .spinner>div {
   background-color: #fff;
   height: 100%;
-  width: 6px;
+  width: 5px;
   display: inline-block;
   margin: 0 1px;
   -webkit-animation: stretchdelay 1.2s infinite ease-in-out;

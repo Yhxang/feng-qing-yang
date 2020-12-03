@@ -36,7 +36,8 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/,
-        use: [{
+        use: [
+          {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../', // 生成地址
@@ -83,6 +84,9 @@ const config = {
       {
 
         test: /\.(eot|svg|ttf|woff|woff2|svg)$/,
+        include: [
+          path.resolve(__dirname, "src/fonts")
+        ],
         use: [{
           loader: "file-loader",
           options: {

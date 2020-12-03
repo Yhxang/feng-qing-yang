@@ -8,7 +8,7 @@ import "../css/loading.css";
 
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation } from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
 import "swiper/swiper.scss";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
@@ -19,8 +19,8 @@ import "../scss/main.scss";
 (function () {
     const $$ = $sel => document.querySelector($sel);
     const docEl = $$('html');
-
-    document.querySelector(".p0-linebg-wrapper").appendChild(bgcanvas.app.view);
+    const lineAnimCanvas = bgcanvas.app.view;
+    document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
     let scroll;
     setTimeout(() => {
         /*
@@ -121,7 +121,7 @@ import "../scss/main.scss";
     }, 100)
 
     Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation]); // Install modules
-    var mainSwiper = new Swiper('.o-scroll', {
+    let mainSwiperOption = {
         direction: 'vertical', // 垂直切换选项
         //freeMode:true,
         //loop: true, // 循环模式选项
@@ -134,24 +134,33 @@ import "../scss/main.scss";
         scrollbar: {
             el: '.swiper-scrollbar',
         },
-        navigation:{
+        navigation: {
             nextEl: null,
             prevEl: null
         },
 
         on: {
-            init: function(){
+            init: function () {
                 //console.log(this.$wrapperEl[0].style.transitionDuration)
                 //this.$wrapperEl[0].style.transitionDuration = "1.2s !important";
                 //console.log(this.$wrapperEl[0].style.transitionDuration)
             },
-            slideChangeTransitionEnd: function(){
+            slideChangeTransitionStart: function () {
+                if (this.activeIndex == 2) {
+                    let canvasTarget = document.querySelector(".p2-linebg-wrapper");
+                    if (!canvasTarget.classList.contains("has-canvas")) {
+                        canvasTarget.appendChild(lineAnimCanvas);
+                        canvasTarget.classList.add("has-canvas");
+                    }
+                }
+            },
+            slideChangeTransitionEnd: function () {
                 //.log(this.slides, this.realIndex, this.slides[this.realIndex])
                 this.slides[this.realIndex].classList.add("first-active");
-                if( this.realIndex == 1 ){
-                    this.allowSlidePrev= false;
-                }else{
-                    this.allowSlidePrev= true;
+                if (this.realIndex == 1) {
+                    this.allowSlidePrev = false;
+                } else {
+                    this.allowSlidePrev = true;
                 }
             }
         },
@@ -163,7 +172,8 @@ import "../scss/main.scss";
         //     //replaceState: true,
         //     key: 'sub'
         // },
-    })
+    }
+    var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
     // function onMouseWheel(e) {
     //     console.log(e);
     //     clearTimeout(e.target.getAttribute('data-timer'));
@@ -175,41 +185,66 @@ import "../scss/main.scss";
     //     }, 200))
 
     // }
-  
+
     // window.addEventListener( 'mousewheel', onMouseWheel, false )
     // window.addEventListener( 'DOMMouseScroll', onMouseWheel, false )
 
     var mediaSwiper = new Swiper('.p1-contents', {
-        speed: 800,
+        speed: 1100,
         loop: true,
         parallax: true,
         nested: true, // 阻止父级切换
         resistanceRatio: 0,
+        watchSlidesProgress: true,
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        // mousewheel: {
-        //     releaseOnEdges: true,
-        //     eventsTarged: '#p1-contents',
-        // },
         on: {
-            slideChangeTransitionStart: function(){
-                mainSwiper.mousewheel.disable();
+
+            progress: function (swiper) {
+                let interleaveOffset = 0.3;
+                swiper.slides.forEach(slide => {
+
+                    let slideProgress = slide.progress;
+
+                    let innerOffset = swiper.width * interleaveOffset;
+                    // console.log(slide  )
+                    let innerTranslate = slideProgress * innerOffset;
+                    //if(swiper.activeIndex ==1) console.log(slide.querySelector('img'))
+                    slide.querySelector('img').style.transform = `translate3d(${innerTranslate}px,0,0)`
+                    //if(swiper.activeIndex ==1) console.log( `translate3d(${innerTranslate}px,0,0,)`)
+                })
             },
-            slideChangeTransitionEnd: function(){
+            touchStart: function (swiper) {
+                this.slides.forEach(slide => slide.style.transition = "")
+            },
+            slideChangeTransitionStart: function (swiper) {
+                mainSwiper.mousewheel.disable();
+                //this.slides.forEach(slide => slide.style.transition = "")
+            },
+            slideChangeTransitionEnd: function (swiper) {
                 mainSwiper.mousewheel.enable();
+                this.slides.forEach(slide => {
+                    let speed = this.params.speed;
+                    slide.style.transition = speed + "ms";
+                    slide.querySelector("img").style.transition = speed + "ms";
+                });
             }
         }
     })
+    let techOptions = {
 
+    }
     var techSwiper = new Swiper('.p2-contents', {
-        speed: 800,
+        speed: 1200,
         loop: true,
-        spaceBetween : 800,
+        spaceBetween: 800,
         parallax: true,
         nested: true, // 阻止父级切换
         resistanceRatio: 0,
+        noSwiping: true,
+        watchSlidesProgress: true,
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -219,16 +254,32 @@ import "../scss/main.scss";
         //     eventsTarged: '#p1-contents',
         // },
         on: {
-            slideChangeTransitionStart: function(){
+            slideChangeTransitionStart: function () {
                 mainSwiper.mousewheel.disable();
-                
+                // this.slides.forEach(slide => {
+                //     let myparallax_x = slide.getAttribute('data-myparallax-x');
+                //     //slide.style.transform = `translate3d(${myparallax_x}px,0,0)`
+                // })
+
             },
-            slideChangeTransitionEnd: function(){
+            slideChangeTransitionEnd: function () {
                 mainSwiper.mousewheel.enable();
             },
-            transitionStart:function(){
+            transitionStart: function () {
+                let { prevEl, nextEl } = this.params.navigation;
+                console.log([prevEl, nextEl].join(","))
+                this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
+                    nav.classList.add("arrow-out");
+                })
                 //mainSwiper.destroy(false)
+            },
+            transitionEnd: function () {
+                let { prevEl, nextEl } = this.params.navigation;
+                this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
+                    nav.classList.remove("arrow-out");
+                })
             }
+
         }
     })
 
@@ -254,6 +305,6 @@ import "../scss/main.scss";
 
 
 
-    
+
 
 })()

@@ -21,6 +21,9 @@ $logoCol: #383e96;
 @function myease(){
   @return cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+.swiper-wrapper{
+  transition-timing-function: myease();
+}
 .swiper-slide{
   overflow: visible;
 }
@@ -31,7 +34,11 @@ li {
   list-style: none;
 }
 a {
-  text-decoration: none;
+  &:hover{
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
 p{
   margin: 0;
@@ -169,6 +176,11 @@ $design-height: (
   }
 }
 
+html ::selection {
+  color: white;
+  background-color: $logoCol;
+}
+
 body {
   color: $logoCol;
   font-family: "Source Han Sans CN Regular", Helvetica;
@@ -240,7 +252,7 @@ body {
   height: 100vh;
   transform: translate3d(100%, 0, 0);
   transition: transform 1s cubic-bezier(0.86, 0, 0.07, 0.995);
-  background-color: rgba(56, 62, 150, 0.3); //fade-in($logoCol, .5);
+  background-color: rgba($logoCol, 0.3); //fade-in($logoCol, .5);
   z-index: 99;
 
   .nav-on & {
@@ -254,7 +266,7 @@ body {
 
 .menu-logo {
   color: $logoCol;
-  font-size: 1.4rem;
+  font-size: pxToRem(28px);
 
   :hover,
   :visited {
@@ -273,15 +285,37 @@ body {
 }
 
 .menu-ul a {
+  display: inline-block;
+  padding: pxToRem(16px / 2) 0;
   :hover,
   :visited {
     color: white;
   }
 }
-.menu-ul span {
-  line-height: 3rem;
-  line-height: pxToRem(60px);
+.text-current{
+  position: relative;
+  overflow: hidden;
+  display: block;
+  line-height: pxToRem(28px);
   color: white;
+}
+.menu-link{
+  position: relative;
+  display: block;
+  @include transition-trf;
+  transition-duration: .4s;
+  &:after{
+    content: attr(data-title);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    transform: translateZ(0);
+    display: block;
+    
+  }
+  a:hover &{
+    transform: translateY(-100%);
+  }
 }
 .menu-bottom {
   width: auto; //pxToRem(71px);
@@ -294,13 +328,8 @@ body {
 }
 
 .o-scroll {
-  // min-height: 100vh;
   width: 100vw;
   height: 100vh;
-  //overflow: hidden;
-  main > div {
-    //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
 }
 
 .c-section {
@@ -380,11 +409,11 @@ $p2-top: 66px;
   height: pxToVh(641px);
 }
 
-.p0-linebg {
+.p0-linebg, .p2-linebg {
   position: absolute;
   width: 100%;
   padding-bottom: 17.2%;
-  top: calc(60vh - 165px);
+  top: calc(60vh - #{pxToRem(165px)});
   overflow: hidden;
 }
 
@@ -414,13 +443,20 @@ $p2-top: 66px;
 
 .p0-ltlogo {
   position: absolute;
+  transform: translateY(-150px);
   //top: 2.75rem;
   left: 0;
   height: 30vh;
   //margin-top: 2.75rem;
   padding-top: 2.75rem;
   width: 60vw;
+  @include transition-trf;
+  transition-duration: .6s;
+  transition-delay: .8s;
 
+  .is-loaded &{
+    transform: none;
+  }
   @include media-breakpoint-up(sm) {
     width: 21rem;
   }
@@ -553,15 +589,16 @@ $logo-layout-height: 273px; //311px;
   position: relative;
   margin-top: pxToVh(394px, xl);
   width: 100vw;
+  height: pxToVh(482px, xl);
   //opacity: 0;/
 }
 
 .p1-contents-height {
   position: relative;
   width: 100vw;
-  overflow: hidden;
+  //overflow: hidden;
   top: -50%;
-  padding-bottom: 33.8%; //59.16%;
+  padding-bottom: 482px / map-get($design-width, xl) *  100%; //59.16%;
 }
 
 .p1-contents {
@@ -569,6 +606,7 @@ $logo-layout-height: 273px; //311px;
   --swiper-navigation-color: #fff;
 
   .swiper-button-prev, .swiper-button-next{
+    left: pxToVw(140px, xl);
     width: pxToRem(30px);
     height: pxToRem(80px);
     background: url(../images/prev_white.png) center center no-repeat;
@@ -579,13 +617,40 @@ $logo-layout-height: 273px; //311px;
     }
   }
   .swiper-button-next{
+    left: auto;
+    right: pxToVw(140px, xl);
     transform: scaleX(-1);
   }
 }
-
+.p1-slide-tip{
+  position: absolute;
+  top: 100%;
+  right: pxToVw(64px, xl);
+}
 .media-slide{
+  overflow: hidden;
   img{
     width: 100%;
+  }
+}
+.p1-detail {
+  position: absolute;
+  left: 50%;
+  bottom: pxToVh(18px, xl);
+  //width: pxToRem(77px);
+  padding: 0 pxToRem(10px);
+  height: pxToRem(21px);
+  line-height: pxToRem(21px);
+  border-radius: pxToRem(3px);
+  border: 1px solid white;
+  text-align: center;
+  font-size: pxToRem(18px);
+  color: white;
+  background-color: $logoCol;
+  font-family: Helvetica;
+  transform: translate3d(-50%, 0, 0);
+  &:hover{
+    color: white;
   }
 }
 
@@ -593,6 +658,7 @@ $logo-layout-height: 273px; //311px;
   position: absolute;
   left: pxToVw(88px, xl);
   top: pxToVh(48px, xl);
+  width: pxToRem(200px);
 }
 .p1-lb-icon{
   position: absolute;
@@ -643,6 +709,12 @@ $logo-layout-height: 273px; //311px;
     height: 100%;
   }
 }
+.p2-linebg{
+  top: calc(100vh - #{pxToVh(100px, xl)});
+}
+.p2-linebg-wrapper{
+  @extend %img-resize-wrapper
+}
 .p2-bluebg-1{
   position: absolute;
   left: pxToVw(282px, xl);
@@ -676,9 +748,11 @@ $logo-layout-height: 273px; //311px;
     right: auto;
     width: pxToRem(88px);
     height: pxToRem(180px);
-    background: url(../images/prev_btn.png) center center no-repeat;
-    background-size: contain;
     &::after{
+      display: none;
+    }
+    &.arrow-out .swiper-button-prev-bg{
+      transform: translate3d(-30%, 0, 0);
       opacity: 0;
     }
   }
@@ -686,17 +760,23 @@ $logo-layout-height: 273px; //311px;
     right: pxToVw(-108px, xl);
     left: auto;
     transform: scaleX(-1);
+
   }
+}
+.swiper-button-prev-bg{
+  width: 100%;
+  height: 100%;
+  @include transition-opc-trf;
+  transition-duration: 0.2s;
+  background: url(../images/prev_btn.png) center center no-repeat;
+  background-size: contain;
 }
 .tech-slide{
   width: 100%;
   @include clearfix;
   padding: pxToVh(18px, xl) pxToRem(30px) 0;
 }
-.p2-title {
-  width: pxToRem(698px);
-  margin-bottom: pxToRem(30px);
-}
+
 .p2-desc {
   padding: 0 0.5rem;
   font-size: 1rem;
@@ -720,6 +800,9 @@ $logo-layout-height: 273px; //311px;
   :first-child {
     margin-right: pxToRem(16px);
   }
+  p{
+    transition: transform 0.3s myease();
+  }
   span{
     line-height: pxToRem(38px);
     background-color: $logoCol;
@@ -734,6 +817,9 @@ $logo-layout-height: 273px; //311px;
   color: $logoCol;
   font-size: 1rem;
   line-height: pxToRem(24px);
+  p{
+    margin-bottom: pxToVh(24px, xl);
+  }
 }
 .p3-contents{
   position: absolute;
@@ -785,7 +871,7 @@ $logo-layout-height: 273px; //311px;
   p{
     font-size: pxToRem(54px);
     font-family: Arial Black, Helvetica, 'san-serif';
-    line-height: pxToRem(54px );
+    line-height: pxToRem(54px);
   }
 }
 .p2-left-side{

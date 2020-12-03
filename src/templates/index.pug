@@ -20,26 +20,17 @@ html(lang="en")
             a.menu-logo(href="#") 风氢扬科技
           nav.menu-nav
             ul.menu-ul
-              li 
-                a(href="#")
-                  span Products
-              li 
-                a(href="#")
-                  span Application
-              li 
-                a(href="#")
-                  span Support
-              li 
-                a(href="#")
-                  span Media
-              li 
-                a(href="#")
-                  span Join us
+              each tab in ["Products", "Application", "Support", "Media", "Join us"]
+                li 
+                  a(href="#")
+                    span.text-current
+                      span.menu-link(data-title=tab)=tab
         .menu-bottom
           img(src=require("../images/menu_bottom.png"))
       
       .o-scroll.swiper-container
         main.swiper-wrapper
+          //- page0:: logo页
           div#section0.swiper-slide(data-history="start" data-hash="start")
             section(class="c-section")
               .o-container
@@ -61,7 +52,8 @@ html(lang="en")
                     each val, index in ["HIGH POWER", "NO CARBON EMISSION", "LONG ENDURANCE"]
                       span.p0-logo-textline
                         span(data-scroll data-scroll-speed=(3-index)/2 data-scroll-position="top" data-scroll-delay=0.02)=val
-             
+          
+          //- page1:: 多媒体页 
           div#section1.swiper-slide(data-history="products" data-hash="products")
             section(class="c-section")
               .bg-holder.p0-blueline-bg
@@ -72,24 +64,33 @@ html(lang="en")
                     .swiper-wrapper
                       .swiper-slide.media-slide
                         img(src=require("../images/p1_proxy.png"))
+                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0") P1 DETAIL
                       .swiper-slide.media-slide
                         img(src=require("../images/p1_proxy.png"))
+                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0") P2 DETAIL
                       .swiper-slide.media-slide
                         img(src=require("../images/p1_proxy.png"))
+                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0") P3 DETAIL
+                    
                     .swiper-button-prev
                     .swiper-button-next
+                  img.p1-slide-tip(src=require("../images/p1_slide_tip.png"))
               .p1-ltlogo
-                img(src=require("../images/p1_ltlogo.png"))
+                img(src=require("../images/p1_lt_logo.svg"))
               .p1-lb-icon
-                img(src=require("../images/p1_lb_icon.png"))
-
+                img(src=require("../images/p1_lb_icon.svg"))
+                //img(src=require("../images/p1_lb_icon.png"))
+          
+          //- page2:: 科技
           div#section2.swiper-slide(data-history="application" data-hash="application")
             section(class="c-section")
+              .p2-linebg
+                .p2-linebg-wrapper
               .p2-bluebg-1
                 img.p2-bluebg-1-img.scaleable(src=require("../images/p2_blueline_1.png"))
               .p2-bluebg-2
                 img.p2-bluebg-2-img.scaleable(src=require("../images/p2_blueline_2.png"))
-              //.p2-bg-leftside
+              //-.p2-bg-leftside
                 img.p2-leftside-img(src=require("../images/p2_leftside.png"))
               
               .p2-left-side
@@ -101,43 +102,29 @@ html(lang="en")
                 .p2-machine-warn
                   img.scaleable(src=require("../images/p2_machine_warn.png")) 
               
-              
-                //- h2.p2-title
-                //-   img(src=require("../images/p2_title.png")
-                //-     data-scroll
-                //-     data-scroll-direction="horizontal"
-                //-     data-scroll-sticky
-                //-     data-scroll-target="#p2-contents"
-                //-   )
-                //- p.p2-desc(data-scroll data-scroll-direction="horizontal")
-                //-   span 风氢扬氢能科技（上海）有限公司由创始人涂蒙于2020-07-06在嘉定区市场监管局注册成立，主要经营一般项目：新兴能源技术研发；工程和技术研究和试验发展；汽车零部件研发；汽车零配件零售；汽车零配件批发；电池销售；电子元器件与机电组件设备销售；电子专用材料研发；电子专用材料销售；新能源汽车整车销售；光伏设备及元器件销售；新能源汽车电附件销售；电力电子元器件销售电气机械设备销售；物联网设备销售；金属密封件销售；物联网技术研发；能量回收系统研发；在线能源监测技术研发。
               .p2-title
                 p 风氢扬科技
-                img.p2-lbbg-img(src=require("../images/p2_lbbg_img.png"))
+                img.p2-lbbg-img(src=require("../images/p2_lbbg_img.svg"))
               .p2-contents.swiper-containers
                 .swiper-wrapper
                   - for(var x = 0; x <3 ; x ++)
                     .swiper-slide.tech-slide
-                      h2.p2-cont-tit
-                        p(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
+                      h2.p2-cont-tit(data-swiper-parallax-opacity="0")
+                        p(data-swiper-parallax-x="100" )
                           span 你好世界
-                        p(data-swiper-parallax-x="50" data-swiper-parallax-opacity="0")
+                        p(data-swiper-parallax-x="300")
                           span /hello world/
-                      p.p2-cont-detal
-                        | 燃料电池系统的原型可追溯至1839年，英国科学家威廉·格罗夫进行了人类历史上第一次燃料电池实验。<br>
-                        | <br>
-                        | 如今，这个“盒子”已成为全球各国能源战略的重要载体，正在改变并改善着人类赖以生存的生活环境和动力驱动方式。<br>
-                        | <br>
-                        | 它使用宇宙中最丰富的元素 - “氢”替代传统化石能源，通过电解反应将化学能转化为电能。已在全球各地的公共交通、物流运输、工程机械等领域得到了广泛应用，为真正的零碳排贡献着卓越的力量。<br>
-                        | <br>
-                        | 一群人再次因对前沿技术的追逐探索集结在一起，以G-POWOER作为自己出征的徽章，佩戴着自信的利刃，天际慕白的晨光洒在身上，他们紧握剑柄，高唱战歌，用坚韧和灿烂砌成巴别高塔，向深邃的苍穹攀登。<br>
-                        | (page#{x})
+                      .p2-cont-detal.swiper-no-swiping
+                        p 燃料电池系统的原型可追溯至1839年，英国科学家威廉·格罗夫进行了人类历史上第一次燃料电池实验。<br>
+                          | 如今，这个“盒子”已成为全球各国能源战略的重要载体，正在改变并改善着人类赖以生存的生活环境和动力驱动方式。
+                        p 它使用宇宙中最丰富的元素 - “氢”替代传统化石能源，通过电解反应将化学能转化为电能。已在全球各地的公共交通、物流运输、工程机械等领域得到了广泛应用，为真正的零碳排贡献着卓越的力量。
+                        p 一群人再次因对前沿技术的追逐探索集结在一起，以G-POWOER作为自己出征的徽章，佩戴着自信的利刃，天际慕白的晨光洒在身上，他们紧握剑柄，高唱战歌，用坚韧和灿烂砌成巴别高塔，向深邃的苍穹攀登。——page#{x}
                 .swiper-button-prev
+                  .swiper-button-prev-bg
                 .swiper-button-next
+                  .swiper-button-prev-bg
 
-
-
-
+          //- page3:: 产品与服务
           div#section3.swiper-slide(data-history="support")
             section(class="c-section")
               .p3-bluebg-1
@@ -166,6 +153,5 @@ html(lang="en")
         .swiper-scrollbar
 
 
-    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js")
-    //script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")
-    //script(nomodule src="https://polyfill.io/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous")
+    //-script(nomodule src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js" crossorigin="anonymous")
+    //-script(nomodule src="https://polyfill.io/v3/polyfill.min.js?features=Object.assign%2CElement.prototype.append%2CNodeList.prototype.forEach%2CCustomEvent%2Csmoothscroll" crossorigin="anonymous")
