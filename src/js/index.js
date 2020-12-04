@@ -16,11 +16,14 @@ import "swiper/swiper.scss";
 
 import "../scss/main.scss";
 
+//import page from "page.js"
+
 (function () {
+    
     const $$ = $sel => document.querySelector($sel);
     const docEl = $$('html');
     const lineAnimCanvas = bgcanvas.app.view;
-    document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
+    
     let scroll;
     setTimeout(() => {
         /*
@@ -98,6 +101,7 @@ import "../scss/main.scss";
         timeout(500).then(value => {
             docEl.classList.add("is-loaded");
             console.log('loaded')
+            document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
             return timeout(500);
         }).then(value => {
             document.getElementById("p0-mainlogo-image").appendChild(logogif);
@@ -125,7 +129,7 @@ import "../scss/main.scss";
         direction: 'vertical', // 垂直切换选项
         //freeMode:true,
         //loop: true, // 循环模式选项
-        speed: 600,
+        speed: 900,
 
         mousewheel: true,
 
@@ -174,6 +178,7 @@ import "../scss/main.scss";
         // },
     }
     var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
+    window.mainSwiper= mainSwiper
     // function onMouseWheel(e) {
     //     console.log(e);
     //     clearTimeout(e.target.getAttribute('data-timer'));
@@ -295,7 +300,8 @@ import "../scss/main.scss";
     document.querySelectorAll(".menu-ul li").forEach((li, index) => {
         li.querySelector("a").addEventListener("click", e => {
             e.preventDefault();
-            mediaSwiper.slideTo(index + 1)
+            mainSwiper.slideTo(index + 1)
+            //page('/user/'+ index)
             // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
             //     direction:600
             // });

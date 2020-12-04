@@ -85,7 +85,7 @@ $xs-font-size: 20px; //15.5;
 $sm-font-size: 20px;
 $md-font-size: 18px;
 $lg-font-size: 18px;
-$xl-font-size: 20px;
+$xl-font-size: 18px;
 $xxl-font-size: 20px;
 
 // 设计稿尺寸 初期用1920*1080做的，中途改为了1400*800
@@ -135,6 +135,15 @@ $design-height: (
     }
   }
 }
+// @include media-breakpoint-down(xl) {
+//   :root {
+//     font-size: $sm-font-size;
+
+//     // .scale:after {
+//     //   content: "sm";
+//     // }
+//   }
+// }
 
 @include media-breakpoint-up(md) {
   :root {
@@ -206,7 +215,11 @@ body {
     transform: translate3d(0, -100%, 0);
   }
 }
-
+.c-page{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 .c-header-btn {
   position: fixed;
   right: pxToVw(30px, xl); //7.5rem;
@@ -330,6 +343,13 @@ body {
 .o-scroll {
   width: 100vw;
   height: 100vh;
+  transform: translate3d(0, 20vh, 0);
+  @include transition-trf;
+  transition-duration: 0.8s;
+  transition-delay: -0.1s;
+  .is-loaded &{
+    transform: none;
+  }
 }
 
 .c-section {
@@ -377,22 +397,18 @@ body {
   pointer-events: none;
   overflow: hidden;
 }
+
 $p2-top: 66px;
 .p0-blueline-bg {
-
   height: 0;
-  //opacity: 0;
   overflow: hidden;
   
   .first-active &{
-    transition: height 1s cubic-bezier(.79,.02,.66,1) .1s;
-    //height: 100vh;
+    transition: height .8s cubic-bezier(.79,.02,.66,1);
     height: pxToVh(835px, xl);//calc(#{pxToRem($p2-top - 6px)} + 100vh);  
+    height: calc(100vh + #{pxToVh(34px, xl)});
     opacity: 1;
   }
-  // img{
-  //   height: calc(#{pxToRem($p2-top - 6px)} + 100vh); 
-  // }
 }
 
 .p0-bluebg-img{
@@ -415,7 +431,13 @@ $p2-top: 66px;
   padding-bottom: 17.2%;
   top: calc(60vh - #{pxToRem(165px)});
   overflow: hidden;
+  opacity: 0;
+  .is-loaded & {
+    transition: opacity 1s 1s;
+    opacity: 1;
+  }
 }
+
 
 .p0-linebg-wrapper {
   @extend %resize-full;
@@ -427,18 +449,21 @@ $p2-top: 66px;
 
 .p0-plus-bg {
   position: absolute;
-  left: 27.4%;
-  width: 32.4%;
+  right: pxToVw(202px, xl);
+  top: pxToVh(-20px, xl);
+  width: pxToVw(360px, xl);
 }
 
 .p0-plus-wrapper {
   @extend %img-resize-wrapper;
-  padding-bottom: 72.8%;
+  padding-bottom: 295px / 360px * 100%;
 }
 
 .p0-plus-image {
   @extend %resize-full;
-  background: url("../images/p0_plus.png") 0 0 repeat;
+  //background: url("../images/p0_plus.png") 0 0 repeat;
+  background: url("../images/p0_point_matrix.svg") top center no-repeat;
+  background-size: contain;
 }
 
 .p0-ltlogo {
@@ -559,28 +584,6 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
-.pp-bluebg-holder{
-  position: absolute;
-  left:0;
-  top: 50vh;
-  width:100vw;
-  height:100vh;
-  overflow: hidden;
-}
-.pp-bg-target{
-  position: fixed;
-  left:0;
-  top: 0;
-  width:100vw;
-  height:100vh;
-  background-color: $logoCol;
-  transform: translate3d(100%,0,0);
-  transition: all 1s;
-  .is-inview>&{
-    transform: none;
-  }
-}
-
 #section2 {
   //background: rgba(0, 0, 0, .2);
 }
@@ -590,14 +593,23 @@ $logo-layout-height: 273px; //311px;
   margin-top: pxToVh(394px, xl);
   width: 100vw;
   height: pxToVh(482px, xl);
-  //opacity: 0;/
+  opacity: 0;
+  transform: translate3d(0, 5vh, 0);
+  @include transition-opc-trf;
+  transition-duration: .5s;
+  transition-delay: 1s;
+  .first-active &{
+    transform: none;
+    opacity: 1;
+  }
 }
 
 .p1-contents-height {
   position: relative;
   width: 100vw;
   //overflow: hidden;
-  top: -50%;
+  //top: -50%;
+  transform: translate3d(0, -50%, 0);
   padding-bottom: 482px / map-get($design-width, xl) *  100%; //59.16%;
 }
 
@@ -638,17 +650,23 @@ $logo-layout-height: 273px; //311px;
   left: 50%;
   bottom: pxToVh(18px, xl);
   //width: pxToRem(77px);
-  padding: 0 pxToRem(10px);
+  
   height: pxToRem(21px);
-  line-height: pxToRem(21px);
-  border-radius: pxToRem(3px);
-  border: 1px solid white;
-  text-align: center;
-  font-size: pxToRem(18px);
-  color: white;
-  background-color: $logoCol;
-  font-family: Helvetica;
-  transform: translate3d(-50%, 0, 0);
+  
+  span{
+    display: block;
+    padding: 0 pxToRem(10px);
+    line-height: pxToRem(21px);
+    border-radius: pxToRem(3px);
+    border: 1px solid white;
+    text-align: center;
+    font-size: pxToRem(18px);
+    color: white;
+    background-color: $logoCol;
+    font-family: Helvetica;
+    transform: translate3d(-50%, 0, 0);
+  }
+  
   &:hover{
     color: white;
   }
@@ -718,7 +736,7 @@ $logo-layout-height: 273px; //311px;
 .p2-bluebg-1{
   position: absolute;
   left: pxToVw(282px, xl);
-  top: pxToVw(34px - 1px, xl);
+  top: pxToVh(34px, xl);
   width: pxToVw(298px, xl);
   height: pxToVh(122px, xl);
   img{
@@ -727,12 +745,15 @@ $logo-layout-height: 273px; //311px;
 }
 .p2-bluebg-2{
   position: absolute;
-  left: pxToVw(481px, xl);
+  right: pxToVw(507px, xl);
   bottom: 0;
   width: pxToVw(412px, xl);
   height: pxToVh(356px, xl);
+  overflow: hidden;
+  text-align: right;
   img{
-    height: 100%;
+    height: auto;
+    width: 100%;
   }
 }
 
@@ -792,7 +813,7 @@ $logo-layout-height: 273px; //311px;
 }
 .p2-cont-tit{
   margin-right: pxToVw(142px, xl);
-  height: pxToVh(122px, xl);
+  //height: pxToVh(122px, xl);
   float: right;
   font-size: pxToRem(30px);
   color: white;
@@ -806,7 +827,7 @@ $logo-layout-height: 273px; //311px;
   span{
     line-height: pxToRem(38px);
     background-color: $logoCol;
-    padding: pxToRem(10px);
+    padding: pxToRem(8px);
   }
 }
 .p2-cont-detal{

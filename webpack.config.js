@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {
   CleanWebpackPlugin
 } = require("clean-webpack-plugin");
@@ -106,6 +107,13 @@ const config = {
     new MiniCssExtractPlugin({
       filename: './css/[name].css?[contenthash:5]'
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "./src/images/favicon.ico"
+        }
+      ]
+    })
     // new HtmlWebpackPlugin({
     //     //filename: '[name].pug'
     //     //template: path.resolve(__dirname, `../pages/${page}.html`),
