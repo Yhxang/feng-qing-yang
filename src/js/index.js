@@ -8,7 +8,7 @@ import "../css/loading.css";
 
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation } from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
 import "swiper/swiper.scss";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
@@ -102,6 +102,9 @@ import "../scss/main.scss";
             docEl.classList.add("is-loaded");
             console.log('loaded')
             document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
+            document.querySelectorAll(".p0-logotext .cls-1").forEach((path, index) => {
+                path.style.animationDelay = `${2.5 + 0.05 * index}s`
+            })
             return timeout(500);
         }).then(value => {
             document.getElementById("p0-mainlogo-image").appendChild(logogif);
@@ -124,7 +127,7 @@ import "../scss/main.scss";
         // window.sup1 = sup1;
     }, 100)
 
-    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation]); // Install modules
+    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination]); // Install modules
     let mainSwiperOption = {
         direction: 'vertical', // 垂直切换选项
         //freeMode:true,
@@ -157,11 +160,18 @@ import "../scss/main.scss";
                         canvasTarget.classList.add("has-canvas");
                     }
                 }
+                document.querySelectorAll(".menu-ul a").forEach((a, index) => {
+                    if(this.realIndex === index + 1)
+                        a.classList.add('active');
+                    else
+                        a.classList.remove('active')
+                })
             },
             slideChangeTransitionEnd: function () {
                 //.log(this.slides, this.realIndex, this.slides[this.realIndex])
                 this.slides[this.realIndex].classList.add("first-active");
                 if (this.realIndex == 1) {
+                    document.querySelector(".c-menubox").classList.add("nav-on")
                     this.allowSlidePrev = false;
                 } else {
                     this.allowSlidePrev = true;
@@ -272,7 +282,6 @@ import "../scss/main.scss";
             },
             transitionStart: function () {
                 let { prevEl, nextEl } = this.params.navigation;
-                console.log([prevEl, nextEl].join(","))
                 this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
                     nav.classList.add("arrow-out");
                 })
@@ -287,7 +296,27 @@ import "../scss/main.scss";
 
         }
     })
+    var produtionSwiper = new Swiper('.p3-product-msg', {
+        speed: 600,
+        loop: true,
+        spaceBetween: 100,
+        parallax: true,
+        nested: true, // 阻止父级切换
+        resistanceRatio: 0,
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+        },
+    })
 
+    var supportSwiper = new Swiper(".p4-contents", {
+        spaceBetween: 300,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    })
 
     $$(".c-header-btn").addEventListener('click', e => {
         if (!docEl.classList.contains('nav-on')) {

@@ -63,7 +63,7 @@ const config = {
           {
             loader: 'pug-loader',
             options: {
-              pretty: true // 可能出错，后期删除此配置
+              //pretty: true // 可能出错，后期删除此配置
             }
           }
         ]
