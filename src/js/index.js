@@ -8,7 +8,7 @@ import "../css/loading.css";
 
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
 import "swiper/swiper.scss";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
@@ -127,12 +127,13 @@ import "../scss/main.scss";
         // window.sup1 = sup1;
     }, 100)
 
-    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination]); // Install modules
+    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade]); // Install modules
     let mainSwiperOption = {
         direction: 'vertical', // 垂直切换选项
         //freeMode:true,
         //loop: true, // 循环模式选项
         speed: 900,
+        shortSwipes: false,
 
         mousewheel: true,
 
@@ -311,10 +312,16 @@ import "../scss/main.scss";
     })
 
     var supportSwiper = new Swiper(".p4-contents", {
-        spaceBetween: 300,
+        // speed: 1200,
+        // spaceBetween: 300,
+        // direction: "vertical",
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+        },
+        effect: "fade",
+        fadeEffect: {
+            crossFade: true
         },
     })
 

@@ -804,15 +804,16 @@ $logo-layout-height: 273px; //311px;
   height: pxToRem(52px);
 }
 
-.p2-title {
+.column-title{
   position: absolute;
+  p{
+    font-size: pxToRem(27px);
+  }
+}
+.p2-title {
   left: pxToVw(89px, xl);
   bottom: pxToVh(118px, xl);
   width: pxToVw(409px, xl);
-
-  p {
-    font-size: 27px;
-  }
 }
 
 .p2-content-bg {
@@ -889,22 +890,6 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
-.p2-contents {
-  position: relative;
-  margin: pxToVh(78px, xl) auto auto;
-  padding-left: pxToVw(45px, xl);
-  width: pxToVw(1080px, xl);
-  height: pxToVh(366px, xl);
-  .swiper-button-prev,.swiper-button-next{
-    top: pxToVh(128px, xl);
-    left: pxToVw(-108px, xl);
-    
-  }
-  .swiper-button-next{
-    right: pxToVw(-108px, xl);
-  }
-}
-
 .swiper-button-prev.pretty-navigation,
 .swiper-button-next.pretty-navigation {
   right: auto;
@@ -934,6 +919,24 @@ $logo-layout-height: 273px; //311px;
     opacity: 0;
   }
 }
+
+.p2-contents {
+  position: relative;
+  margin: pxToVh(78px, xl) auto auto;
+  padding-left: pxToVw(45px, xl);
+  width: pxToVw(1080px, xl);
+  height: pxToVh(366px, xl);
+  .swiper-button-prev,.swiper-button-next{
+    top: pxToVh(128px, xl);
+    left: pxToVw(-108px, xl);
+    right: auto;
+  }
+  .swiper-button-next{
+    left: auto;
+    right: pxToVw(-108px, xl);
+  }
+}
+
 
 .tech-slide {
   width: 100%;
@@ -1085,17 +1088,12 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
-.p3-title {
+.p3-title{
   //width: pxToRem(417px);
-  position: absolute;
   right: pxToVw(76px, xl);
   top: pxToVh(98px, xl);
   width: pxToVw(246px, xl);
   height: pxToVh(111px, xl);
-
-  p {
-    font-size: 27px;
-  }
 }
 
 .swiper-container {
@@ -1123,7 +1121,13 @@ $logo-layout-height: 273px; //311px;
   right: 0;
   top: pxToVh(714px, xl);
 }
-
+.p4-bluebg-1{
+  position: absolute;
+  top: pxToVh(598px, xl);
+  right: pxToVw(401px, xl);
+  width: pxToVw(650px, xl);
+  height: pxToVh(573px, xl);
+}
 .p4-prodect-title {
   position: absolute;
   left: pxToVw(80px, xl);
@@ -1154,6 +1158,9 @@ $logo-layout-height: 273px; //311px;
   .swiper-slide{
     display: flex;
   }
+  p{
+    font-weight: bold;
+  }
 }
 .p4-box {
   padding: pxToRem(10px) 0 0 pxToRem(20px);
@@ -1169,4 +1176,16 @@ $logo-layout-height: 273px; //311px;
     float: left;
 
   }
+}
+.p5-bluebg-1{
+  position: absolute;
+  left: pxToVw(351px, xl);
+  top: pxToVh(371px, xl);
+  width: pxToVw(886px, xl);
+  height: pxToVh(544px, xl);
+}
+.p5-title{
+  top: pxToVh(68px, xl);
+  right: pxToVw(216px, xl);
+  width: pxToVw(270px, xl);
 }

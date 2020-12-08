@@ -2942,15 +2942,18 @@ a:hover .menu-link,
   height: 2.6rem;
 }
 
-.p2-title {
+.column-title {
   position: absolute;
+}
+
+.column-title p {
+  font-size: 1.35rem;
+}
+
+.p2-title {
   left: 6.35714vw;
   bottom: 14.75vh;
   width: 29.21429vw;
-}
-
-.p2-title p {
-  font-size: 27px;
 }
 
 .p2-content-bg {
@@ -3017,6 +3020,7 @@ a:hover .menu-link,
   bottom: 0;
   width: 29.42857vw;
   height: 44.5vh;
+<<<<<<< Updated upstream
 }
 
 .p2-contents {
@@ -3036,6 +3040,10 @@ a:hover .menu-link,
   right: -7.71429vw;
 }
 
+=======
+}
+
+>>>>>>> Stashed changes
 .swiper-button-prev.pretty-navigation,
 .swiper-button-next.pretty-navigation {
   right: auto;
@@ -3068,6 +3076,28 @@ a:hover .menu-link,
   opacity: 0;
 }
 
+<<<<<<< Updated upstream
+=======
+.p2-contents {
+  position: relative;
+  margin: 9.75vh auto auto;
+  padding-left: 3.21429vw;
+  width: 77.14286vw;
+  height: 45.75vh;
+}
+
+.p2-contents .swiper-button-prev, .p2-contents .swiper-button-next {
+  top: 16vh;
+  left: -7.71429vw;
+  right: auto;
+}
+
+.p2-contents .swiper-button-next {
+  left: auto;
+  right: -7.71429vw;
+}
+
+>>>>>>> Stashed changes
 .tech-slide {
   width: 100%;
   padding: 2.25vh 1.5rem 0;
@@ -3228,15 +3258,10 @@ a:hover .menu-link,
 }
 
 .p3-title {
-  position: absolute;
   right: 5.42857vw;
   top: 12.25vh;
   width: 17.57143vw;
   height: 13.875vh;
-}
-
-.p3-title p {
-  font-size: 27px;
 }
 
 .swiper-wrapper.mousewheel {
@@ -3259,6 +3284,7 @@ a:hover .menu-link,
   top: 89.25vh;
 }
 
+<<<<<<< Updated upstream
 .p4-prodect-title {
   position: absolute;
   left: 5.71429vw;
@@ -3270,6 +3296,27 @@ a:hover .menu-link,
   float: left;
 }
 
+=======
+.p4-bluebg-1 {
+  position: absolute;
+  top: 74.75vh;
+  right: 28.64286vw;
+  width: 46.42857vw;
+  height: 71.625vh;
+}
+
+.p4-prodect-title {
+  position: absolute;
+  left: 5.71429vw;
+  top: 18.125vh;
+  width: 59.64286vw;
+}
+
+.p4-prodect-tit-right {
+  float: left;
+}
+
+>>>>>>> Stashed changes
 .p4-contents {
   position: relative;
   margin: 50vh auto 0;
@@ -3295,6 +3342,13 @@ a:hover .menu-link,
   display: flex;
 }
 
+<<<<<<< Updated upstream
+=======
+.p4-contents p {
+  font-weight: bold;
+}
+
+>>>>>>> Stashed changes
 .p4-box {
   padding: 0.5rem 0 0 1rem;
   width: 19.5rem;
@@ -3308,5 +3362,22 @@ a:hover .menu-link,
 .p4-box + p {
   font-size: 1.25rem;
   float: left;
+<<<<<<< Updated upstream
+=======
+}
+
+.p5-bluebg-1 {
+  position: absolute;
+  left: 25.07143vw;
+  top: 46.375vh;
+  width: 63.28571vw;
+  height: 68vh;
+}
+
+.p5-title {
+  top: 8.5vh;
+  right: 15.42857vw;
+  width: 19.28571vw;
+>>>>>>> Stashed changes
 }
 
