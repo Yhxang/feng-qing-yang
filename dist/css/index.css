@@ -71,7 +71,7 @@
     url(/dist/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
     url(/dist/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
     url(/dist/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
-    url(/dist/images/Source_Han_Sans_CN_Regular.svg?8abc6) format("svg");
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
 @font-face {
   font-family: 'swiper-icons';
@@ -2310,7 +2310,7 @@ a:hover {
   cursor: pointer;
 }
 
-p {
+p, figure {
   margin: 0;
 }
 
@@ -2334,6 +2334,8 @@ p {
   right: 0;
   top: 0;
   opacity: 0.2;
+  z-index: 199;
+  pointer-events: none;
 }
 
 :root .scale :after {
@@ -2582,6 +2584,10 @@ a:hover .menu-link,
       transform: none;
 }
 
+main.swiper-wrapper > .swiper-slide {
+  transform: translateZ(0);
+}
+
 .c-section {
   position: relative;
   height: 100vh;
@@ -2589,25 +2595,13 @@ a:hover .menu-link,
   display: flex;
 }
 
-.c-section margin {
-  left: auto;
-  right: auto;
-}
-
-@media (min-width: 1400px) {
-  .c-section margin {
-    left: 1.25rem;
-    right: 1.25rem;
-  }
-}
-
-.p0-plus-wrapper, .p2-linebg-wrapper {
+.p0-plus-wrapper, .p2-linebg-wrapper, .p6-newsimg-size {
   width: 100%;
   position: relative;
   padding-bottom: 100%;
 }
 
-.menu-on, .menu-off, .p0-linebg-wrapper, .p0-plus-image, .p0-mainlogo-image, .p1-contents {
+.menu-on, .menu-off, .p0-linebg-wrapper, .p0-plus-image, .p0-mainlogo-image, .p1-contents, .p6-img-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -2680,7 +2674,7 @@ a:hover .menu-link,
 }
 
 .p0-plus-image {
-  background: url(../images/p0_point_matrix.svg?34108) top center no-repeat;
+  background: url(../images/p0_point_matrix.svg?e8290) top center no-repeat;
   background-size: contain;
 }
 
@@ -2771,8 +2765,8 @@ a:hover .menu-link,
 }
 
 .cls-1 {
-  -webkit-animation: move 3s cubic-bezier(0.215, 0.61, 0.355, 1) 2.5s forwards;
-          animation: move 3s cubic-bezier(0.215, 0.61, 0.355, 1) 2.5s forwards;
+  -webkit-animation: move 3s cubic-bezier(0.37, 0, 0.63, 1) 2.5s forwards;
+          animation: move 3s cubic-bezier(0.37, 0, 0.63, 1) 2.5s forwards;
   stroke-dasharray: 100px, 100px;
   stroke-dashoffset: 100px;
 }
@@ -3020,30 +3014,8 @@ a:hover .menu-link,
   bottom: 0;
   width: 29.42857vw;
   height: 44.5vh;
-<<<<<<< Updated upstream
 }
 
-.p2-contents {
-  position: relative;
-  margin: 9.75vh auto auto;
-  padding-left: 3.21429vw;
-  width: 77.14286vw;
-  height: 45.75vh;
-}
-
-.p2-contents .swiper-button-prev, .p2-contents .swiper-button-next {
-  top: 16vh;
-  left: -7.71429vw;
-}
-
-.p2-contents .swiper-button-next {
-  right: -7.71429vw;
-}
-
-=======
-}
-
->>>>>>> Stashed changes
 .swiper-button-prev.pretty-navigation,
 .swiper-button-next.pretty-navigation {
   right: auto;
@@ -3076,8 +3048,6 @@ a:hover .menu-link,
   opacity: 0;
 }
 
-<<<<<<< Updated upstream
-=======
 .p2-contents {
   position: relative;
   margin: 9.75vh auto auto;
@@ -3097,7 +3067,6 @@ a:hover .menu-link,
   right: -7.71429vw;
 }
 
->>>>>>> Stashed changes
 .tech-slide {
   width: 100%;
   padding: 2.25vh 1.5rem 0;
@@ -3265,7 +3234,7 @@ a:hover .menu-link,
 }
 
 .swiper-wrapper.mousewheel {
-  transition-duration: .2s !important;
+  transition-duration: 0.3s !important;
 }
 
 .p3-bluebg-1 {
@@ -3284,19 +3253,6 @@ a:hover .menu-link,
   top: 89.25vh;
 }
 
-<<<<<<< Updated upstream
-.p4-prodect-title {
-  position: absolute;
-  left: 5.71429vw;
-  top: 18.125vh;
-  width: 59.64286vw;
-}
-
-.p4-prodect-tit-right {
-  float: left;
-}
-
-=======
 .p4-bluebg-1 {
   position: absolute;
   top: 74.75vh;
@@ -3316,7 +3272,6 @@ a:hover .menu-link,
   float: left;
 }
 
->>>>>>> Stashed changes
 .p4-contents {
   position: relative;
   margin: 50vh auto 0;
@@ -3342,13 +3297,10 @@ a:hover .menu-link,
   display: flex;
 }
 
-<<<<<<< Updated upstream
-=======
 .p4-contents p {
   font-weight: bold;
 }
 
->>>>>>> Stashed changes
 .p4-box {
   padding: 0.5rem 0 0 1rem;
   width: 19.5rem;
@@ -3362,8 +3314,6 @@ a:hover .menu-link,
 .p4-box + p {
   font-size: 1.25rem;
   float: left;
-<<<<<<< Updated upstream
-=======
 }
 
 .p5-bluebg-1 {
@@ -3378,6 +3328,237 @@ a:hover .menu-link,
   top: 8.5vh;
   right: 15.42857vw;
   width: 19.28571vw;
->>>>>>> Stashed changes
+}
+
+.p5-contents {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 31.5vh auto 0;
+  width: 79.42857vw;
+  height: 57.25vh;
+  border: 1px solid #383e96;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.p5-thumb {
+  width: 15.66157%;
+  border-right: 1px solid #383e96;
+  margin: 2.25vh 0;
+  overflow: hidden;
+}
+
+.p5-thumb .swiper-slide {
+  position: relative;
+  padding-left: 1.85714vw;
+  padding-right: 1vw;
+  opacity: .4;
+}
+
+.p5-thumb .swiper-slide::after {
+  content: "";
+  position: absolute;
+  top: 75%;
+  display: none;
+  width: 2.1rem;
+  height: 1.5rem;
+  background: url(../images/p5_model_active.svg?6e70a) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.p5-thumb .swiper-slide.swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.p5-thumb .swiper-slide.swiper-slide-thumb-active:after {
+  display: block;
+}
+
+.p5-thumb .swiper-slide img {
+  position: relative;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.p5-thumb .swiper-slide:first-child img {
+  width: 6.85714vw;
+}
+
+.p5-thumb .swiper-slide:nth-child(2) img {
+  width: 7.14286vw;
+}
+
+.p5-thumb .swiper-slide:nth-child(3) img {
+  width: 6.28571vw;
+}
+
+.p5-thumb-scrollbar {
+  position: absolute;
+  left: -0.25rem;
+  top: 10vh;
+  height: 21.28571vw;
+  width: 0.5rem;
+  border-radius: 0;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.p5-thumb-scrollbar .swiper-scrollbar-drag {
+  width: 0.5rem;
+  border-radius: 0;
+  background-color: #383e96;
+}
+
+.p5-msgcont {
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1.66667vh 0;
+}
+
+.p5-msgcont .swiper-slide {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.p5-text-area {
+  width: 25.71429vw;
+  padding: 2.96296vh 2.57143vw 0;
+  font-family: Helvetica;
+}
+
+.p5-sub-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.p5-model-title {
+  font-size: 1.15rem;
+  line-height: 1.6rem;
+}
+
+.p5-model-detail {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+}
+
+.p5-imageholder {
+  margin-top: -5.5vh;
+  position: relative;
+  width: 38.21429vw;
+}
+
+.p5-modelimg {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 36.21429vw;
+  overflow: hidden;
+}
+
+#section6 {
+  height: 101.625vh;
+}
+
+.p6-bluebg-1 {
+  position: absolute;
+  right: 11.71429vw;
+  top: 14.375vh;
+  width: 36.71429vw;
+  height: 87.25vh;
+}
+
+.p6-title {
+  position: absolute;
+  left: 6.21429vw;
+  top: 10.625vh;
+  width: 14.78571vw;
+}
+
+.p6-rb-icon {
+  position: absolute;
+  right: 1.85714vw;
+  top: 75.25vh;
+  width: 10.35714vw;
+}
+
+.p6-contents-pos {
+  position: relative;
+  margin: 25.625vh auto 0;
+  width: 100%;
+}
+
+.p6-contents-pos .p6-prev, .p6-contents-pos .p6-next {
+  position: absolute;
+  top: 3.75rem;
+  left: auto;
+  right: 88.57143vw;
+}
+
+.p6-contents-pos .p6-next {
+  left: 88.57143vw;
+  right: auto;
+}
+
+.p6-contents {
+  position: relative;
+  margin: 0 auto;
+  width: 75.64286vw;
+  overflow: hidden;
+}
+
+.p6-news-link {
+  display: block;
+  width: 100%;
+}
+
+.p6-newsimg-size {
+  padding-bottom: 66.25%;
+}
+
+.p6-img-wrapper {
+  overflow: hidden;
+}
+
+.p6-img-wrapper img {
+  width: 100%;
+  transition: transform 0s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition-duration: .8s;
+  transform: translateZ(0);
+}
+
+.p6-news-link:hover .p6-img-wrapper img {
+  transform: scale(1.03) translateZ(0);
+}
+
+.p6-news-info {
+  margin: 0 auto;
+  padding: 0 0.7rem 0.8rem;
+  padding-right: 5.1rem;
+  width: 90.03115%;
+  color: #383e96;
+  background-color: #dbdbdb;
+  font-family: Helvetica, sans-serif;
+  transition: all .3s;
+}
+
+.p6-news-link:hover .p6-news-info {
+  color: white;
+  background-color: #383e96;
+}
+
+.p6-news-info span {
+  padding-top: 0.2rem;
+  font-size: 0.5rem;
+  line-height: 0.8rem;
+}
+
+.p6-news-info h3 {
+  font-size: 0.75rem;
+  line-height: 0.9rem;
+}
+
+.p6-news-info p {
+  font-size: 0.5rem;
+  line-height: 0.7rem;
 }
 

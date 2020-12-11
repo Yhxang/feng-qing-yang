@@ -1,14 +1,16 @@
 //import "animate.css"
+import "@babel/polyfill";
+
 import "../css/loading.css";
 
 //import "locomotive-scroll/dist/locomotive-scroll.css"
 //import LocomotiveScroll from 'locomotive-scroll';
 
 //import SuperGif from "../lib/libgif" 
-
+//import anime from "animejs/lib/anime.es";
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 
 import "swiper/swiper.scss";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
@@ -19,6 +21,18 @@ import "../scss/main.scss";
 //import page from "page.js"
 
 (function () {
+    // setTimeout(()=>{
+    //     anime({
+    //         targets: '#p0-logotext path',
+    //         strokeDashoffset: [anime.setDashoffset, 0],
+    //         easing: 'easeInOutSine',
+    //         duration: 1500,
+    //         delay: function(el, i) { return i * 250 },
+    //         direction: 'alternate',
+    //         loop: true
+    //       });
+    // },3000)
+    
     
     const $$ = $sel => document.querySelector($sel);
     const docEl = $$('html');
@@ -127,11 +141,13 @@ import "../scss/main.scss";
         // window.sup1 = sup1;
     }, 100)
 
-    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade]); // Install modules
+    Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs]); // Install modules
+    //$$("#section6").style.height=`${813/800*100}vh`;
     let mainSwiperOption = {
         direction: 'vertical', // 垂直切换选项
         //freeMode:true,
-        //loop: true, // 循环模式选项
+        slidesPerView: 'auto', // 适配最后一页不规则的高度
+
         speed: 900,
         shortSwipes: false,
 
@@ -140,8 +156,9 @@ import "../scss/main.scss";
         parallax: true,
 
         scrollbar: {
-            el: '.swiper-scrollbar',
+            el: '.main-scrollbar',
         },
+        noSwipingClass: "stop-swiping",
         navigation: {
             nextEl: null,
             prevEl: null
@@ -188,8 +205,8 @@ import "../scss/main.scss";
         //     key: 'sub'
         // },
     }
-    var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
-    window.mainSwiper= mainSwiper
+    // var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
+    // window.mainSwiper= mainSwiper;
     // function onMouseWheel(e) {
     //     console.log(e);
     //     clearTimeout(e.target.getAttribute('data-timer'));
@@ -202,8 +219,8 @@ import "../scss/main.scss";
 
     // }
 
-    // window.addEventListener( 'mousewheel', onMouseWheel, false )
-    // window.addEventListener( 'DOMMouseScroll', onMouseWheel, false )
+    //window.addEventListener( 'mousewheel', onMouseWheel, false )
+    //window.addEventListener( 'DOMMouseScroll', onMouseWheel, false )
 
     var mediaSwiper = new Swiper('.p1-contents', {
         speed: 1100,
@@ -325,6 +342,52 @@ import "../scss/main.scss";
         },
     })
 
+    var modelsThumbSwiper = new Swiper(".p5-thumb", {
+        direction: "vertical",
+        nested: true,
+        mousewheel: true,
+        slidesPerView: 4,
+        watchSlidesVisibility: true,
+        //centerInsufficientSlides: true,
+        scrollbar: {
+            el: '.p5-thumb-scrollbar',
+            draggable: true,
+            dragSize: 76
+        }
+    })
+    var modelDetailSwiper = new Swiper(".p5-msgcont", {
+        effect: "fade",
+        fadeEffect: {
+            crossFade: true
+        },
+        thumbs: {
+            swiper: modelsThumbSwiper,
+        },
+        on: {
+            transitionStart: function (swiper) {
+                mainSwiper.mousewheel.disable();
+                //this.slides.forEach(slide => slide.style.transition = "")
+            },
+            transitionEnd: function (swiper) {
+                mainSwiper.mousewheel.enabled();
+            },
+            mousewheel: function(){
+                console.log('wheel')
+            }
+        }
+        
+    })
+
+    var newsSwiper = new Swiper(".p6-contents", {
+        spaceBetween: 48,
+        slidesPerView: 3,//"auto"
+        roundLengths: true, // 将slide的宽和高取整
+        navigation: {
+            nextEl: '.p6-prev',
+            prevEl: '.p6-next',
+        },
+    })
+
     $$(".c-header-btn").addEventListener('click', e => {
         if (!docEl.classList.contains('nav-on')) {
             docEl.classList.add('nav-on');
@@ -345,7 +408,11 @@ import "../scss/main.scss";
         })
     })
 
-
+    function resize(){
+        document.querySelector("p.scale").innerText= `${window.innerWidth}*${window.innerHeight}`
+    }
+    resize()
+    window.addEventListener("resize", resize)
 
 
 

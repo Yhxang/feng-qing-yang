@@ -2,6 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const {
   CleanWebpackPlugin
 } = require("clean-webpack-plugin");
@@ -18,7 +19,17 @@ const config = {
   },
   mode: "development",
   optimization: {
-    minimize: false
+    //minimize: false
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+    
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -27,7 +38,18 @@ const config = {
     //publicPath: '/'
   },
   module: {
-    rules: [{
+    rules: [
+      // {
+      //   test: /\.js$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env']
+      //     }
+      //   }
+      // },
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -57,19 +79,54 @@ const config = {
           }
         ]
       },
+      
+      // {
+      //   test: /\.svg$/,
+      //   exclude: [
+      //     path.resolve(__dirname, "src/fonts")
+      //   ],
+      //   use: [
+      //     {
+      //       loader: "url-loader",
+      //       options: {
+      //         name: '[name].[ext]?[contenthash:5]',
+      //         //publicpath: '/dist/',
+      //         //publicPath: '../images',// 最终生成的css代码中,图片url前缀
+      //         outputPath: 'images', // 图片输出的实际路径(相对于dist)
+      //         limit: 0, // 当小于某KB时转为base64
+      //         esModule: false // 否则就要require('src').default
+      //       }
+      //     },
+      //     {
+      //       loader: ImageMinimizerPlugin.loader,
+      //       options: {
+      //         severityError: 'warning', // Ignore errors on corrupted images
+      //         minimizerOptions: {
+      //           plugins: [
+      //             ['imagemin-svgo',  {
+      //               plugins: [
+      //                 // SVGO options is here "https://github.com/svg/svgo#what-it-can-do"
+      //                 {
+      //                   removeTitle: true,
+      //                   removeViewBox: false,
+      //                   removeXMLNS: true,
+      //                   prefixIds: {
+      //                     prefix: 'my_prefix'
+      //                   }
+      //                 },
+      //               ],
+      //             }]
+      //           ],
+      //         },
+      //       },
+      //     }
+      //   ]
+      // },
       {
-        test: /\.pug$/,
-        use: [
-          {
-            loader: 'pug-loader',
-            options: {
-              //pretty: true // 可能出错，后期删除此配置
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif|webp)$/,
+        test: /\.(png|jpg|gif|webp|svg)$/,
+        exclude: [
+          path.resolve(__dirname, "src/fonts")
+        ],
         use: [{
           loader: "url-loader",
           options: {
@@ -83,7 +140,6 @@ const config = {
         }]
       },
       {
-
         test: /\.(eot|svg|ttf|woff|woff2|svg)$/,
         include: [
           path.resolve(__dirname, "src/fonts")
@@ -96,7 +152,18 @@ const config = {
           }
         }]
 
-      }
+      },
+      {
+        test: /\.pug$/,
+        use: [
+          {
+            loader: 'pug-loader',
+            options: {
+              //pretty: true // 可能出错，后期删除此配置
+            }
+          }
+        ]
+      },
 
     ]
   },
@@ -113,7 +180,30 @@ const config = {
           from: "./src/images/favicon.ico"
         }
       ]
-    })
+    }),
+    new ImageMinimizerPlugin({
+      severityError: 'warning', // Ignore errors on corrupted images
+      exclude: /font/,
+      minimizerOptions: {
+        plugins: [
+          [
+            'svgo', 
+            {
+              plugins: [
+                  // SVGO options is here "https://github.com/svg/svgo#what-it-can-do"
+                  {
+                    removeTitle: true,
+                    removeViewBox: false,
+                    removeXMLNS: true,
+                    prefixIds: {
+                      prefix: 'my_prefix'
+                    }
+                  }
+                ]
+              }
+          ],
+        ],
+    }})
     // new HtmlWebpackPlugin({
     //     //filename: '[name].pug'
     //     //template: path.resolve(__dirname, `../pages/${page}.html`),
