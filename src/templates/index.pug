@@ -206,6 +206,7 @@ html(lang="en")
                 img.p5-bluebg-img.scaleable(src=require("../images/p5_blueline_1.png"))
               .p5-linebg
                 .p5-linebg-wrap
+                  include ../images/solarsys.svg
               .p5-title.column-title
                 p 应用案例
                 img(src=require("../images/p5_title.svg"))
@@ -266,7 +267,39 @@ html(lang="en")
                   .swiper-button-prev-bg
                 .swiper-button-next.pretty-navigation.p6-next
                   .swiper-button-prev-bg
-          #section7.swiper-slide
+              footer
+                .footer-container.container-fluid
+                  .row
+                    .footer-logo.col-md-4
+                      img.scaleable(src=require("../images/footer_logo.svg"))
+                    .shares.col-md-4
+                      span.iconfont.icon-weixin
+                      span.iconfont.icon-tubiaozhizuo-
+                      span.iconfont.icon-linkedin
+                      span.iconfont.icon-douyin
+                    .footer-right.col-md-4
+                      img(src=require("../images/footer_right_proxy.png"))
+                      //- ul
+                      //-   li
+                      //-     a 了解G-POWER
+                      //-   li
+                      //-     a 关于G-POWER
+                      //-   li
+                      //-     a 联系我们
+                      //-   li
+                      //-     a 加入我们
+                .copyright
+                  p 风氢扬科技有限公司版权所有 | Copyright &copy; 
+                  p 
+                    span 内容自审制度
+                    span 经营许可证编号：XXX-1234567890
+                    span 沪ICP备12345678号
+                  p 沪网文（2020）0460-123
+              
+          //#section7.swiper-slide(style="height:162px")
+            
+              
 
 
         .main-scrollbar.swiper-scrollbar
+  //script(src="/fonts/iconfont.js")

@@ -11,6 +11,8 @@
 @import "~swiper/components/navigation/navigation.scss";
 @import "~swiper/components/pagination/pagination.scss";
 
+@import "./animation.scss";
+
 $logoCol: #383e96;
 
 @mixin transition-opc-trf {
@@ -1184,6 +1186,20 @@ $logo-layout-height: 273px; //311px;
   width: pxToVw(886px, xl);
   height: pxToVh(544px, xl);
 }
+.p5-linebg{
+  position: absolute;
+  left: pxToRem(5px);
+  bottom: pxToRem(22px); 
+  width: pxToRem(330px);
+}
+#innerCircHolder{
+  transform-origin: center center;
+  animation: roll 5s linear infinite;
+}
+#outerCircHolder{
+  transform-origin: center center;
+  animation: antiroll 5s linear infinite;
+}
 .p5-title{
   top: pxToVh(68px, xl);
   right: pxToVw(216px, xl);
@@ -1291,14 +1307,15 @@ $p5-contents-height: 458px;
 }
 .p5-modelimg{
   position: absolute;
-  right:1px;
+  right:2px;
   top: 1px;
   width: pxToVw(507px, xl);
   //height: pxToVh(358px, xl);
   overflow: hidden;
 }
 #section6{
-  height: pxToVh(813px, xl);
+  //height: pxToVh(813px, xl);
+  height: calc(#{pxToVh(652px, xl)} + #{pxToRem(162px)});
 }
 .p6-bluebg-1{
   position: absolute;
@@ -1391,5 +1408,66 @@ $p5-contents-height: 458px;
   p{
     font-size: pxToRem(10px);
     line-height: pxToRem(14px);
+  }
+}
+#section7{
+  background-color: black;
+}
+footer{
+  position: absolute;
+  left: 0;
+  top: pxToVh(652px, xl);
+  width: 100vw;
+  height: pxToRem(162px);
+  background-color: black;
+}
+.footer-logo{
+  width: pxToRem(232px);
+  padding: 0;
+  img{
+    margin-left: pxToRem(-148px);
+  }
+  
+}
+.footer-container{
+  display: relative;
+  width: pxToRem(630px) !important;
+  margin: 0 auto;
+  padding-top: pxToRem(20px);
+  padding-bottom: pxToRem(16px);
+ 
+}
+.shares{
+  text-align: center;
+}
+.iconfont{
+  padding: pxToRem(6px);
+  color: white;
+}
+.footer-right{
+  padding: 0;
+  font-size: 12px;
+  width: pxToRem(224px);
+  line-height: pxToRem(30px);
+  li{
+    display: inline-block;
+    color: white;
+  }
+}
+.copyright{
+  width: pxToRem(305px);
+  margin: 0 auto;
+  padding-top: pxToRem(20px);
+  border-top: 1px solid #808080;
+  min-width: pxToRem(630px);
+  p{
+    height: pxToRem(24px);
+    line-height: pxToRem(24px);
+    text-align: center;
+    color: #808080;
+    font-size: 8px;
+  }
+  span{
+    padding: 0 pxToRem(7px);
   }
 }

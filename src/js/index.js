@@ -3,6 +3,9 @@ import "@babel/polyfill";
 
 import "../css/loading.css";
 
+import "../fonts/iconfont.css"
+//import * as a from "../fonts/iconfont";
+
 //import "locomotive-scroll/dist/locomotive-scroll.css"
 //import LocomotiveScroll from 'locomotive-scroll';
 
@@ -205,7 +208,7 @@ import "../scss/main.scss";
         //     key: 'sub'
         // },
     }
-    // var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
+    var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
     // window.mainSwiper= mainSwiper;
     // function onMouseWheel(e) {
     //     console.log(e);
@@ -369,7 +372,7 @@ import "../scss/main.scss";
                 //this.slides.forEach(slide => slide.style.transition = "")
             },
             transitionEnd: function (swiper) {
-                mainSwiper.mousewheel.enabled();
+                mainSwiper.mousewheel.enable();
             },
             mousewheel: function(){
                 console.log('wheel')

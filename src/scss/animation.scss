@@ -1,0 +1,16 @@
+@keyframes roll{
+    0%{
+        transform: none;
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+@keyframes antiroll{
+    0%{
+        transform: none;
+    }
+    100%{
+        transform: rotateZ(-360deg);
+    }
+}
