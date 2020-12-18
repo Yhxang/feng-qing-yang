@@ -6,7 +6,6 @@ const imgspriteSrc = require('../images/p0_canvasimg.png');
 //     type = "canvas";
 // }
 // PIXI.utils.sayHello(type);
-
 const WIDTH = 1920;
 const HEIGHT = 330;
 const lineWidth = 1;
@@ -268,5 +267,5 @@ function intersect(line1,line2){
     }
     //return str;
 }
-//document.querySelector(".p0-linebg").appendChild(app.view);
+//document.querySelector(".p0-linebg-wrapper").appendChild(app.view);
 export default { app };

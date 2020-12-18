@@ -50,6 +50,11 @@ const config = {
       //   }
       // },
       {
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
+      },
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -79,49 +84,6 @@ const config = {
           }
         ]
       },
-      
-      // {
-      //   test: /\.svg$/,
-      //   exclude: [
-      //     path.resolve(__dirname, "src/fonts")
-      //   ],
-      //   use: [
-      //     {
-      //       loader: "url-loader",
-      //       options: {
-      //         name: '[name].[ext]?[contenthash:5]',
-      //         //publicpath: '/dist/',
-      //         //publicPath: '../images',// 最终生成的css代码中,图片url前缀
-      //         outputPath: 'images', // 图片输出的实际路径(相对于dist)
-      //         limit: 0, // 当小于某KB时转为base64
-      //         esModule: false // 否则就要require('src').default
-      //       }
-      //     },
-      //     {
-      //       loader: ImageMinimizerPlugin.loader,
-      //       options: {
-      //         severityError: 'warning', // Ignore errors on corrupted images
-      //         minimizerOptions: {
-      //           plugins: [
-      //             ['imagemin-svgo',  {
-      //               plugins: [
-      //                 // SVGO options is here "https://github.com/svg/svgo#what-it-can-do"
-      //                 {
-      //                   removeTitle: true,
-      //                   removeViewBox: false,
-      //                   removeXMLNS: true,
-      //                   prefixIds: {
-      //                     prefix: 'my_prefix'
-      //                   }
-      //                 },
-      //               ],
-      //             }]
-      //           ],
-      //         },
-      //       },
-      //     }
-      //   ]
-      // },
       {
         test: /\.(png|jpg|gif|webp|svg)$/,
         exclude: [
