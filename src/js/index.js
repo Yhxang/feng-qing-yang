@@ -1,4 +1,4 @@
-//import "animate.css"
+import "animate.css"
 import "@babel/polyfill";
 
 import "../css/loading.css";
@@ -14,8 +14,21 @@ import "../fonts/iconfont.js";
 import anime from "animejs/lib/anime.es";
 import bgcanvas from './bgcanvas';
 
-import Swiper, { Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs } from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import page from 'page.js'
+
+import Swiper, {
+  Scrollbar,
+  Navigation,
+  Mousewheel,
+  Parallax,
+  History,
+  HashNavigation,
+  Pagination,
+  EffectFade,
+  Thumbs
+} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 import "swiper/swiper.scss";
+import SwiperAnimation from "@cycjimmy/swiper-animation";
 //import "swiper/components/scrollbar/scrollbar.scss"; // ??? Not work, Need import in main.scss, Why?
 //import "../scss/scroll.scss" // But if copy it to ./src/ and import it, it worked, why???
 
@@ -26,12 +39,17 @@ import axios from "axios";
 import urls from "../mock/urls";
 import "../mock/mock.js"; // sideEffects
 
-
+const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 (function () {
 
-  void function solarsysSVG() {
+  void
+
+  function solarsysSVG() {
     //var path = anime.path('.solar-10');
-    let svgObj = { deg1: 0, deg2: 0 };
+    let svgObj = {
+      deg1: 0,
+      deg2: 0
+    };
     let innerCircHolder = document.querySelector("#innerCircHolder");
     let outerCircHolder = document.querySelector("#outerCircHolder");
     let warnicon = document.querySelector("#warnicon");
@@ -45,7 +63,7 @@ import "../mock/mock.js"; // sideEffects
       loop: true,
       update: function () {
         innerCircHolder.setAttribute('transform', `rotate(${svgObj.deg1}, ${innerCx} ${innerCy})`);
-        warnicon.setAttribute("opacity", parseInt(svgObj.deg1 / 5) % 2 === 0 ? 1 : .6)
+        warnicon.setAttribute("opacity", parseInt(svgObj.deg1 / 20) % 2 === 0 ? 1 : .6)
       }
     });
     anime({
@@ -72,7 +90,9 @@ import "../mock/mock.js"; // sideEffects
       easing: 'easeInOutSine',
       duration: 800,
       fill: ["none", "#393e96"],
-      delay: function (el, i) { return i * 80 + 3000 },
+      delay: function (el, i) {
+        return i * 80 + 3000
+      },
       //direction: 'alternate',
       //loop: true
     });
@@ -157,6 +177,7 @@ import "../mock/mock.js"; // sideEffects
       })
       return timeout(500);
     }).then(value => {
+      mainSwiper.update();
       document.getElementById("p0-mainlogo-image").appendChild(logogif);
       console.log('logo gif start playing')
       return timeout(8000);
@@ -179,6 +200,7 @@ import "../mock/mock.js"; // sideEffects
 
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs]); // Install modules
   //$$("#section6").style.height=`${813/800*100}vh`;
+  const swiperAnimation = new SwiperAnimation();
   let mainSwiperOption = {
     direction: 'vertical', // 垂直切换选项
     //freeMode:true,
@@ -193,6 +215,7 @@ import "../mock/mock.js"; // sideEffects
 
     scrollbar: {
       el: '.main-scrollbar',
+      draggable: true,
     },
     noSwipingClass: "stop-swiping",
     navigation: {
@@ -205,9 +228,13 @@ import "../mock/mock.js"; // sideEffects
         //console.log(this.$wrapperEl[0].style.transitionDuration)
         //this.$wrapperEl[0].style.transitionDuration = "1.2s !important";
         //console.log(this.$wrapperEl[0].style.transitionDuration)
+        swiperAnimation.init(this).animate();
+      },
+      slideChange: function(){
+        swiperAnimation.init(this).animate();
       },
       slideChangeTransitionStart: function () {
-        console.log(this.realIndex, this.activeIndex)
+        //console.log(this.realIndex, this.activeIndex)
         if (this.activeIndex == 2) {
           let canvasTarget = document.querySelector(".p2-linebg-wrapper");
           if (!canvasTarget.classList.contains("has-canvas")) {
@@ -223,27 +250,31 @@ import "../mock/mock.js"; // sideEffects
         })
       },
       slideChangeTransitionEnd: function () {
-        //.log(this.slides, this.realIndex, this.slides[this.realIndex])
         this.slides[this.realIndex].classList.add("first-active");
-        if (this.realIndex == 1) {
+        if (this.realIndex !== 0) {
           document.querySelector(".c-menubox").classList.add("nav-on")
-          this.allowSlidePrev = false;
+          if (this.realIndex == 1) {
+            //alert(1)
+            this.allowSlidePrev = false;
+          } else {
+            this.allowSlidePrev = true;
+          }
         } else {
-          this.allowSlidePrev = true;
+
         }
       }
     },
     // hashNavigation: {
-    //     watchState: true,
-    //     hashChange: true
+    //   watchState: true,
+    //   hashChange: true
     // }
-    // history: {
-    //     //replaceState: true,
-    //     key: 'sub'
-    // },
+    history: {
+      //replaceState: true,
+      key: ''
+    },
   }
   var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
-  // window.mainSwiper= mainSwiper;
+  window.mainSwiper = mainSwiper;
   // function onMouseWheel(e) {
   //     console.log(e);
   //     clearTimeout(e.target.getAttribute('data-timer'));
@@ -337,14 +368,20 @@ import "../mock/mock.js"; // sideEffects
         mainSwiper.mousewheel.enable();
       },
       transitionStart: function () {
-        let { prevEl, nextEl } = this.params.navigation;
+        let {
+          prevEl,
+          nextEl
+        } = this.params.navigation;
         this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
           nav.classList.add("arrow-out");
         })
         //mainSwiper.destroy(false)
       },
       transitionEnd: function () {
-        let { prevEl, nextEl } = this.params.navigation;
+        let {
+          prevEl,
+          nextEl
+        } = this.params.navigation;
         this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
           nav.classList.remove("arrow-out");
         })
@@ -428,6 +465,7 @@ import "../mock/mock.js"; // sideEffects
     },
     on: {
       slideChange: function () {
+        /*
         setTimeout(() => {
           let svgBoxs = document.querySelectorAll(".case-slide-active svg>rect");
           let smallbox = svgBoxs[0];
@@ -472,34 +510,121 @@ import "../mock/mock.js"; // sideEffects
               }
             })
         }, 0);
+        */
       }
     }
 
   })
 
+  //let newsPageInited = false;
+  page.base('/dist');
+  page("/", function () {
+    console.log('index')
+    $$("html").classList.remove("open-news")
+  })
+
+  page('/home', function () {
+    console.log('home')
+    mainSwiper.slideTo(1);
+    $$("html").classList.remove("open-news")
+  })
+  page('/technology', function technologyPage() {
+    console.log('technology')
+    mainSwiper.slideTo(2);
+    $$("html").classList.remove("open-news")
+  })
+  page('/products', function productsPage() {
+    mainSwiper.slideTo(3);
+    $$("html").classList.remove("open-news")
+    console.log('products')
+  })
+  page('/supports', function supportsPage() {
+    mainSwiper.slideTo(4);
+    $$("html").classList.remove("open-news")
+    console.log('supports')
+  })
+  page('/case', function supportsPage() {
+    mainSwiper.slideTo(5);
+    $$("html").classList.remove("open-news")
+    console.log('case')
+  })
+  page('/news', function newsPage() {
+    mainSwiper.slideTo(6);
+    $$("html").classList.remove("open-news")
+    console.log('news')
+  })
+
+  page('/news/article/:page', showNews);
+
+  function showNews(ctx) {
+    $$("html").classList.add("open-news")
+    var page = ~~ctx.params.page;
+    //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
+    axios[urls.newsArticleData.type](urls.newsArticleData.url + page)
+      .then(function (response) {
+        let newsData = response && response.data;
+        $$(".news-page-title").innerHTML = newsData.pageTitle;
+        $$(".publish-date").innerHTML = newsData.publishDate;
+        $$(".news-page-body").innerHTML = newsData.pageBody;
+        $$("html").scrollTo(0, 0);
+        $$("html").classList.add("is-loaded");
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  page("*", function () {
+    alert('Not Found')
+  })
+  page();
+  page.start();
+
   axios[urls.newsListData.type](urls.newsListData.url)
-    .then(function(response){
+    .then(function (response) {
       let newsListData = response && response.data;
       let newsTemplate = document.getElementById("newsTemplate").innerHTML;
-      console.log(newsListData)
+      //console.log(newsListData)
       newsListData.forEach(data => {
         //let data= newsListData[0]
         let html = newsTemplate;
-        for(let prop in data){
-          html = html.replace(`{{${prop}}}`, data[prop]);
+        for (let prop in data) {
+          let val = data[prop];
+          html = html.replace(`{{${prop}}}`, val);
         }
         newsSwiper.appendSlide(html);
       })
-      
+
+
+      let newsDesc = document.getElementsByClassName("news-desc");
+      for (let i = 0; i < newsDesc.length; i++) {
+        formatStr(newsDesc[i])
+      }
+      let newsLink = document.querySelectorAll(".p6-news-link")
+      for (let i = 0; i < newsLink.length; i++) {
+        newsLink[i].addEventListener('click', e => {
+          //e.preventDefault();
+          $$('html').classList.add("open-news");
+          $$("html").classList.remove("is-loaded");
+        })
+      }
+
+      $$(".news_page").appendChild($$(".footer").cloneNode(true));
+      $$(".news-back").addEventListener("click", e => {
+        e.preventDefault()
+        page(base + 'news');
+        $$(".o-scroll").focus()
+      })
+
       //console.log(response );
     })
-    .catch(function(error){
+    .catch(function (error) {
       console.log(error);
     })
 
+
   var newsSwiper = new Swiper(".p6-contents", {
     spaceBetween: 40,
-    slidesPerView: 1,//"auto"
+    slidesPerView: 1, //"auto"
     roundLengths: true, // 将slide的宽和高取整
     navigation: {
       nextEl: '.p6-prev',
@@ -508,7 +633,7 @@ import "../mock/mock.js"; // sideEffects
     breakpoints: {
       768: {
         spaceBetween: 15,
-        slidesPerView: 2,//"auto"
+        slidesPerView: 2, //"auto"
       },
       992: {
         spaceBetween: 15,
@@ -532,16 +657,17 @@ import "../mock/mock.js"; // sideEffects
       docEl.classList.remove('nav-on');
     }
   })
-
+  //console.log(process.env.NODE_ENV)
+  let pages = ['index', 'home', 'technology', 'products', 'supports', 'case', 'news'];
   document.querySelectorAll(".menu-ul li").forEach((li, index) => {
     li.querySelector("a").addEventListener("click", e => {
       e.preventDefault();
-      mainSwiper.slideTo(index + 1)
-      //page('/user/'+ index)
+      page(base + pages[index + 1]);
+      //mainSwiper.slideTo(index + 1)
       // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
       //     direction:600
       // });
-      $$(".c-header-btn").dispatchEvent(new Event('click'));
+      //$$(".c-header-btn").dispatchEvent(new Event('click'));
     })
   })
 
@@ -551,3 +677,30 @@ import "../mock/mock.js"; // sideEffects
   resize()
   window.addEventListener("resize", resize)
 })()
+
+const formatStr = (ele) => {
+  let text = ele.innerHTML;
+  const totalTextLen = ele.innerText.length;
+  const lineNum = 3;
+  const base = window.getComputedStyle(ele);
+  const baseWidth = base.width;
+  const baseFontSize = base.fontSize;
+  const lineWidth = +baseWidth.slice(0, -2);
+
+  // 所计算的strNum为元素内部一行可容纳的字数(不区分中英文)
+  const strNum = Math.floor(lineWidth / +baseFontSize.slice(0, -2));
+
+  let content = '';
+
+  // 多行可容纳总字数
+  const totalStrNum = Math.floor(strNum * lineNum);
+
+  const lastIndex = totalStrNum - totalTextLen;
+
+  if (totalTextLen > totalStrNum) {
+    content = text.slice(0, lastIndex - 3).concat('...');
+  } else {
+    content = text;
+  }
+  ele.innerHTML = content;
+}

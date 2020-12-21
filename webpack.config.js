@@ -140,6 +140,10 @@ const config = {
       patterns: [
         {
           from: "./src/images/favicon.ico"
+        },
+        {
+          from: './src/images/news_img',
+          to: 'news_img'
         }
       ]
     }),

@@ -1,24 +1,30 @@
-@keyframes roll{
-    0%{
-        transform: none;
-    }
-    100%{
-        transform: rotateZ(360deg);
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
-@keyframes antiroll{
-    0%{
-        transform: none;
-    }
-    100%{
-        transform: rotateZ(-360deg);
-    }
+
+@keyframes fadeInUp {
+  0% {
+    transform: translate3d(0, 20px, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
-@keyframes fadeIn{
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
+
+@keyframes fadeOut70{
+  0% {
+    opacity: 1;
+  }
+  100%{
+    opacity: .7;
+  }
 }
