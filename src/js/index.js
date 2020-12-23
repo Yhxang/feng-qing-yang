@@ -25,7 +25,8 @@ import Swiper, {
   HashNavigation,
   Pagination,
   EffectFade,
-  Thumbs
+  Thumbs,
+  Autoplay
 } from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 import "swiper/swiper.scss";
 import SwiperAnimation from "@cycjimmy/swiper-animation";
@@ -198,7 +199,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     // window.sup1 = sup1;
   }, 100)
 
-  Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs]); // Install modules
+  Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules
   //$$("#section6").style.height=`${813/800*100}vh`;
   const swiperAnimation = new SwiperAnimation();
   let mainSwiperOption = {
@@ -391,6 +392,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   var produtionSwiper = new Swiper('.p3-product-msg', {
     speed: 600,
     loop: true,
+    autoplay: true,
     spaceBetween: 100,
     parallax: true,
     nested: true, // 阻止父级切换
@@ -517,44 +519,44 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   })
 
   //let newsPageInited = false;
-  page.base('/dist');
+  page.base(base);
   page("/", function () {
     console.log('index')
     $$("html").classList.remove("open-news")
   })
 
-  page('/home', function () {
+  page('home', function () {
     console.log('home')
     mainSwiper.slideTo(1);
     $$("html").classList.remove("open-news")
   })
-  page('/technology', function technologyPage() {
+  page('technology', function technologyPage() {
     console.log('technology')
     mainSwiper.slideTo(2);
     $$("html").classList.remove("open-news")
   })
-  page('/products', function productsPage() {
+  page('products', function productsPage() {
     mainSwiper.slideTo(3);
     $$("html").classList.remove("open-news")
     console.log('products')
   })
-  page('/supports', function supportsPage() {
+  page('supports', function supportsPage() {
     mainSwiper.slideTo(4);
     $$("html").classList.remove("open-news")
     console.log('supports')
   })
-  page('/case', function supportsPage() {
+  page('case', function supportsPage() {
     mainSwiper.slideTo(5);
     $$("html").classList.remove("open-news")
     console.log('case')
   })
-  page('/news', function newsPage() {
+  page('news', function newsPage() {
     mainSwiper.slideTo(6);
     $$("html").classList.remove("open-news")
     console.log('news')
   })
 
-  page('/news/article/:page', showNews);
+  page('news/article/:page', showNews);
 
   function showNews(ctx) {
     $$("html").classList.add("open-news")
@@ -662,7 +664,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   document.querySelectorAll(".menu-ul li").forEach((li, index) => {
     li.querySelector("a").addEventListener("click", e => {
       e.preventDefault();
-      page(base + pages[index + 1]);
+      page(pages[index + 1]);
       //mainSwiper.slideTo(index + 1)
       // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
       //     direction:600

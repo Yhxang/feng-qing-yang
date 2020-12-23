@@ -185,8 +185,20 @@ config.plugins = config.plugins.concat(pages.map(page => {
     chunks: [page]
   })
 }))
-// .concat([
-//     new HtmlWebpackPugPlugin()
-// ])
 
-module.exports = config;
+module.exports = (env, argv) => {
+  //console.log(env, argv)
+  config.mode = argv.mode;
+
+  if(argv.mode === "development"){
+    //config.devtool = false; //????
+  }
+
+  if (argv.mode === 'production') {
+    config.devtool = "cheap-module-source-map";
+    config.output.publicPath = "/";
+    config.plugins.unshift(new CleanWebpackPlugin({}));
+  }
+
+  return config;
+};
