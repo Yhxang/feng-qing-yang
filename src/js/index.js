@@ -409,13 +409,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       clickable: true
     },
   })
-  document.querySelectorAll(".p4-box").forEach(titBox => {
+  document.querySelectorAll(".p5-box").forEach(titBox => {
     titBox.innerHTML = Array.from(titBox.innerText).map((char, i) => {
       return char === "\n" ? "<br>" : `<span style="transition-delay:${i / 20}s">${char}</span>`
     }).join("");
   })
 
-  var supportSwiper = new Swiper(".p4-contents", {
+  var supportSwiper = new Swiper(".p5-contents", {
     // speed: 1200,
     // spaceBetween: 300,
     // direction: "vertical",
@@ -431,7 +431,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     },
   })
 
-  var modelsThumbSwiper = new Swiper(".p5-thumb", {
+  var modelsThumbSwiper = new Swiper(".p6-thumb", {
     direction: "vertical",
     threshold: 10,
     nested: true,
@@ -441,7 +441,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     watchSlidesVisibility: true,
     //centerInsufficientSlides: true,
     scrollbar: {
-      el: '.p5-thumb-scrollbar',
+      el: '.p6-thumb-scrollbar',
       draggable: true,
       dragSize: 76
     },
@@ -455,7 +455,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       },
     }
   })
-  var modelDetailSwiper = new Swiper(".p5-msgcont", {
+  var modelDetailSwiper = new Swiper(".p6-msgcont", {
     slideActiveClass: 'case-slide-active',
     noSwipingClass: "stop-swiping",
     effect: "fade",
@@ -525,37 +525,19 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     $$("html").classList.remove("open-news")
   })
 
-  page('home', function () {
-    console.log('home')
-    mainSwiper.slideTo(1);
-    $$("html").classList.remove("open-news")
+  const pages = [];
+  
+  document.querySelectorAll(".menu-ul li a").forEach(a => {
+    pages.push(a.getAttribute("href").slice(2).trim());
+  });
+  console.log(pages)
+  pages.forEach((pageIndex, idx) => {
+    page(pageIndex, function(){
+      console.log(pageIndex);
+      mainSwiper.slideTo(idx + 1);
+      $$("html").classList.remove("open-news");
+    })
   })
-  page('technology', function technologyPage() {
-    console.log('technology')
-    mainSwiper.slideTo(2);
-    $$("html").classList.remove("open-news")
-  })
-  page('products', function productsPage() {
-    mainSwiper.slideTo(3);
-    $$("html").classList.remove("open-news")
-    console.log('products')
-  })
-  page('supports', function supportsPage() {
-    mainSwiper.slideTo(4);
-    $$("html").classList.remove("open-news")
-    console.log('supports')
-  })
-  page('case', function supportsPage() {
-    mainSwiper.slideTo(5);
-    $$("html").classList.remove("open-news")
-    console.log('case')
-  })
-  page('news', function newsPage() {
-    mainSwiper.slideTo(6);
-    $$("html").classList.remove("open-news")
-    console.log('news')
-  })
-
   page('news/article/:page', showNews);
 
   function showNews(ctx) {
@@ -601,7 +583,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       for (let i = 0; i < newsDesc.length; i++) {
         formatStr(newsDesc[i])
       }
-      let newsLink = document.querySelectorAll(".p6-news-link")
+      let newsLink = document.querySelectorAll(".p7-news-link")
       for (let i = 0; i < newsLink.length; i++) {
         newsLink[i].addEventListener('click', e => {
           //e.preventDefault();
@@ -614,9 +596,8 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       $$(".news-back").addEventListener("click", e => {
         e.preventDefault()
         page(base + 'news');
-        $$(".o-scroll").focus()
+        $$(".o-scroll").focus();
       })
-
       //console.log(response );
     })
     .catch(function (error) {
@@ -624,13 +605,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     })
 
 
-  var newsSwiper = new Swiper(".p6-contents", {
+  var newsSwiper = new Swiper(".p7-contents", {
     spaceBetween: 40,
     slidesPerView: 1, //"auto"
     roundLengths: true, // 将slide的宽和高取整
     navigation: {
-      nextEl: '.p6-prev',
-      prevEl: '.p6-next',
+      nextEl: '.p7-prev',
+      prevEl: '.p7-next',
     },
     breakpoints: {
       768: {
@@ -660,18 +641,18 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     }
   })
   //console.log(process.env.NODE_ENV)
-  let pages = ['index', 'home', 'technology', 'products', 'supports', 'case', 'news'];
-  document.querySelectorAll(".menu-ul li").forEach((li, index) => {
-    li.querySelector("a").addEventListener("click", e => {
-      e.preventDefault();
-      page(pages[index + 1]);
-      //mainSwiper.slideTo(index + 1)
-      // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
-      //     direction:600
-      // });
-      //$$(".c-header-btn").dispatchEvent(new Event('click'));
-    })
-  })
+
+  // document.querySelectorAll(".menu-ul li").forEach((li, index) => {
+  //   li.querySelector("a").addEventListener("click", e => {
+  //     e.preventDefault();
+  //     page(pages[index]);
+  //     //mainSwiper.slideTo(index + 1)
+  //     // scroll.scrollTo(document.querySelector("#section" + (index + 1)), {
+  //     //     direction:600
+  //     // });
+  //     //$$(".c-header-btn").dispatchEvent(new Event('click'));
+  //   })
+  // })
 
   function resize() {
     document.querySelector("p.scale").innerText = `${window.innerWidth}*${window.innerHeight}`

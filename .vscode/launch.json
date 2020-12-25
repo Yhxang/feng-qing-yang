@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\index.js",
-            "args": ["mode=development"]
+            "args": ["--mode=development"]
         }
     ]
 }

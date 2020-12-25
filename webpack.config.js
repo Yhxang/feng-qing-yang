@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+var tinyPngWebpackPlugin = require('tinypng-webpack-plugin')
 const {
   CleanWebpackPlugin
 } = require("clean-webpack-plugin");
@@ -152,6 +153,8 @@ const config = {
       exclude: /font/,
       minimizerOptions: {
         plugins: [
+          ['jpegtran', { progressive: true }],
+          ['optipng', { optimizationLevel: 5 }],
           [
             'svgo', 
             {
@@ -169,7 +172,11 @@ const config = {
               }
           ],
         ],
-    }})
+    }}),
+    // new tinyPngWebpackPlugin({
+    //   key:"nDcZv7CzHYV25bVBW6mjPDjvx3RL8PrX",
+    //   //proxy:'http://user:pass@192.168.0.1:8080'
+    // })
     // new HtmlWebpackPlugin({
     //     //filename: '[name].pug'
     //     //template: path.resolve(__dirname, `../pages/${page}.html`),
@@ -197,7 +204,13 @@ module.exports = (env, argv) => {
   if (argv.mode === 'production') {
     config.devtool = "cheap-module-source-map";
     config.output.publicPath = "/";
-    config.plugins.unshift(new CleanWebpackPlugin({}));
+    config.plugins.unshift(
+      new CleanWebpackPlugin(),  
+      // new tinyPngWebpackPlugin({
+      //   key:"nDcZv7CzHYV25bVBW6mjPDjvx3RL8PrX",
+      //   //proxy:'http://user:pass@192.168.0.1:8080'
+      // })
+    );
   }
 
   return config;
