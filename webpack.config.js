@@ -153,8 +153,8 @@ const config = {
       exclude: /font/,
       minimizerOptions: {
         plugins: [
-          ['jpegtran', { progressive: true }],
-          ['optipng', { optimizationLevel: 5 }],
+          // ['jpegtran', { progressive: true }],
+          // ['optipng', { optimizationLevel: 5 }],
           [
             'svgo', 
             {

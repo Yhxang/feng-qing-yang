@@ -86,7 +86,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   let scroll;
   setTimeout(() => {
     anime({
-      targets: '#slogn .cls-1',
+      targets: '#slogn .slogn-1',
       strokeDashoffset: [anime.setDashoffset, 0],
       easing: 'easeInOutSine',
       duration: 800,
@@ -198,6 +198,20 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     // sup1.load();
     // window.sup1 = sup1;
   }, 100)
+  $$(".menu-switch-mobile").addEventListener('click', e => {
+    let menubox = $$(".c-menubox");
+    if(menubox.classList.contains("nav-show-mobile")){
+      menubox.classList.remove("nav-show-mobile");
+    }else{
+      menubox.classList.add("nav-show-mobile");
+    }
+  })
+  document.querySelectorAll(".text-current").forEach(a => {
+    a.addEventListener("click", e=>{
+      let menubox = $$(".c-menubox");
+      menubox.classList.remove("nav-show-mobile");
+    })
+  })
 
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules
   //$$("#section6").style.height=`${813/800*100}vh`;
@@ -208,7 +222,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     slidesPerView: 'auto', // 适配最后一页不规则的高度
 
     speed: 900,
-    shortSwipes: false,
+    
 
     mousewheel: true,
 
@@ -222,6 +236,11 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     navigation: {
       nextEl: null,
       prevEl: null
+    },
+    breakpoints: {
+      768.001: {
+        //shortSwipes: false,
+      }
     },
 
     on: {
@@ -244,7 +263,14 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
           }
         }
         document.querySelectorAll(".menu-ul a").forEach((a, index) => {
-          if (this.realIndex === index + 1)
+          let realIndex = this.realIndex;
+          if(realIndex > 3 && realIndex <= 5 ){
+            realIndex = 3;
+          }else if(realIndex > 5){
+            realIndex = realIndex - 2;
+          }
+          console.log(realIndex)
+          if (realIndex === index + 1)
             a.classList.add('active');
           else
             a.classList.remove('active')
@@ -255,7 +281,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         if (this.realIndex !== 0) {
           document.querySelector(".c-menubox").classList.add("nav-on")
           if (this.realIndex == 1) {
-            //alert(1)
             this.allowSlidePrev = false;
           } else {
             this.allowSlidePrev = true;
@@ -347,7 +372,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     resistanceRatio: 0,
     noSwiping: true,
     watchSlidesProgress: true,
-    noSwipingClass: "stop-swiping",
+    //noSwipingClass: "stop-swiping",
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -356,6 +381,12 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     //     releaseOnEdges: true,
     //     eventsTarged: '#p1-contents',
     // },
+    breakpoints: {
+      768.001: {
+        //shortSwipes: false,
+        noSwipingClass: "stop-swiping",
+      }
+    },
     on: {
       slideChangeTransitionStart: function () {
         mainSwiper.mousewheel.disable();
@@ -528,13 +559,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   const pages = [];
   
   document.querySelectorAll(".menu-ul li a").forEach(a => {
-    pages.push(a.getAttribute("href").slice(2).trim());
+    pages.push(a.getAttribute("href").slice(2).replace('&',"").trim());
   });
   console.log(pages)
   pages.forEach((pageIndex, idx) => {
     page(pageIndex, function(){
       console.log(pageIndex);
-      mainSwiper.slideTo(idx + 1);
+      mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1);
       $$("html").classList.remove("open-news");
     })
   })
@@ -595,7 +626,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       $$(".news_page").appendChild($$(".footer").cloneNode(true));
       $$(".news-back").addEventListener("click", e => {
         e.preventDefault()
-        page(base + 'news');
+        page(base + 'media');
         $$(".o-scroll").focus();
       })
       //console.log(response );
@@ -633,13 +664,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     }
   })
 
-  $$(".c-header-btn").addEventListener('click', e => {
-    if (!docEl.classList.contains('nav-on')) {
-      docEl.classList.add('nav-on');
-    } else {
-      docEl.classList.remove('nav-on');
-    }
-  })
+  // $$(".c-header-btn").addEventListener('click', e => {
+  //   if (!docEl.classList.contains('nav-on')) {
+  //     docEl.classList.add('nav-on');
+  //   } else {
+  //     docEl.classList.remove('nav-on');
+  //   }
+  // })
   //console.log(process.env.NODE_ENV)
 
   // document.querySelectorAll(".menu-ul li").forEach((li, index) => {

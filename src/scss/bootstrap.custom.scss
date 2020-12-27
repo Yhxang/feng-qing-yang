@@ -1,6 +1,7 @@
 // https://salferrarello.com/add-additional-bootstrap-4-container-size/
 $grid-breakpoints: (
   xs: 0,
+  sp: 360px,
   sm: 576px,
   md: 768px,
   lg: 992px,
@@ -10,6 +11,7 @@ $grid-breakpoints: (
 );
 $container-max-widths: (
   sm: 540px,
+  sp: 340px,
   md: 720px,
   lg: 960px,
   xl: 1140px,

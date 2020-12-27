@@ -19,22 +19,26 @@ html(lang="en")
         -for (var x=1; x<=5; x++)
           div(class="rect"+x)
     .c-page#page-scroll
-      .c-header-btn
-        .menu-on
-        .menu-off
       .c-menubox.container-fluid
         .menu-area.row
           .menu-logo-box
-            a.menu-logo(href="#")
-              img(src=require("../images/p_logo.svg"))
+            a.menu-logo(href="./")
+              include ../images/p_logo_inc.svg
+            .menu-switch-mobile
+              span.menu-burger-line
+              span.menu-burger-line
+              span.menu-burger-line
+              //img(src=require("../images/p_logo.svg"))
           nav.menu-nav
             ul.menu-ul
-              each val,key in {home: "首页", technology:"风氢扬科技", products:"产品与服务", service:"工程服务", supports:"技术支持", case:"应用案例", news:"新闻"}
+              each val,key in {home: "首页", "G-POWER":"风氢扬科技", "products-service":"产品与服务",  applications:"市场应用", media:"媒体中心"}
                 li 
-                  a.text-current(href="./"+key)
+                  a.text-current(href="./"+key.replace("&",""),class=key)
                     span.menu-link(data-title=val)=val
+                    
         //- .menu-bottom
         //-   img(src=require("../images/menu_bottom.png"))
+      //- .c-menubox-blur
 
       .o-scroll.swiper-container
         main.swiper-wrapper
@@ -62,8 +66,8 @@ html(lang="en")
           //- page1:: 多媒体页 
           #section1.swiper-slide(data-history="home" data-hash="home")
             section(class="c-section")
-              .bg-holder.p0-blueline-bg
-                img.p0-bluebg-img.scaleable(src=require("../images/p0_blueline_bg.png"))
+              .bg-holder.p0-stripe-1.stripe-bg
+                img.p0-stripe-img.scaleable(src=require("../images/p0_blueline_bg.png"))
               .p1-holder-pos
                 .p1-contents-height
                   #p1-contents.p1-contents.swiper-container
@@ -90,14 +94,14 @@ html(lang="en")
                 //img(src=require("../images/p1_lb_icon.png"))
 
           //- page2:: 科技
-          #section2.swiper-slide(data-history="technology" data-hash="technology")
+          #section2.swiper-slide(data-history="G-POWER" data-hash="G-POWER")
             section(class="c-section")
               .p2-linebg
                 .p2-linebg-wrapper
-              .p2-bluebg-1
-                img.p2-bluebg-1-img.scaleable(src=require("../images/p2_blueline_1.png"))
-              .p2-bluebg-2
-                img.p2-bluebg-2-img(src=require("../images/p2_blueline_2.png"))
+              .p2-stripe-1.stripe-bg
+                img.p2-stripe-1-img.scaleable(src=require("../images/p2_blueline_1.png"))
+              .p2-stripe-2.stripe-bg
+                img.p2-stripe-2-img(src=require("../images/p2_blueline_2.png"))
               //-.p2-bg-leftside
                 img.p2-leftside-img(src=require("../images/p2_leftside.png"))
 
@@ -149,12 +153,12 @@ html(lang="en")
                   .swiper-button-prev-bg
 
           //- page3:: 产品与服务
-          #section3.swiper-slide(data-history="products" data-hash="products")
+          #section3.swiper-slide(data-history="products-service" data-hash="products")
             section(class="c-section")
-              .p3-bluebg-1
-                img.p3-bluebg-img.scaleable(src=require("../images/p3_blueline_1.png"))
-              .p3-bluebg-2
-                img.p3-bluebg-img.scaleable(src=require("../images/p3_blueline_2.png"))
+              .p3-stripe-1.stripe-bg
+                img.p3-stripe-img.scaleable(src=require("../images/p3_blueline_1.png"))
+              .p3-stripe-2.stripe-bg
+                img.p3-stripe-img.scaleable(src=require("../images/p3_blueline_2.png"))
               .p3-title.column-title
                 p 产品与服务
                 img(src=require("../images/p3_title.svg")
@@ -204,10 +208,10 @@ html(lang="en")
                         data-duration=".5s"
                         data-delay=".3s") #[strong CHIGMA 120]燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。
           //- page4:: 工程服务
-          #section4.swiper-slide(data-history="service" data-hash="service")
+          #section4.swiper-slide(data-history="products-service" data-hash="service")
             section(class="c-section")
-              .p4-bluebg-1
-                img.p4-bluebg-img.scaleable(src=require("../images/p4_blueline_1.png"))
+              .p4-stripe-1.stripe-bg
+                img.p4-stripe-img.scaleable(src=require("../images/p4_blueline_1.png"))
               .p4-prodect-title.clearfix
                 img.p4-prodect-index(src=require("../images/p4_index.svg"))
                 h3.p4-prodect-tittext /工程服务
@@ -221,10 +225,10 @@ html(lang="en")
                   p 针对非标准应用、集成、及场景的定制解决方案。
 
           //- page5:: 售后支持
-          #section5.swiper-slide(data-history="supports" data-hash="supports")
+          #section5.swiper-slide(data-history="products-service" data-hash="supports")
             section(class="c-section")
-              .p5-bluebg-1
-                img.p5-bluebg-img.scaleable(src=require("../images/p5_blueline_1.png"))
+              .p5-stripe-1.stripe-bg
+                img.p5-stripe-img.scaleable(src=require("../images/p5_blueline_1.png"))
               .p5-prodect-title.clearfix
                 img.p5-prodect-index(src=require("../images/p5_index.svg"))
                 h3.p5-prodect-tittext /售后支持
@@ -247,10 +251,10 @@ html(lang="en")
                   .swiper-button-prev-bg
 
           //- page6:: 应用案例
-          #section6.swiper-slide(data-history="case" data-hash="case")
+          #section6.swiper-slide(data-history="applications" data-hash="case")
             section(class="c-section")
-              .p6-bluebg-1
-                img.p6-bluebg-img.scaleable(src=require("../images/p6_blueline_1.png"))
+              .p6-stripe-1.stripe-bg
+                img.p6-stripe-img.scaleable(src=require("../images/p6_blueline_1.png"))
               .p6-linebg
                 .p6-linebg-wrap
                   include ../images/solarsys_inc.svg
@@ -296,10 +300,10 @@ html(lang="en")
                           img(src=require("../images/p6_modelimg_"+(index+1)+".png"))
 
           //- page7:: 新闻
-          #section7.swiper-slide(data-history="news" data-hash="news")
+          #section7.swiper-slide(data-history="media" data-hash="news")
             section(class="c-section")
-              .p7-bluebg-1
-                img.p7-bluebg-img.scaleable(src=require("../images/p7_blueline_1.png"))
+              .p7-stripe-1.stripe-bg
+                img.p7-stripe-img.scaleable(src=require("../images/p7_blueline_1.png"))
               .p7-title.column-title
                 //p 应用案例
                 img(src=require("../images/p7_title.svg"))
