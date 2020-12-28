@@ -43,9 +43,7 @@ import "../mock/mock.js"; // sideEffects
 const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 (function () {
 
-  void
-
-  function solarsysSVG() {
+  void function solarsysSVG() {
     //var path = anime.path('.solar-10');
     let svgObj = {
       deg1: 0,
@@ -84,9 +82,17 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   const lineAnimCanvas = bgcanvas.app.view;
 
   let scroll;
+  const lang = docEl.getAttribute('lang');
   setTimeout(() => {
+    let svgTarget;
+
+    if(lang == "en"){
+      svgTarget = '#slogn .slogn-1'
+    }else if(lang === "zh-CN"){
+      svgTarget = '#slogn-cn .slogncn-1'
+    }
     anime({
-      targets: '#slogn .slogn-1',
+      targets: svgTarget,
       strokeDashoffset: [anime.setDashoffset, 0],
       easing: 'easeInOutSine',
       duration: 800,
@@ -143,26 +149,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     let logogif = new Image();
     logogif.src = logogifimg;
 
-    // setTimeout(() => {
-    //     // scroll.scrollTo(document.querySelector('#section0'), {
-    //     //     duration: 400,
-    //     //     callback: function () {
-    //     //         console.log('scroll to #section0');
-    //     //         scroll.stop()
-    //     //     }
-    //     // })
-    //     docEl.classList.add("is-loaded");
-    //     setTimeout(() => {
-    //         document.getElementById("p0-mainlogo-image").appendChild(logogif);
-    //         setTimeout(() => {
-    //             scroll.start();
-    //             scroll.scrollTo("#section1", {
-    //                 duration: 400,
-    //             })
-    //         }, 8000)
-    //     }, 500)
-    // }, 500);
-
     function timeout(ms) {
       return new Promise((resolve, reject) => {
         setTimeout(resolve, ms, 'done');
@@ -184,20 +170,10 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       return timeout(8000);
     }).then(value => {
       console.log('start scroll')
-      // scroll.start();
-      // scroll.scrollTo("#section1", {
-      //     duration: 400,
-      // })
     })
 
-
-    // const sup1 = new SuperGif({ 
-    //     gif: document.getElementById('logoimg'),
-    //     loop_mode: false,
-    // } );
-    // sup1.load();
-    // window.sup1 = sup1;
   }, 100)
+
   $$(".menu-switch-mobile").addEventListener('click', e => {
     let menubox = $$(".c-menubox");
     if(menubox.classList.contains("nav-show-mobile")){
@@ -213,7 +189,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     })
   })
   $$(".menu-logo").addEventListener("click", e => {
-    mainSwiper.slideTo(0)
+    mainSwiper.slideTo(0);
   })
 
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules

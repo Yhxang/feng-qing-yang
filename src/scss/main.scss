@@ -68,6 +68,17 @@ figure {
   height: 100%;
 }
 
+[lang="en"]{
+  .cn{
+    display: none !important;
+  }
+}
+[lang="zh-CN"]{
+  .en{
+    display: none !important;
+  }
+}
+
 $root-font-size: (xs: 14px, //15.5;
   sm: 16px,
   md: 18px,
@@ -616,7 +627,11 @@ $p2-top: 66px;
   width: 100%;
   margin: auto;
   margin-top: pxToRem(-180px); //-10rem; // -7.75rem;
+  @include media-breakpoint-down(md){
+    top: pxToVh(520px, md);
+  }
 }
+
 
 $logo-static-width: 425px; // gif 最后落版宽高
 $logo-static-height: 273px;
@@ -624,6 +639,10 @@ $logo-stage-width: 680px; // gif 舞台宽高
 $logo-stage-height: 457px;
 $logo-layout-width: 425px; //487px; // 设计稿宽高 // 不按设计稿，按老黄给的gif尺寸来
 $logo-layout-height: 273px; //311px;
+$logo-layout-width-md: 483px;
+$logo-layout-height-md: 309px;
+$logo-layout-width-sm: 236px;
+$logo-layout-height-sm: 151px;
 
 
 .p0-mainlogo {
@@ -635,13 +654,17 @@ $logo-layout-height: 273px; //311px;
   height: pxToRem($logo-layout-height);
 
   @include media-breakpoint-down(md) {
-    width: pxToRem($logo-layout-width)  * 2 / 3;
-    height: pxToRem($logo-layout-height)  * 2 / 3;
+    width: pxToRem($logo-layout-width-md, md);
+    height: pxToRem($logo-layout-height-md, md);
   }
   @include media-breakpoint-down(sm) {
-    width: pxToRem($logo-layout-width) / 2;
-    height: pxToRem($logo-layout-height) / 2;
+    width: pxToRem($logo-layout-width-sm, sm);
+    height: pxToRem($logo-layout-height-sm, sm);
   }
+  // @include media-breakpoint-down(sm) {
+  //   width: pxToRem($logo-layout-width) / 2;
+  //   height: pxToRem($logo-layout-height) / 2;
+  // }
 }
 
 .p0-mainlogo-wrapper {
@@ -649,6 +672,10 @@ $logo-layout-height: 273px; //311px;
   //padding-bottom: 645px / 960px * 100%;
   $wrapper-width: $logo-stage-width * $logo-layout-width / $logo-static-width;
   $wrapper-height: $logo-stage-height * $logo-layout-height / $logo-static-height;
+  $wrapper-width-md: $logo-stage-width * $logo-layout-width-md / $logo-static-width;
+  $wrapper-height-md: $logo-stage-height * $logo-layout-height-md / $logo-static-height;
+  $wrapper-width-sm: $logo-stage-width * $logo-layout-width-sm / $logo-static-width;
+  $wrapper-height-sm: $logo-stage-height * $logo-layout-height-sm / $logo-static-height;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -656,15 +683,20 @@ $logo-layout-height: 273px; //311px;
   height: $wrapper-height;
   transform: translate3d(-50%, -50%, 0);
   @include media-breakpoint-down(md) {
-    width: $wrapper-width * 2 / 3;
-    height: $wrapper-height * 2 / 3;
+    width: pxToRem($wrapper-width-md, md);//$wrapper-width * 2 / 3;
+    height: pxToRem($wrapper-height-md, md);
     transform: translate3d(-50%, -50%, 0);
   }
   @include media-breakpoint-down(sm) {
-    width: $wrapper-width/2;
-    height: $wrapper-height/2;
+    width: pxToRem($wrapper-width-sm, sm);//$wrapper-width * 2 / 3;
+    height: pxToRem($wrapper-height-sm, sm);
     transform: translate3d(-50%, -50%, 0);
   }
+  // @include media-breakpoint-down(sm) {
+  //   width: $wrapper-width/2;
+  //   height: $wrapper-height/2;
+  //   transform: translate3d(-50%, -50%, 0);
+  // }
 }
 
 .p0-mainlogo-image {
@@ -682,29 +714,63 @@ $logo-layout-height: 273px; //311px;
   //background: url("../images/p0_mainlogo.png") 0 0 repeat;
   //background-size: cover;
 }
-
-.p0-logotext {
+.p0-logotext{
+  display: flex;
+  width: 100vw;
   margin: auto;
   margin-top: pxToVh(180px); //12.5vh;
-  //width: 12rem;
-  font-size: 0;
-  text-align: center;
   display: flex;
   justify-content: center;
-  
+}
+.p0-logotext {
+  ul {
+    margin: 0;
+    //width: 12rem;
+    font-size: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+ 
   li{
     margin: 0 pxToVw(20px, xl);
   }
   svg {
     height: pxToRem(26px);
   }
-
-  @include media-breakpoint-down(md){
-    display: block;
-    text-align: left;
+  &.cn svg{
+    height: pxToRem(32px);
+  }
+  @include media-breakpoint-down(lg){
+    &.en{
+      ul{
+        display: block;
+        text-align: left;
+      }
+      li{
+        margin: pxToVh(22px, md) 0;
+        padding-left: pxToVw(88px, md);
+      }
+    }
+  }
+  // @include media-breakpoint-down(md){
+  //   svg{
+  //     height: pxToRem(18px, md);
+  //   }
+  // }
+  @include media-breakpoint-down(sm){
+    ul{
+      display: block;
+      text-align: left;
+    }
+    
     li{
       margin: pxToVh(22px, md) 0;
       padding-left: pxToVw(88px, md);
+    }
+    &.cn li{
+      padding-left: 0;
+      text-align: center;
     }
   }
 }
@@ -732,9 +798,12 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
-.slogn-2 {
+.slogncn-2, .slogn-2 {
   opacity: 0;
-  animation: fadeIn .5s linear 3s both;
+  animation: fadeIn .5s linear 3.5s both;
+}
+.slogn-2{
+  animation-delay: 4.5s;
 }
 
 .p0-logo-textline {

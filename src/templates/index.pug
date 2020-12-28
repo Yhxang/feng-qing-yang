@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="zh-CN")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
@@ -17,9 +17,10 @@ html(lang="en")
           image(xlink:href=require("../images/model_img_4.png"),id="model_img_4" width="636" height="537")
       include ../images/models_inc.svg
       include ../images/slogn_en_inc.svg 
+      include ../images/slogn_cn_inc.svg 
       //- 如果用xlink:href外链，将会获取不到svg dom
     </div>
-    p.scale
+    p.scale 
     div#loading(data-scroll-section)
       .spinner
         -for (var x=1; x<=5; x++)
@@ -66,11 +67,18 @@ html(lang="en")
                   .p0-mainlogo
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image#p0-mainlogo-image(data-scroll data-scroll-speed=3 data-scroll-position="top")
-                  ul.p0-logotext#p0-logotext
-                    -var slognEn=[[0,0,109,11.32],[126.04,0,186,11.32],[327.15,0,188,11.32]]
-                    each region,index in slognEn
-                      li
-                        +svguse("#slogn-en-p"+(index+1),region)
+                  .p0-logotext.en
+                    ul
+                      -var slognEn=[[0,0,109,11.32],[126.04,0,186,11.32],[327.15,0,188,11.32]]
+                      each region,index in slognEn
+                        li
+                          +svguse("#slogn-en-p"+(index+1),region)
+                  .p0-logotext.cn
+                    ul
+                      -var slognEn=[[0,0,50,14.27],[75,0,50,14.27],[148,0,50,14.27]]
+                      each region,index in slognEn
+                        li
+                          +svguse("#slogn-cn-p"+(index+1),region)
                     //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 109 11.32")
                     //-   use(xlink:href="#slogn-en-p1")
                     //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="126.04 0 "+(126.04 + 186)+" 11.32")

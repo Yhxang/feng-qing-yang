@@ -2648,6 +2648,14 @@ figure {
   height: 100%;
 }
 
+[lang="en"] .cn {
+  display: none !important;
+}
+
+[lang="zh-CN"] .en {
+  display: none !important;
+}
+
 :root {
   font-size: 14px;
 }
@@ -3166,6 +3174,12 @@ main.swiper-wrapper > .swiper-slide {
   margin-top: -9rem;
 }
 
+@media (max-width: 991.98px) {
+  .o-center-wrapper-logo {
+    top: 38.98051vh;
+  }
+}
+
 .p0-mainlogo {
   position: relative;
   margin: auto;
@@ -3177,15 +3191,15 @@ main.swiper-wrapper > .swiper-slide {
 
 @media (max-width: 991.98px) {
   .p0-mainlogo {
-    width: 14.16667rem;
-    height: 9.1rem;
+    width: 26.83333rem;
+    height: 17.16667rem;
   }
 }
 
 @media (max-width: 767.98px) {
   .p0-mainlogo {
-    width: 10.625rem;
-    height: 6.825rem;
+    width: 14.75rem;
+    height: 9.4375rem;
   }
 }
 
@@ -3200,16 +3214,16 @@ main.swiper-wrapper > .swiper-slide {
 
 @media (max-width: 991.98px) {
   .p0-mainlogo-wrapper {
-    width: 453.33333px;
-    height: 304.66667px;
+    width: 42.93333rem;
+    height: 28.73687rem;
     transform: translate3d(-50%, -50%, 0);
   }
 }
 
 @media (max-width: 767.98px) {
   .p0-mainlogo-wrapper {
-    width: 340px;
-    height: 228.5px;
+    width: 23.6rem;
+    height: 15.79831rem;
     transform: translate3d(-50%, -50%, 0);
   }
 }
@@ -3226,8 +3240,18 @@ main.swiper-wrapper > .swiper-slide {
 }
 
 .p0-logotext {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
   margin: auto;
   margin-top: 16.66667vh;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.p0-logotext ul {
+  margin: 0;
   font-size: 0;
   text-align: center;
   display: -ms-flexbox;
@@ -3244,14 +3268,33 @@ main.swiper-wrapper > .swiper-slide {
   height: 1.3rem;
 }
 
-@media (max-width: 991.98px) {
-  .p0-logotext {
+.p0-logotext.cn svg {
+  height: 1.6rem;
+}
+
+@media (max-width: 1199.98px) {
+  .p0-logotext.en ul {
+    display: block;
+    text-align: left;
+  }
+  .p0-logotext.en li {
+    margin: 1.64918vh 0;
+    padding-left: 11.45833vw;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .p0-logotext ul {
     display: block;
     text-align: left;
   }
   .p0-logotext li {
     margin: 1.64918vh 0;
     padding-left: 11.45833vw;
+  }
+  .p0-logotext.cn li {
+    padding-left: 0;
+    text-align: center;
   }
 }
 
@@ -3287,10 +3330,15 @@ main.swiper-wrapper > .swiper-slide {
   }
 }
 
-.slogn-2 {
+.slogncn-2, .slogn-2 {
   opacity: 0;
-  -webkit-animation: fadeIn .5s linear 3s both;
-          animation: fadeIn .5s linear 3s both;
+  -webkit-animation: fadeIn .5s linear 3.5s both;
+          animation: fadeIn .5s linear 3.5s both;
+}
+
+.slogn-2 {
+  -webkit-animation-delay: 4.5s;
+          animation-delay: 4.5s;
 }
 
 .p0-logo-textline {
