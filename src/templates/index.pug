@@ -5,6 +5,10 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
     title 风氢扬科技
   body
+    mixin svguse(svgid, vb)
+      svg(xmlns="http://www.w3.org/2000/svg", viewBox= vb[0]+" "+vb[1]+" "+vb[2]+" "+vb[3])
+        use(xlink:href=svgid)
+
     <div aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
       svg(xmlns="http://www.w3.org/2000/svg")
         def
@@ -12,6 +16,8 @@ html(lang="en")
           image(xlink:href=require("../images/model_img_3.png"),id="model_img_3" width="577" height="391")
           image(xlink:href=require("../images/model_img_4.png"),id="model_img_4" width="636" height="537")
       include ../images/models_inc.svg
+      include ../images/slogn_en_inc.svg 
+      //- 如果用xlink:href外链，将会获取不到svg dom
     </div>
     p.scale
     div#loading(data-scroll-section)
@@ -60,8 +66,18 @@ html(lang="en")
                   .p0-mainlogo
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image#p0-mainlogo-image(data-scroll data-scroll-speed=3 data-scroll-position="top")
-                  .p0-logotext#p0-logotext
-                    include ../images/slogn_inc.svg
+                  ul.p0-logotext#p0-logotext
+                    -var slognEn=[[0,0,109,11.32],[126.04,0,186,11.32],[327.15,0,188,11.32]]
+                    each region,index in slognEn
+                      li
+                        +svguse("#slogn-en-p"+(index+1),region)
+                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 109 11.32")
+                    //-   use(xlink:href="#slogn-en-p1")
+                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="126.04 0 "+(126.04 + 186)+" 11.32")
+                    //-   use(xlink:href="#slogn-en-p2")
+                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 188 11.32")
+                    //-   use(xlink:href="#slogn-en-p3")
+
 
           //- page1:: 多媒体页 
           #section1.swiper-slide(data-history="home" data-hash="home")
@@ -72,18 +88,13 @@ html(lang="en")
                 .p1-contents-height
                   #p1-contents.p1-contents.swiper-container
                     .swiper-wrapper
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
-                          span  P1 DETAIL
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0") 
-                          span P2 DETAIL
-                      .swiper-slide.media-slide
-                        img(src=require("../images/p1_proxy.png"))
-                        a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
-                          span  P3 DETAIL
+                      -for(var x = 1; x <= 3; x++)
+                        .swiper-slide.media-slide
+                          .media-content
+                          //-img(src=require("../images/p1_proxy.png"))
+                          a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
+                            span="P"+x+" DETAIL"
+                      
                     .swiper-button-prev
                     .swiper-button-next
                   img.p1-slide-tip(src=require("../images/p1_slide_tip.png"))
@@ -179,6 +190,7 @@ html(lang="en")
                           .swiper-slide.stop-swiping
                             svg(aria-hidden="true" viewBox="628.9,0,285,200")
                               use(xlink:href="#model3")
+                              //- ???? 切换外链失败
                             //- img(src=require("../images/p3_model_3.png"))
                           .swiper-slide.stop-swiping
                             svg(aria-hidden="true" viewBox="324.0,0,285,200")

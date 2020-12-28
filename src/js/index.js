@@ -212,6 +212,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       menubox.classList.remove("nav-show-mobile");
     })
   })
+  $$(".menu-logo").addEventListener("click", e => {
+    mainSwiper.slideTo(0)
+  })
 
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules
   //$$("#section6").style.height=`${813/800*100}vh`;
@@ -232,14 +235,14 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       el: '.main-scrollbar',
       draggable: true,
     },
-    noSwipingClass: "stop-swiping",
+    //noSwipingClass: "stop-swiping",
     navigation: {
       nextEl: null,
       prevEl: null
     },
     breakpoints: {
       768.001: {
-        //shortSwipes: false,
+        noSwipingClass: "stop-swiping",
       }
     },
 
@@ -339,7 +342,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
           // console.log(slide  )
           let innerTranslate = slideProgress * innerOffset;
           //if(swiper.activeIndex ==1) console.log(slide.querySelector('img'))
-          slide.querySelector('img').style.transform = `translate3d(${innerTranslate}px,0,0)`
+          slide.querySelector('.media-content').style.transform = `translate3d(${innerTranslate}px,0,0)`
           //if(swiper.activeIndex ==1) console.log( `translate3d(${innerTranslate}px,0,0,)`)
         })
       },
@@ -355,7 +358,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         this.slides.forEach(slide => {
           let speed = this.params.speed;
           slide.style.transition = speed + "ms";
-          slide.querySelector("img").style.transition = speed + "ms";
+          slide.querySelector('.media-content').style.transition = speed + "ms";
         });
       }
     }
@@ -553,7 +556,8 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   page.base(base);
   page("/", function () {
     console.log('index')
-    $$("html").classList.remove("open-news")
+    $$("html").classList.remove("open-news");
+
   })
 
   const pages = [];

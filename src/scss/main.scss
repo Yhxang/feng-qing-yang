@@ -129,7 +129,7 @@ xxxl {
       font-size: map-get($root-font-size, $breakpoint);
 
       .scale:after {
-        content: "#{$breakpoint}";
+        content: quote($breakpoint);
       }
     }
   }
@@ -280,7 +280,6 @@ body {
   display: inline-block;
   color: $logoCol;
   line-height: pxToRem(46px);
-  ;
 
   img,
   svg {
@@ -462,6 +461,7 @@ body {
   @include transition-trf;
   transition-duration: 0.8s;
   transition-delay: -0.1s;
+  overflow: hidden;
 
   .is-loaded & {
     transform: translate3d(0, 0, 0);
@@ -521,6 +521,9 @@ $p2-top: 66px;
     height: pxToVh(835px, xl); //calc(#{pxToRem($p2-top - 6px)} + 100vh);  
     height: calc(100vh + #{pxToVh(34px, xl)});
     opacity: 1;
+    @include media-breakpoint-down(md) {
+      opacity: .2;
+    }
   }
 }
 
@@ -588,6 +591,7 @@ $p2-top: 66px;
   //margin-top: 2.75rem;
   padding-top: 2.75rem;
   width: 60vw;
+  width: 21rem;
   @include transition-trf;
   transition-duration: .6s;
   transition-delay: .8s;
@@ -595,10 +599,12 @@ $p2-top: 66px;
   .is-loaded & {
     transform: none;
   }
-
-  @include media-breakpoint-up(sm) {
-    width: 21rem;
+  @include media-breakpoint-down(md) {
+    display: none;
   }
+  // @include media-breakpoint-down(sm) {
+  //   display: none;
+  // }
 }
 
 
@@ -619,29 +625,46 @@ $logo-stage-height: 457px;
 $logo-layout-width: 425px; //487px; // 设计稿宽高 // 不按设计稿，按老黄给的gif尺寸来
 $logo-layout-height: 273px; //311px;
 
+
 .p0-mainlogo {
   position: relative;
   margin: auto;
   transition: all 0.5s;
   width: 80vw;
+  width: pxToRem($logo-layout-width);
+  height: pxToRem($logo-layout-height);
 
-  @include media-breakpoint-up(sm) {
-    width: pxToRem($logo-layout-width);
-    height: pxToRem($logo-layout-height);
+  @include media-breakpoint-down(md) {
+    width: pxToRem($logo-layout-width)  * 2 / 3;
+    height: pxToRem($logo-layout-height)  * 2 / 3;
   }
-
-  @include media-breakpoint-up(md) {}
+  @include media-breakpoint-down(sm) {
+    width: pxToRem($logo-layout-width) / 2;
+    height: pxToRem($logo-layout-height) / 2;
+  }
 }
 
 .p0-mainlogo-wrapper {
   //@extend %img-resize-wrapper;
   //padding-bottom: 645px / 960px * 100%;
+  $wrapper-width: $logo-stage-width * $logo-layout-width / $logo-static-width;
+  $wrapper-height: $logo-stage-height * $logo-layout-height / $logo-static-height;
   position: absolute;
   left: 50%;
   top: 50%;
-  width: $logo-stage-width * $logo-layout-width / $logo-static-width;
-  height: $logo-stage-height * $logo-layout-height / $logo-static-height;
+  width: $wrapper-width;
+  height: $wrapper-height;
   transform: translate3d(-50%, -50%, 0);
+  @include media-breakpoint-down(md) {
+    width: $wrapper-width * 2 / 3;
+    height: $wrapper-height * 2 / 3;
+    transform: translate3d(-50%, -50%, 0);
+  }
+  @include media-breakpoint-down(sm) {
+    width: $wrapper-width/2;
+    height: $wrapper-height/2;
+    transform: translate3d(-50%, -50%, 0);
+  }
 }
 
 .p0-mainlogo-image {
@@ -650,7 +673,11 @@ $logo-layout-height: 273px; //311px;
   img {
     width: auto;
     margin: 0 auto;
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
   }
+  
 
   //background: url("../images/p0_mainlogo.png") 0 0 repeat;
   //background-size: cover;
@@ -662,9 +689,23 @@ $logo-layout-height: 273px; //311px;
   //width: 12rem;
   font-size: 0;
   text-align: center;
-
+  display: flex;
+  justify-content: center;
+  
+  li{
+    margin: 0 pxToVw(20px, xl);
+  }
   svg {
     height: pxToRem(26px);
+  }
+
+  @include media-breakpoint-down(md){
+    display: block;
+    text-align: left;
+    li{
+      margin: pxToVh(22px, md) 0;
+      padding-left: pxToVw(88px, md);
+    }
   }
 }
 
@@ -691,7 +732,7 @@ $logo-layout-height: 273px; //311px;
   }
 }
 
-#slogn .slogn-2 {
+.slogn-2 {
   opacity: 0;
   animation: fadeIn .5s linear 3s both;
 }
@@ -764,6 +805,9 @@ $logo-layout-height: 273px; //311px;
   //top: -50%;
   transform: translate3d(0, -50%, 0);
   padding-bottom: 482px / map-get($design-width, xl) * 100%; //59.16%;
+  @include media-breakpoint-down(md){
+    padding-bottom: 212px * 2 / map-get($design-width, md) * 100%; //59.16%;
+  }
 }
 
 .p1-contents {
@@ -799,7 +843,19 @@ $logo-layout-height: 273px; //311px;
 
 .media-slide {
   overflow: hidden;
-
+  
+  // @include media-breakpoint-down(md){
+  //   height: pxToRem(212px, md);
+  //   img{
+  //     height: 100%;
+  //   }
+  // }
+  .media-content{
+    width: 100%;
+    height: 100%;
+    background: url(../images/p1_proxy.png) center center no-repeat;
+    background-size: cover;
+  }
   img {
     width: 100%;
   }
@@ -928,6 +984,9 @@ $title-font-size: pxToRem(27px);
   height: pxToVh(356px, xl);
   overflow: hidden;
   text-align: right;
+  @include media-breakpoint-down(md){
+    height: pxToVh(250px, md);
+  }
 
   img {
     position: absolute;
