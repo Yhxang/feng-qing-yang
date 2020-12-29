@@ -202,7 +202,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 
     speed: 900,
     
-
     mousewheel: true,
 
     parallax: true,
@@ -219,7 +218,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     breakpoints: {
       768.001: {
         noSwipingClass: "stop-swiping",
-      }
+      },
+      // ["@" + 360/397]: {
+      //   freeMode: "false"
+      // }
+      // '@1.00': { 
+      //   freeMode: "false"
+      // }
     },
 
     on: {
@@ -229,6 +234,16 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         //console.log(this.$wrapperEl[0].style.transitionDuration)
         swiperAnimation.init(this).animate();
       },
+      resize: function(swiper){
+        if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/697)){
+          this.freeMode = true;
+        }else{
+          this.freeMode = false;
+        }
+
+        
+        swiper.update();
+      }, 
       slideChange: function(){
         swiperAnimation.init(this).animate();
       },
@@ -625,6 +640,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       prevEl: '.p7-next',
     },
     breakpoints: {
+
       768: {
         spaceBetween: 15,
         slidesPerView: 2, //"auto"
@@ -666,7 +682,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   // })
 
   function resize() {
-    document.querySelector("p.scale").innerText = `${window.innerWidth}*${window.innerHeight}`
+    document.querySelector("p.scale").innerText = `${window.innerWidth}*${window.innerHeight}__`
   }
   resize()
   window.addEventListener("resize", resize)
