@@ -170,6 +170,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       return timeout(8000);
     }).then(value => {
       console.log('start scroll')
+      //mainSwiper.slideTo(1)
     })
 
   }, 100)
@@ -192,6 +193,17 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     mainSwiper.slideTo(0);
   })
 
+  // function resizeHandler(e){
+  //   if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/697)){
+  //     mainSwiper.params.freeMode = mainSwiperOption.freeMode = true;
+  //   }else{
+  //     mainSwiper.params.freeMode = mainSwiperOption.freeMode = false;
+  //   }
+  //   //console.log('resize')
+    
+  //   mainSwiper.update();
+  //   console.log(mainSwiperOption.freeMode+"__"+mainSwiper.params.freeMode)
+  // }
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules
   //$$("#section6").style.height=`${813/800*100}vh`;
   const swiperAnimation = new SwiperAnimation();
@@ -226,7 +238,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       //   freeMode: "false"
       // }
     },
-
     on: {
       init: function () {
         //console.log(this.$wrapperEl[0].style.transitionDuration)
@@ -235,14 +246,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         swiperAnimation.init(this).animate();
       },
       resize: function(swiper){
-        if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/697)){
-          this.freeMode = true;
-        }else{
-          this.freeMode = false;
-        }
-
-        
-        swiper.update();
+        console.log('swiper resize!')
       }, 
       slideChange: function(){
         swiperAnimation.init(this).animate();
@@ -293,8 +297,26 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       key: ''
     },
   }
+
   var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
   window.mainSwiper = mainSwiper;
+
+  window.addEventListener("resize",e=> {
+    if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
+      //alert(window.innerWidth/window.innerHeight)
+
+      //mainSwiper.params.freeMode = mainSwiperOption.freeMode = true;
+    }else{
+      mainSwiper.params.freeMode = mainSwiperOption.freeMode = false;
+    }
+    //console.log('resize')
+    
+    mainSwiper.update();
+    //console.log(mainSwiperOption.freeMode+"__"+mainSwiper.params.freeMode)
+    //console.log('reeee')
+  })
+  window.dispatchEvent(new Event("resize"));
+
   // function onMouseWheel(e) {
   //     console.log(e);
   //     clearTimeout(e.target.getAttribute('data-timer'));
@@ -558,8 +580,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   });
   console.log(pages)
   pages.forEach((pageIndex, idx) => {
+    console.log('each:', pageIndex, idx, "slideTo:", idx >= 3 ? idx + 3 : idx + 1)
     page(pageIndex, function(){
-      console.log(pageIndex);
+      console.log(pageIndex, idx);
       mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1);
       $$("html").classList.remove("open-news");
     })
@@ -584,7 +607,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       })
   }
   page("*", function () {
-    alert('Not Found')
+    console.log('Not Found')
   })
   page();
   page.start();
