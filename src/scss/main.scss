@@ -124,6 +124,7 @@ figure {
   font-size: map-get($root-font-size, xs);
 
   .scale {
+    display: none;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -2482,8 +2483,9 @@ $p6-contents-height: 458px;
     left: pxToVw(1240px, xl);
     right: auto;
   }
+
   @include media-breakpoint-down(sm){
-    margin-top: pxToRem(164px, sm);
+    margin-top: pxToRem(180px, sm);//pxToRem(230px, sm);临界//pxToRem(164px, sm); //?????造成了media访问application的严重问题，似乎跟屏幕宽（高?）度有关
   }
 
 }
@@ -2617,8 +2619,14 @@ $p6-contents-height: 458px;
     }
     @include media-breakpoint-down(sm){
       margin-top: pxToRem(30px, sm);
+      
     }
   }
+  
+  @include media-breakpoint-down(sm){
+    padding-bottom: pxToRem(150px, sm); // 借调到这里
+  }
+  
 }
 
 .p8-title {
@@ -2679,6 +2687,7 @@ $p6-contents-height: 458px;
     height: pxToRem(165px, sm);
     
   }
+
 }
 .p8-partner-left{
   width: pxToRem(136px, xl);
@@ -2765,7 +2774,7 @@ footer {
   //height: pxToRem(162px);
   background-color: black;
   @include media-breakpoint-down(sm){
-    margin-top: pxToRem(85px, sm);
+    margin-top: 0;//pxToRem(85px, sm);
     padding-bottom: pxToRem(100px,sm);
   }
 }

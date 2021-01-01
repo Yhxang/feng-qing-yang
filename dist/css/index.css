@@ -67,11 +67,11 @@
 
 @font-face {
   font-family: "Source Han Sans CN Regular";
-  src: url(/dist/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
+  src: url(/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
+    url(/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
+    url(/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
+    url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
+    url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
 .container,
 .container-fluid,
@@ -2418,6 +2418,7 @@ figure {
 }
 
 :root .scale {
+  display: none;
   position: fixed;
   right: 0;
   bottom: 0;
@@ -4861,7 +4862,7 @@ main.swiper-wrapper > .swiper-slide {
 
 @media (max-width: 749.98px) {
   .p7-contents-pos {
-    margin-top: 10.25rem;
+    margin-top: 11.25rem;
   }
 }
 
@@ -4994,6 +4995,12 @@ main.swiper-wrapper > .swiper-slide {
 @media (max-width: 749.98px) {
   .p8-section .c-section {
     margin-top: 1.875rem;
+  }
+}
+
+@media (max-width: 749.98px) {
+  .p8-section {
+    padding-bottom: 9.375rem;
   }
 }
 
@@ -5168,7 +5175,7 @@ footer {
 
 @media (max-width: 749.98px) {
   footer {
-    margin-top: 5.3125rem;
+    margin-top: 0;
     padding-bottom: 6.25rem;
   }
 }
@@ -5365,3 +5372,5 @@ footer {
   opacity: .2;
 }
 
+
+/*# sourceMappingURL=index.css.map?08f05*/
