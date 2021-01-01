@@ -1,14 +1,15 @@
 // https://salferrarello.com/add-additional-bootstrap-4-container-size/
 $grid-breakpoints: (
-  xs: 0,
+  xs:100px,
   sm: 576px,
-  md: 768px,
+  md: 750px,//768px,
   lg: 992px,
   xl: 1200px,
   xxl: 1400px,
   xxxl: 1600px
 );
 $container-max-widths: (
+  xs:100px,
   sm: 540px,
   md: 720px,
   lg: 960px,
@@ -17,3 +18,21 @@ $container-max-widths: (
   xxxl: 1560px
 );
 $grid-gutter-width: 0;
+
+$root-font-size: (xs: 14px, //15.5;
+  sm: 16px,
+  md: 18px,
+  lg: 18px,
+  xl: 20px,
+  xxl: 20px,
+  xxxl:24px);
+
+// 设计稿尺寸 初期用1920*1080做的，中途改为了1400*800
+$design-width: (xxl: 1920px,
+  xl: 1400px,
+  md: 768px,
+  xs: 0);
+$design-height: (xxl: 1080px,
+  xl: 800px,
+  md: 1334px,
+  xs: 0);

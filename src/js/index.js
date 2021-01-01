@@ -228,7 +228,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       prevEl: null
     },
     breakpoints: {
-      768.001: {
+      750.001: {
         noSwipingClass: "stop-swiping",
       },
       // ["@" + 360/397]: {
@@ -346,6 +346,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     on: {
 
       progress: function (swiper) {
+        return;
         let interleaveOffset = 0.3;
         swiper.slides.forEach(slide => {
 
@@ -368,6 +369,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       },
       slideChangeTransitionEnd: function (swiper) {
         mainSwiper.mousewheel.enable();
+        return;
         this.slides.forEach(slide => {
           let speed = this.params.speed;
           slide.style.transition = speed + "ms";
@@ -444,7 +446,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     parallax: true,
     nested: true, // 阻止父级切换
     resistanceRatio: 0,
-    noSwipingClass: "stop-swiping",
+    //noSwipingClass: "stop-swiping",
     autoHeight: true,
     navigation: {
       nextEl: '.p3-next',
@@ -587,7 +589,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       $$("html").classList.remove("open-news");
     })
   })
-  page('news/article/:page', showNews);
+  page('media/article/:page', showNews);
 
   function showNews(ctx) {
     $$("html").classList.add("open-news")
@@ -655,30 +657,42 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 
 
   var newsSwiper = new Swiper(".p7-contents", {
-    spaceBetween: 40,
+    spaceBetween: 28,
     slidesPerView: 1, //"auto"
     roundLengths: true, // 将slide的宽和高取整
+    initialSlide:2,
+    loop: true,
+    loopAdditionalSlides:1,
+    grabCursor: true,
     navigation: {
       nextEl: '.p7-prev',
       prevEl: '.p7-next',
     },
     breakpoints: {
 
-      768: {
+      750: {
         spaceBetween: 15,
         slidesPerView: 2, //"auto"
+        loop: false,
+        grabCursor: false
       },
       992: {
         spaceBetween: 15,
         slidesPerView: 2,
+        loop: false,
+        grabCursor: false
       },
       1200: {
         spaceBetween: 15,
         slidesPerView: 3,
+        loop: false,
+        grabCursor: false
       },
       1400: {
         spaceBetween: 48,
-        slidesPerView: 3
+        slidesPerView: 3,
+        loop: false,
+        grabCursor: false
       }
     }
   })

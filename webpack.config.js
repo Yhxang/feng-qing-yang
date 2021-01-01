@@ -183,15 +183,18 @@ const config = {
     // })
   ]
 }
-
+const langs = ['cn','en']
 const pages = Object.keys(config.entry);
-config.plugins = config.plugins.concat(pages.map(page => {
-  return new HtmlWebpackPlugin({
-    filename: page === "index" ? `${page}.html` : `${page}/index.html`,
-    template: path.resolve(__dirname, `./src/templates/${page}.pug`),
-    chunks: [page]
-  })
-}))
+langs.forEach(lang => {
+  config.plugins = config.plugins.concat(pages.map(page => {
+    return new HtmlWebpackPlugin({
+      filename: page === "index" ? `${lang}/${page}.html` : `${lang}/${page}/index.html`,
+      template: path.resolve(__dirname, `./src/templates/${page}_${lang}.pug`),
+      chunks: [page]
+    })
+  }))
+})
+
 
 module.exports = (env, argv) => {
   //console.log(env, argv)
@@ -202,6 +205,7 @@ module.exports = (env, argv) => {
   }
 
   if (argv.mode === 'production') {
+
     config.devtool = "cheap-module-source-map";
     config.output.publicPath = "/";
     config.plugins.unshift(

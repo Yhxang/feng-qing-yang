@@ -1,10 +1,10 @@
 doctype html
-html(lang="en")
+html(lang="zh-CN")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
     //- , viewport-fit=cover
-    title 风氢扬科技
+    title G-POWER
     meta(name="description", content="cn")
   body
     mixin svguse(svgid, vb)
@@ -175,7 +175,7 @@ html(lang="en")
                   .swiper-button-prev-bg
                 .swiper-button-next.pretty-navigation
                   .swiper-button-prev-bg
-
+              img.p2-mobile-tip(src=require("../images/p2_mobile_tip.png"))
           //- page3:: 产品与服务
           #section3.swiper-slide(data-history="products-service" data-hash="products")
             section.c-section.md-pad
@@ -301,10 +301,7 @@ html(lang="en")
               .p6-title.column-title
                 p 市场应用
                 img.column-title-img(src=require("../images/p6_title.svg"))
-              .p6-contents.stop-swiping(data-swiper-animation="animate__fadeIn"
-                data-duration=".5s"
-                data-delay=".25s"
-                )
+              .p6-contents.stop-swiping
                 .row
                   .p6-thumb.swiper-containers.col-xs-4.col-sm-3.col-md-2
 
@@ -385,10 +382,15 @@ html(lang="en")
                   .p8-title.column-title
                     p 合作机构
                     img(src=require("../images/p6_model_active.svg"))
-                  ul.p8-contents
-                    -for(var i=0; i<4; i++)
-                      li
-                        img(src=require("../images/p8_partner_1.png"))
+                  .p8-contents
+                    ul.p8-partner-left
+                      -for(var i=1; i<=3; i++)
+                        li
+                          img(src=require("../images/p8_partner_a"+(i<10?("0"+i):i)+".png"))
+                    ul.p8-partner-right
+                      -for(var j=1; j<=14; j++)
+                        li
+                          img(src=require("../images/p8_partner_b"+(j<10?("0"+j):j)+".png"))
                 .p8-rb-icon
                   img(src=require("../images/p1_lb_icon.svg"))
 
@@ -397,7 +399,7 @@ html(lang="en")
                 .row
                   .footer-logo.col-xs-4.col-lg-4
                     img.scaleable(src=require("../images/footer_logo.svg"))
-                  .shares.col-xs-3.col-lg-4
+                  .shares.col-xs-1.col-lg-4
                     svg.icon(aria-hidden="true")
                       use(xlink:href="#icon-weixin")
                     //- svg.icon(aria-hidden="true")
@@ -415,8 +417,8 @@ html(lang="en")
                   span 经营许可证编号：XXX-1234567890
                   span 沪ICP备12345678号
                 p 沪网文（2020）0460-123
-
-          //#section7.swiper-slide(style="height:162px")
+          //-#section100.swiper-slide(data-history="end" data-hash="end",style='height:0')
+          //-#section100.swiper-slide(style="height:0")
 
 
 
