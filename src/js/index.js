@@ -154,13 +154,16 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         setTimeout(resolve, ms, 'done');
       })
     }
-
-    timeout(500).then(value => {
+    
+    new Promise((resolve, reject) => {
+      logogif.addEventListener("load", resolve);
+      logogif.addEventListener("error", reject);
+    }).then(value => {
       docEl.classList.add("is-loaded");
       console.log('loaded')
       document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
       document.querySelectorAll(".p0-logotext .cls-1").forEach((path, index) => {
-        path.style.animationDelay = `${2.5 + 0.05 * index}s`
+        path.style.animationDelay = `${2.5 + 0.05 * index}s`;
       })
       return timeout(500);
     }).then(value => {
@@ -252,7 +255,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         swiperAnimation.init(this).animate();
       },
       slideChangeTransitionStart: function () {
-        //console.log(this.realIndex, this.activeIndex)
         if (this.activeIndex == 2) {
           let canvasTarget = document.querySelector(".p2-linebg-wrapper");
           if (!canvasTarget.classList.contains("has-canvas")) {
@@ -262,13 +264,23 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         }
         document.querySelectorAll(".menu-ul a").forEach((a, index) => {
           let realIndex = this.realIndex;
-          if(realIndex > 3 && realIndex <= 5 ){
-            realIndex = 3;
-          }else if(realIndex > 5){
+          // if(realIndex > 3 && realIndex <= 5 ){
+          //   realIndex = 3;
+          // }else if(realIndex > 5){
+          //   realIndex = realIndex - 2;
+          // }
+          // console.log(realIndex)
+          // if (realIndex === index + 1)
+          //   a.classList.add('active');
+          // else
+          //   a.classList.remove('active')
+          if(realIndex > 2 && realIndex <= 4 ){
+            realIndex = 2;
+          }else if(realIndex > 4){
             realIndex = realIndex - 2;
           }
           console.log(realIndex)
-          if (realIndex === index + 1)
+          if (realIndex === index )
             a.classList.add('active');
           else
             a.classList.remove('active')
@@ -329,10 +341,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 
   // }
 
-  //window.addEventListener( 'mousewheel', onMouseWheel, false )
-  //window.addEventListener( 'DOMMouseScroll', onMouseWheel, false )
-
-  var mediaSwiper = new Swiper('.p1-contents', {
+  const mediaSwiperOption = {
     speed: 1100,
     loop: true,
     parallax: true,
@@ -361,7 +370,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         })
       },
       touchStart: function (swiper) {
-        this.slides.forEach(slide => slide.style.transition = "")
+        //this.slides.forEach(slide => slide.style.transition = "")
       },
       slideChangeTransitionStart: function (swiper) {
         mainSwiper.mousewheel.disable();
@@ -377,7 +386,10 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         });
       }
     }
-  })
+  }
+  // 暂时隐藏该栏目
+  // var mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
+
   let techOptions = {
 
   }
@@ -441,7 +453,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   var produtionSwiper = new Swiper('.p3-product-msg', {
     speed: 600,
     loop: true,
-    autoplay: true,
+    //autoplay: true,
     spaceBetween: 100,
     parallax: true,
     nested: true, // 阻止父级切换
@@ -582,10 +594,12 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   });
   console.log(pages)
   pages.forEach((pageIndex, idx) => {
-    console.log('each:', pageIndex, idx, "slideTo:", idx >= 3 ? idx + 3 : idx + 1)
+    let slideIdxTarget =  idx >= 2 ? idx + 2 : idx; // 隐藏多媒体
+    console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
     page(pageIndex, function(){
       console.log(pageIndex, idx);
-      mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1);
+      //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
+      mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
       $$("html").classList.remove("open-news");
     })
   })

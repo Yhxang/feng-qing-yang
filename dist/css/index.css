@@ -67,11 +67,11 @@
 
 @font-face {
   font-family: "Source Han Sans CN Regular";
-  src: url(/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
-    url(/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
-    url(/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
-    url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
-    url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
+  src: url(/dist/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
 .container,
 .container-fluid,
@@ -3211,6 +3211,10 @@ main.swiper-wrapper > .swiper-slide {
   transition-duration: 0.8s;
 }
 
+#section1 {
+  display: none;
+}
+
 .p1-holder-pos {
   position: relative;
   margin-top: 49.25vh;
@@ -3648,7 +3652,9 @@ main.swiper-wrapper > .swiper-slide {
 }
 
 .p2-cont-detal p {
-  margin-bottom: 3vh;
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
 }
 
 @media (max-width: 991.98px) {
@@ -3667,9 +3673,6 @@ main.swiper-wrapper > .swiper-slide {
     text-indent: 2em;
     -moz-column-count: auto;
          column-count: auto;
-  }
-  .p2-cont-detal p {
-    margin-bottom: 0;
   }
 }
 
@@ -3908,6 +3911,9 @@ main.swiper-wrapper > .swiper-slide {
   position: relative;
   padding-left: 0.7rem;
   margin-top: 7.5vh;
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
 }
 
 @media (max-width: 1599.98px) {
@@ -4077,6 +4083,9 @@ main.swiper-wrapper > .swiper-slide {
   position: relative;
   margin: 17.31481vh 0 0 4.27083vw;
   width: 60.57143vw;
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
 }
 
 @media (max-width: 749.98px) {
@@ -4218,6 +4227,9 @@ main.swiper-wrapper > .swiper-slide {
   top: 18.125vh;
   width: 59.64286vw;
   font-size: 0;
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
 }
 
 @media (max-width: 991.98px) {
@@ -5372,5 +5384,3 @@ footer {
   opacity: .2;
 }
 
-
-/*# sourceMappingURL=index.css.map?08f05*/

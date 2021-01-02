@@ -913,6 +913,9 @@ $logo-layout-height-sm: 151px;
 }
 
 // #section2 { }
+#section1 { 
+  display: none; 
+}
 
 .p1-holder-pos {
   position: relative;
@@ -1346,7 +1349,8 @@ $title-font-size: pxToRem(26px);
   line-height: 1.2;//pxToRem(30px);
 
   p {
-    margin-bottom: pxToVh(24px, xl);
+    text-align: justify;
+    text-align-last: left;
   }
 
   @include media-breakpoint-down(md) {
@@ -1354,7 +1358,6 @@ $title-font-size: pxToRem(26px);
     line-height: pxToRem(24px, sm);
     text-indent: 2em;
     column-count: auto;
-    
   }
 
   @include media-breakpoint-down(sm) {
@@ -1362,9 +1365,6 @@ $title-font-size: pxToRem(26px);
     font-size: 1rem;//pxToRem(14px, sm);
     text-indent: 2em;
     column-count: auto;
-    p{
-      margin-bottom: 0;
-    }
   }
 }
 
@@ -1559,6 +1559,8 @@ $title-font-size: pxToRem(26px);
   position: relative;
   padding-left: pxToRem(14px);
   margin-top: pxToVh(60px, xl);
+  text-align: justify;
+  text-align-last: left;
 
   @include media-breakpoint-down(xxl){
     margin-top: pxToVh(30px, xl);
@@ -1726,6 +1728,9 @@ $title-font-size: pxToRem(26px);
   position: relative;
   margin: pxToVh(187px) 0 0 pxToVw(82px);
   width: pxToVw(848px, xl);
+  text-align: justify;
+  text-align-last: left;
+
   @include media-breakpoint-down(sm){
     width: auto;
     margin-left: 0;
@@ -1859,6 +1864,8 @@ $title-font-size: pxToRem(26px);
   top: pxToVh(145px, xl);
   width: pxToVw(835px, xl);
   font-size: 0;
+  text-align: justify;
+  text-align-last: left;
   @include media-breakpoint-down(md){
     position: relative;
     left:auto;
