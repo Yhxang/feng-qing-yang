@@ -84,25 +84,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   let scroll;
   const lang = docEl.getAttribute('lang');
   setTimeout(() => {
-    let svgTarget;
-
-    if(lang == "en"){
-      svgTarget = '#slogn .slogn-1'
-    }else if(lang === "zh-CN"){
-      svgTarget = '#slogn-cn .slogncn-1'
-    }
-    anime({
-      targets: svgTarget,
-      strokeDashoffset: [anime.setDashoffset, 0],
-      easing: 'easeInOutSine',
-      duration: 800,
-      fill: ["none", "#393e96"],
-      delay: function (el, i) {
-        return i * 80 + 3000
-      },
-      //direction: 'alternate',
-      //loop: true
-    });
+    
     /*
     scroll = new LocomotiveScroll({
         el: document.querySelector("#page-scroll"),
@@ -159,6 +141,25 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       logogif.addEventListener("load", resolve);
       logogif.addEventListener("error", reject);
     }).then(value => {
+      let svgTarget;
+
+    if(lang == "en"){
+      svgTarget = '#slogn .slogn-1'
+    }else if(lang === "zh-CN"){
+      svgTarget = '#slogn-cn .slogncn-1'
+    }
+    anime({
+      targets: svgTarget,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 800,
+      fill: ["none", "#393e96"],
+      delay: function (el, i) {
+        return i * 80 + 3000
+      },
+      //direction: 'alternate',
+      //loop: true
+    });
       docEl.classList.add("is-loaded");
       console.log('loaded')
       document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
@@ -290,13 +291,12 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         this.slides[this.realIndex].classList.add("first-active");
         if (this.realIndex !== 0) {
           document.querySelector(".c-menubox").classList.add("nav-on")
+          return;
           if (this.realIndex == 1) {
             this.allowSlidePrev = false;
           } else {
             this.allowSlidePrev = true;
           }
-        } else {
-
         }
       }
     },
@@ -314,10 +314,11 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   window.mainSwiper = mainSwiper;
 
   window.addEventListener("resize",e=> {
-    if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
+    // if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
+      if(window.innerWidth<768.001){
       //alert(window.innerWidth/window.innerHeight)
 
-      //mainSwiper.params.freeMode = mainSwiperOption.freeMode = true;
+      mainSwiper.params.freeMode = mainSwiperOption.freeMode = true;
     }else{
       mainSwiper.params.freeMode = mainSwiperOption.freeMode = false;
     }
@@ -395,8 +396,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   }
   var techSwiper = new Swiper('.p2-contents', {
     speed: 1200,
-    loop: true,
-    spaceBetween: 800,
+    //loop: true,
+    autoHeight: true,
+    spaceBetween: 80,
     parallax: true,
     nested: true, // 阻止父级切换
     resistanceRatio: 0,
@@ -411,23 +413,30 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     //     releaseOnEdges: true,
     //     eventsTarged: '#p1-contents',
     // },
+    scrollbar: {
+      el: '.p2-thumb-scrollbar',
+      draggable: true,
+      dragSize: 120
+    },
     breakpoints: {
       768.001: {
         //shortSwipes: false,
+        spaceBetween: 800,
         noSwipingClass: "stop-swiping",
-      }
+        
+      },
+      // 992.001:{
+      //   scrollbar: ''
+      // }
     },
     on: {
-      slideChangeTransitionStart: function () {
+      slideChangeTransitionStart: function (swiper) {
         mainSwiper.mousewheel.disable();
-        // this.slides.forEach(slide => {
-        //     let myparallax_x = slide.getAttribute('data-myparallax-x');
-        //     //slide.style.transform = `translate3d(${myparallax_x}px,0,0)`
-        // })
-
       },
-      slideChangeTransitionEnd: function () {
+      slideChangeTransitionEnd: function (swiper) {
         mainSwiper.mousewheel.enable();
+
+
       },
       transitionStart: function () {
         let {
@@ -439,14 +448,22 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         })
         //mainSwiper.destroy(false)
       },
-      transitionEnd: function () {
+      transitionEnd: function (swiper) {
         let {
           prevEl,
           nextEl
-        } = this.params.navigation;
-        this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
+        } = swiper.params.navigation;
+        swiper.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
           nav.classList.remove("arrow-out");
         })
+        
+        let scrollbarDrag = swiper.el.querySelector(".swiper-scrollbar-drag");
+        console.log(scrollbarDrag)
+        if(swiper.activeIndex === swiper.slides.length - 1){
+          scrollbarDrag.classList.add('dragged-end')
+        }else{
+          scrollbarDrag.classList.remove('dragged-end')
+        }
       }
     }
   })
@@ -594,19 +611,21 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   });
   console.log(pages)
   pages.forEach((pageIndex, idx) => {
-    let slideIdxTarget =  idx >= 2 ? idx + 2 : idx; // 隐藏多媒体
+    let slideIdxTarget =  idx > 2 ? idx + 2 : idx; // 隐藏多媒体
     console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
-    page(pageIndex, function(){
+    page(new RegExp("en\/?" + pageIndex), function(ctx){
+      console.log(ctx)
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
       mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
       $$("html").classList.remove("open-news");
     })
   })
-  page('media/article/:page', showNews);
+  page(new RegExp("en\/?" + 'media/article/:page'), showNews);
 
   function showNews(ctx) {
     $$("html").classList.add("open-news")
+    
     var page = ~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
     axios[urls.newsArticleData.type](urls.newsArticleData.url + page)
@@ -622,8 +641,8 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         console.log(err)
       })
   }
-  page("*", function () {
-    console.log('Not Found')
+  page("*", function (ctx) {
+    console.log(ctx,'Not Found')
   })
   page();
   page.start();
