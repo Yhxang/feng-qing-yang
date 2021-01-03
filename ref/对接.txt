@@ -1,0 +1,46 @@
+-------------------前台网站
+中文：
+http://www.g-powertech.com.cn/
+http://g-powertech.com.cn/
+英文
+http://en.g-powertech.com.cn/
+
+-------------------新闻管理后台
+
+http://www.g-powertech.com.cn/mycms/adminhoutai/
+用户名：admin
+密码：123456789
+
+
+--------------------中文接口地址
+根目录/api.php
+
+	新闻列表
+
+		post参数
+		act:newslist
+
+	
+	新闻详情
+
+		post参数
+		act:news
+		newsId:2 (新闻id)
+
+
+--------------------英文接口地址
+根目录/api.php
+
+	新闻列表
+
+		post参数
+			act:newslist
+		返回结果：新闻列表json
+
+	
+	新闻详情
+
+		post参数
+			act:news
+			newsId:7 (新闻id)
+		返回结果：新闻详情json

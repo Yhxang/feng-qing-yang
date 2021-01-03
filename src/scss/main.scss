@@ -2739,15 +2739,22 @@ $p6-contents-height: 458px;
     margin-top: pxToRem(12px);
     width: pxToRem(50px);
   }
+
+  [lang="en"] & p{
+    display: block;
+  }
   
   @include media-breakpoint-down(md){
-    border:none;
-    &::before,&::after{
-      display: none;
+    [lang="zh-CN"] &{
+      border:none;
+      &::before,&::after{
+        content: normal;
+      }
+      p{
+        display: block;
+      }
     }
-    [lang="en"] & p{
-      display: block;
-    }
+    
   }
   @include media-breakpoint-down(sm){
     display: inline-block;

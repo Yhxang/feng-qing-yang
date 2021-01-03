@@ -1,10 +1,10 @@
 export default {
     newsListData: { 
-        url: "/api/newslist",
+        url: "/api.php",//"/api/newslist",
         type: 'post'
     },
     newsArticleData: {
-        url: "/api/news/",
+        url: "/api.php",//"/api/news/",
         type: 'post'
     }
 }

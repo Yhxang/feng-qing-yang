@@ -5143,14 +5143,18 @@ main.swiper-wrapper > .swiper-slide {
   width: 2.5rem;
 }
 
+[lang="en"] .p8-title p {
+  display: block;
+}
+
 @media (max-width: 991.98px) {
-  .p8-title {
+  [lang="zh-CN"] .p8-title {
     border: none;
   }
-  .p8-title::before, .p8-title::after {
-    display: none;
+  [lang="zh-CN"] .p8-title::before, [lang="zh-CN"] .p8-title::after {
+    content: normal;
   }
-  [lang="en"] .p8-title p {
+  [lang="zh-CN"] .p8-title p {
     display: block;
   }
 }

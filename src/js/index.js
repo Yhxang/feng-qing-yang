@@ -613,7 +613,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   pages.forEach((pageIndex, idx) => {
     let slideIdxTarget =  idx > 2 ? idx + 2 : idx; // 隐藏多媒体
     console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
-    page(new RegExp("en\/?" + pageIndex), function(ctx){
+    page(new RegExp("(en\\/)?" + pageIndex), function(ctx){
       console.log(ctx)
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
@@ -621,7 +621,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       $$("html").classList.remove("open-news");
     })
   })
-  page(new RegExp("en\/?" + 'media/article/:page'), showNews);
+  page(new RegExp("(en\\/)?" + 'media\\/article\\/:page'), showNews);
 
   function showNews(ctx) {
     $$("html").classList.add("open-news")
@@ -647,7 +647,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   page();
   page.start();
 
-  axios[urls.newsListData.type](urls.newsListData.url)
+  axios[urls.newsListData.type](urls.newsListData.url, {
+    act: "newslist"
+  })
     .then(function (response) {
       let newsListData = response && response.data;
       let newsTemplate = document.getElementById("newsTemplate").innerHTML;
