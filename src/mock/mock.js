@@ -5,6 +5,7 @@ import urls from "./urls";
 // let config=require('../../webpack.config')
 // console.log(webpack)
 const mode = process.env.NODE_ENV;
+const basePath = mode === "development" ? "dist" : "";
 
 console.log('loaded mockjs');
 let params = Mock.mock({
@@ -45,23 +46,23 @@ Mock.setup({
 //   }];
 params.newsListData = [
   {
-    'date': '2020-9-15',
-    'title': '风氢扬科技CHIGMA 120系统正式亮相FCVC2020',
-    'imgsrc': './news_img/p6_news_1.jpg',
-    'description': "9月14-16日，由中国汽车工程学会和国际氢能与燃料电池协会（筹）共同主办的“第五届国际氢能与燃料电池汽车大会”（FCVC 2020）在上海汽车会展中心隆重召开，风氢扬科技携最新大功率燃料电池系统.....",
-    'url': './media/article/01'
-  },{
     'date': '2020-11-28',
     'title': '风动鹏城，氢扬湾区-风氢扬科技“论剑”高工氢电年会',
     'imgsrc': './news_img/p6_news_2.jpg',
     'description': "以“氢色十城关不住 千辆氢车竞争先”为主题的2020高工氢电年会在深圳盛大举办。11月27日上午，在以“系统强大与国产猛进”为主题的氢燃料电池系统专场上......",
-    'url': './media/article/02'
+    'newsId': '02'
+  }, {
+    'date': '2020-9-15',
+    'title': '风氢扬科技CHIGMA 120系统正式亮相FCVC2020',
+    'imgsrc': './news_img/p6_news_1.jpg',
+    'description': "9月14-16日，由中国汽车工程学会和国际氢能与燃料电池协会（筹）共同主办的“第五届国际氢能与燃料电池汽车大会”（FCVC 2020）在上海汽车会展中心隆重召开，风氢扬科技携最新大功率燃料电池系统.....",
+    'newsId': '01'
   },{
     'date': '2020-4-23',
     'title': '风氢扬燃料电池物流车整装待发',
     'imgsrc': './news_img/p6_news_3.jpg',
     'description': "由风氢扬科技自主设计开发的65kW燃料电池系统近日进行示范展示。4月23日，浙江省委常委黄建发和金华市市长尹学群等领导在金华指导工作，现场参观燃料电池物流车，与现场人员一起探讨燃料电池工作原理、燃料电池车辆运营优势。",
-    'url': './media/article/03'
+    'newsId': '03'
   }
 ]
 
@@ -95,6 +96,18 @@ params.articleData = {
 }
 
 
-Mock.mock(urls.newsListData.url, urls.newsListData.type, params.newsListData);
+Mock.mock(urls.newsListData.url, urls.newsListData.type, options => { 
+  let res = JSON.parse(options.body);
+  let { act, lang, newsId } = res;
 
-Mock.mock(new RegExp(urls.newsArticleData.url + "\\d+"), urls.newsArticleData.type, params.articleData);
+  if(act === "newslist"){
+    console.log(`mockjs：return 新闻列表（版本：${lang}）`);
+    return params.newsListData;
+  }else if(act === "news"){
+    console.log(`mockjs：return 新闻详情newsId（版本：${lang}）：  ${newsId}`);
+    return params.articleData;
+  }else{
+    console.log("没有act参数!");
+  }
+  
+});

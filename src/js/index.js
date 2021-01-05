@@ -41,8 +41,111 @@ import urls from "../mock/urls";
 import "../mock/mock.js"; // sideEffects
 
 const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
-(function () {
 
+(function () {
+  const $$ = $sel => document.querySelector($sel);
+  const docEl = $$('html');
+  const lineAnimCanvas = bgcanvas.app.view;
+
+  let scroll;
+  const lang = docEl.getAttribute('lang');
+
+  /*
+  scroll = new LocomotiveScroll({
+      el: document.querySelector("#page-scroll"),
+      smooth: true,
+      scrollFromAnywhere: true,
+      repeat: true,
+      getSpeed: true,
+      getDirection: true
+      //direction: "horizontal"
+  });
+  scroll.stop();
+  window.scroll = scroll;
+  scroll.on('scroll', (args) => {
+      // Get all current elements : args.currentElements
+      if (typeof args.currentElements['tar'] === 'object') {
+          let progress = args.currentElements['tar'].progress;
+          
+          let prg = progress >= 0.5 ? 1 : progress / 0.5;
+          console.log(`translate(${-prg}%,0,0)`);
+          let p0BluebgImg =  document.querySelector(".p0-bluebg-img");
+          p0BluebgImg.style.transform = `translate3d(${(prg - 1) * 100}%,0,0)`;
+          p0BluebgImg.style.opacity = prg;
+          // ouput log example: 0.34
+          // gsap example : myGsapAnimation.progress(progress);
+      }
+  })
+  // window.scroll.on('call', func => {
+  //     // Using modularJS
+  //     this.call(...func);
+  //     // Using jQuery events
+  //     //$(document).trigger(func);
+  //     // Or do it your own way 😎
+  // });
+  scroll.on('call', function (value, way, obj) {
+      console.log(value, way, obj)
+      // Using modularJS
+      //this.call(...func);
+      // Using jQuery events
+      //$(document).trigger(func);
+      // Or do it your own way 😎
+  });
+    */
+  let logogifimg = require("../images/logo_anim.gif");
+  let logogif = new Image();
+  logogif.src = logogifimg;
+
+  function timeout(ms) {
+    return new Promise((resolve, reject) => {
+      setTimeout(resolve, ms, 'done');
+    })
+  }
+
+  new Promise((resolve, reject) => {
+
+    logogif.addEventListener("load", resolve);
+    logogif.addEventListener("error", reject);
+
+  }).then(value => {
+    docEl.classList.add("is-loaded");
+    console.log('loaded')
+
+    // svg 动画
+    let svgTarget;
+    if (lang == "en") {
+      svgTarget = '#slogn .slogn-1'
+    } else if (lang === "zh-CN") {
+      svgTarget = '#slogn-cn .slogncn-1'
+    }
+    anime({
+      targets: svgTarget,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 800,
+      fill: ["none", "#393e96"],
+      delay: function (el, i) {
+        return i * 80 + 3000
+      },
+      //direction: 'alternate',
+      //loop: true
+    });
+
+    // 将 canvas 动画添加到 dom
+    document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
+
+    return timeout(500);
+  }).then(value => {
+    mainSwiper.update();
+    document.getElementById("p0-mainlogo-image").appendChild(logogif);
+    console.log('logo gif start playing')
+    return timeout(8000);
+  }).then(value => {
+    console.log('start scroll');
+    //mainSwiper.slideTo(1)
+  })
+
+  // 应用案例栏目的圆圈动画
   void function solarsysSVG() {
     //var path = anime.path('.solar-10');
     let svgObj = {
@@ -77,118 +180,16 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     });
   }();
 
-  const $$ = $sel => document.querySelector($sel);
-  const docEl = $$('html');
-  const lineAnimCanvas = bgcanvas.app.view;
-
-  let scroll;
-  const lang = docEl.getAttribute('lang');
-  setTimeout(() => {
-    
-    /*
-    scroll = new LocomotiveScroll({
-        el: document.querySelector("#page-scroll"),
-        smooth: true,
-        scrollFromAnywhere: true,
-        repeat: true,
-        getSpeed: true,
-        getDirection: true
-        //direction: "horizontal"
-    });
-    scroll.stop();
-    window.scroll = scroll;
-    scroll.on('scroll', (args) => {
-        // Get all current elements : args.currentElements
-        if (typeof args.currentElements['tar'] === 'object') {
-            let progress = args.currentElements['tar'].progress;
-            
-            let prg = progress >= 0.5 ? 1 : progress / 0.5;
-            console.log(`translate(${-prg}%,0,0)`);
-            let p0BluebgImg =  document.querySelector(".p0-bluebg-img");
-            p0BluebgImg.style.transform = `translate3d(${(prg - 1) * 100}%,0,0)`;
-            p0BluebgImg.style.opacity = prg;
-            // ouput log example: 0.34
-            // gsap example : myGsapAnimation.progress(progress);
-        }
-    })
-    // window.scroll.on('call', func => {
-    //     // Using modularJS
-    //     this.call(...func);
-    //     // Using jQuery events
-    //     //$(document).trigger(func);
-    //     // Or do it your own way 😎
-    // });
-    scroll.on('call', function (value, way, obj) {
-        console.log(value, way, obj)
-        // Using modularJS
-        //this.call(...func);
-        // Using jQuery events
-        //$(document).trigger(func);
-        // Or do it your own way 😎
-    });
-    */
-    let logogifimg = require("../images/logo_anim.gif");
-    let logogif = new Image();
-    logogif.src = logogifimg;
-
-    function timeout(ms) {
-      return new Promise((resolve, reject) => {
-        setTimeout(resolve, ms, 'done');
-      })
-    }
-    
-    new Promise((resolve, reject) => {
-      logogif.addEventListener("load", resolve);
-      logogif.addEventListener("error", reject);
-    }).then(value => {
-      let svgTarget;
-
-    if(lang == "en"){
-      svgTarget = '#slogn .slogn-1'
-    }else if(lang === "zh-CN"){
-      svgTarget = '#slogn-cn .slogncn-1'
-    }
-    anime({
-      targets: svgTarget,
-      strokeDashoffset: [anime.setDashoffset, 0],
-      easing: 'easeInOutSine',
-      duration: 800,
-      fill: ["none", "#393e96"],
-      delay: function (el, i) {
-        return i * 80 + 3000
-      },
-      //direction: 'alternate',
-      //loop: true
-    });
-      docEl.classList.add("is-loaded");
-      console.log('loaded')
-      document.querySelector(".p0-linebg-wrapper").appendChild(lineAnimCanvas);
-      document.querySelectorAll(".p0-logotext .cls-1").forEach((path, index) => {
-        path.style.animationDelay = `${2.5 + 0.05 * index}s`;
-      })
-      return timeout(500);
-    }).then(value => {
-      mainSwiper.update();
-      document.getElementById("p0-mainlogo-image").appendChild(logogif);
-      console.log('logo gif start playing')
-      return timeout(8000);
-    }).then(value => {
-      console.log('start scroll')
-      //mainSwiper.slideTo(1)
-    })
-
-  }, 100)
-
   $$(".menu-switch-mobile").addEventListener('click', e => {
     let menubox = $$(".c-menubox");
-    if(menubox.classList.contains("nav-show-mobile")){
+    if (menubox.classList.contains("nav-show-mobile")) {
       menubox.classList.remove("nav-show-mobile");
-    }else{
+    } else {
       menubox.classList.add("nav-show-mobile");
     }
   })
   document.querySelectorAll(".text-current").forEach(a => {
-    a.addEventListener("click", e=>{
+    a.addEventListener("click", e => {
       let menubox = $$(".c-menubox");
       menubox.classList.remove("nav-show-mobile");
     })
@@ -204,24 +205,20 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   //     mainSwiper.params.freeMode = mainSwiperOption.freeMode = false;
   //   }
   //   //console.log('resize')
-    
+
   //   mainSwiper.update();
   //   console.log(mainSwiperOption.freeMode+"__"+mainSwiper.params.freeMode)
   // }
   Swiper.use([Scrollbar, Navigation, Mousewheel, Parallax, History, HashNavigation, Pagination, EffectFade, Thumbs, Autoplay]); // Install modules
-  //$$("#section6").style.height=`${813/800*100}vh`;
+
   const swiperAnimation = new SwiperAnimation();
   let mainSwiperOption = {
     direction: 'vertical', // 垂直切换选项
     //freeMode:true,
     slidesPerView: 'auto', // 适配最后一页不规则的高度
-
     speed: 900,
-    
     mousewheel: true,
-
     parallax: true,
-
     scrollbar: {
       el: '.main-scrollbar',
       draggable: true,
@@ -249,48 +246,43 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         //console.log(this.$wrapperEl[0].style.transitionDuration)
         swiperAnimation.init(this).animate();
       },
-      resize: function(swiper){
+      resize: function (swiper) {
         console.log('swiper resize!')
-      }, 
-      slideChange: function(){
-        swiperAnimation.init(this).animate();
       },
-      slideChangeTransitionStart: function () {
-        if (this.activeIndex == 2) {
+      slideChange: function (swiper) {
+        swiperAnimation.init(this).animate();        
+      },
+      slideChangeTransitionStart: function (swiper) {
+        let activeIndex = swiper.activeIndex; // main swiper index
+        if (activeIndex == 2) {
           let canvasTarget = document.querySelector(".p2-linebg-wrapper");
           if (!canvasTarget.classList.contains("has-canvas")) {
             canvasTarget.appendChild(lineAnimCanvas);
             canvasTarget.classList.add("has-canvas");
           }
         }
+
+        let columnIndex = activeIndex; // 栏目index
+
+        if (activeIndex > 2 && activeIndex <= 4) {
+          columnIndex = 2;
+        } else if (activeIndex > 4) {
+          columnIndex = activeIndex - 2;
+        }
+
+        //console.log({activeIndex, columnIndex, pages, page:pages[columnIndex]})
+
         document.querySelectorAll(".menu-ul a").forEach((a, index) => {
-          let realIndex = this.realIndex;
-          // if(realIndex > 3 && realIndex <= 5 ){
-          //   realIndex = 3;
-          // }else if(realIndex > 5){
-          //   realIndex = realIndex - 2;
-          // }
-          // console.log(realIndex)
-          // if (realIndex === index + 1)
-          //   a.classList.add('active');
-          // else
-          //   a.classList.remove('active')
-          if(realIndex > 2 && realIndex <= 4 ){
-            realIndex = 2;
-          }else if(realIndex > 4){
-            realIndex = realIndex - 2;
-          }
-          console.log(realIndex)
-          if (realIndex === index )
+          if (columnIndex === index)
             a.classList.add('active');
           else
-            a.classList.remove('active')
+            a.classList.remove('active');
         })
       },
       slideChangeTransitionEnd: function () {
         this.slides[this.realIndex].classList.add("first-active");
         if (this.realIndex !== 0) {
-          document.querySelector(".c-menubox").classList.add("nav-on")
+          document.querySelector(".c-menubox").classList.add("nav-on");
           return;
           if (this.realIndex == 1) {
             this.allowSlidePrev = false;
@@ -313,17 +305,17 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   var mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
   window.mainSwiper = mainSwiper;
 
-  window.addEventListener("resize",e=> {
+  window.addEventListener("resize", e => {
     // if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
-      if(window.innerWidth<768.001){
+    if (window.innerWidth < 768.001) {
       //alert(window.innerWidth/window.innerHeight)
 
       mainSwiper.params.freeMode = mainSwiperOption.freeMode = true;
-    }else{
+    } else {
       mainSwiper.params.freeMode = mainSwiperOption.freeMode = false;
     }
     //console.log('resize')
-    
+
     mainSwiper.update();
     //console.log(mainSwiperOption.freeMode+"__"+mainSwiper.params.freeMode)
     //console.log('reeee')
@@ -392,9 +384,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   // var mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
 
   let techOptions = {
-
-  }
-  var techSwiper = new Swiper('.p2-contents', {
     speed: 1200,
     //loop: true,
     autoHeight: true,
@@ -423,7 +412,6 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         //shortSwipes: false,
         spaceBetween: 800,
         noSwipingClass: "stop-swiping",
-        
       },
       // 992.001:{
       //   scrollbar: ''
@@ -435,15 +423,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       },
       slideChangeTransitionEnd: function (swiper) {
         mainSwiper.mousewheel.enable();
-
-
       },
-      transitionStart: function () {
+      transitionStart: function (swiper) {
         let {
           prevEl,
           nextEl
-        } = this.params.navigation;
-        this.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
+        } = swiper.params.navigation;
+        swiper.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
           nav.classList.add("arrow-out");
         })
         //mainSwiper.destroy(false)
@@ -456,17 +442,19 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
         swiper.el.querySelectorAll([prevEl, nextEl].join(",")).forEach(nav => {
           nav.classList.remove("arrow-out");
         })
-        
+
         let scrollbarDrag = swiper.el.querySelector(".swiper-scrollbar-drag");
-        console.log(scrollbarDrag)
-        if(swiper.activeIndex === swiper.slides.length - 1){
+
+        if (swiper.activeIndex === swiper.slides.length - 1) {
           scrollbarDrag.classList.add('dragged-end')
-        }else{
+        } else {
           scrollbarDrag.classList.remove('dragged-end')
         }
       }
     }
-  })
+  }
+  var techSwiper = new Swiper('.p2-contents', techOptions);
+
   var produtionSwiper = new Swiper('.p3-product-msg', {
     speed: 600,
     loop: true,
@@ -488,7 +476,8 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     },
   })
   document.querySelectorAll(".p5-box").forEach(titBox => {
-    titBox.innerHTML = Array.from(titBox.innerText).map((char, i) => {
+    let paragraph = titBox.querySelector("p");
+    paragraph.innerHTML = Array.from(paragraph.innerText.replace(/<br *?\/>/g, "\n")).map((char, i) => {
       return char === "\n" ? "<br>" : `<span style="transition-delay:${i / 20}s">${char}</span>`
     }).join("");
   })
@@ -605,30 +594,43 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   })
 
   const pages = [];
-  
+
   document.querySelectorAll(".menu-ul li a").forEach(a => {
-    pages.push(a.getAttribute("href").slice(2).replace('&',"").trim());
+    pages.push(a.getAttribute("href").slice(2).replace('&', "").trim());
   });
   console.log(pages)
   pages.forEach((pageIndex, idx) => {
-    let slideIdxTarget =  idx > 2 ? idx + 2 : idx; // 隐藏多媒体
+    let slideIdxTarget = idx > 2 ? idx + 2 : idx; // 隐藏多媒体
     console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
-    page(new RegExp("(en\\/)?" + pageIndex), function(ctx){
-      console.log(ctx)
+    page(new RegExp("(en\\/)?" + pageIndex +"\\/?$"), function (ctx) {
+      console.log('p',ctx)
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
-      mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
+      //mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
+      var a =document.createElement("a")
+      a.setAttribute("href", "./"+pageIndex)
+      a.dispatchEvent(new Event('click'))
       $$("html").classList.remove("open-news");
     })
   })
-  page(new RegExp("(en\\/)?" + 'media\\/article\\/:page'), showNews);
+  
+  // page(new RegExp("(en\\/)?" + 'media\\/article\\/\\'+ ":page"), showNews); ????正则获取page失败
+  page('media/article/:page', showNews);
+  page('en/media/article/:page', showNews);
 
+  console.log(new RegExp("(en\/)?" + 'media\/article\/\:page'))
+  //http://127.0.0.1:3000/dist/media/article/01
   function showNews(ctx) {
     $$("html").classList.add("open-news")
-    
-    var page = ~~ctx.params.page;
+    console.log('n', ctx)
+
+    var page = ctx.params.page;//~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
-    axios[urls.newsArticleData.type](urls.newsArticleData.url + page)
+    axios[urls.newsArticleData.type](urls.newsArticleData.url, {
+      lang,
+      act: "news",
+      newsId: page
+    })
       .then(function (response) {
         let newsData = response && response.data;
         $$(".news-page-title").innerHTML = newsData.pageTitle;
@@ -642,12 +644,13 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       })
   }
   page("*", function (ctx) {
-    console.log(ctx,'Not Found')
+    console.log(ctx, 'Not Found')
   })
   page();
   page.start();
 
   axios[urls.newsListData.type](urls.newsListData.url, {
+    lang,
     act: "newslist"
   })
     .then(function (response) {
@@ -656,6 +659,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       //console.log(newsListData)
       newsListData.forEach(data => {
         //let data= newsListData[0]
+        data.url = "./media/article/" + data.newsId;
         let html = newsTemplate;
         for (let prop in data) {
           let val = data[prop];
@@ -695,9 +699,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     spaceBetween: 28,
     slidesPerView: 1, //"auto"
     roundLengths: true, // 将slide的宽和高取整
-    initialSlide:2,
+    initialSlide: 2,
     loop: true,
-    loopAdditionalSlides:1,
+    loopAdditionalSlides: 1,
     grabCursor: true,
     navigation: {
       nextEl: '.p7-prev',

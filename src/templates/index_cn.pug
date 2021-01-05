@@ -21,9 +21,9 @@ html(lang=language)
           image(xlink:href=require("../images/model_img_1.png"),id="model_img_1" width="630" height="578")
           image(xlink:href=require("../images/model_img_3.png"),id="model_img_3" width="577" height="391")
           image(xlink:href=require("../images/model_img_4.png"),id="model_img_4" width="636" height="537")
-      include ../images/models_inc.svg
-      include ../images/slogn_en_inc.svg 
-      include ../images/slogn_cn_inc.svg 
+      block svginc
+        include ../images/models_inc.svg
+        include ../images/slogn_cn_inc.svg 
       //- 如果用xlink:href外链，将会获取不到svg dom
     </div>
     
@@ -45,6 +45,7 @@ html(lang=language)
               //img(src=require("../images/p_logo.svg"))
           
           nav.menu-nav
+            a.langBtn(href= language=="en"?"http://g-powertech.com.cn/":"http://en.g-powertech.com.cn/")
             ul.menu-ul
               block vars
                 - var menus = {home: "首页", "G-POWER":"风氢扬科技", "products-service":"产品与服务",  applications:"市场应用", media:"媒体中心"};
@@ -377,8 +378,9 @@ html(lang=language)
                 .swiper-wrapper
                   each data in afterSaleData.conts
                     .swiper-slide 
-                      h3.p5-box.stop-swiping!= data.boxTit
-                      p.p5-detail.stop-swiping!= data.desc
+                      h3.p5-box.stop-swiping
+                        p!= data.boxTit
+                      p.p5-detail(class=data.spec?data.spec:"").stop-swiping!= data.desc
                 .swiper-button-prev.pretty-navigation
                   .swiper-button-next-bg
                 .swiper-button-next.pretty-navigation
@@ -424,9 +426,9 @@ html(lang=language)
 
                     .swiper-wrapper
                       .swiper-slide
-                        img(src=require("../images/p6_model_1.svg"))
-                      .swiper-slide
                         img(src=require("../images/p6_model_2.svg"))
+                      .swiper-slide
+                        img(src=require("../images/p6_model_1.svg"))
                       .swiper-slide
                         img(src=require("../images/p6_model_3.svg"))
                       .swiper-slide
@@ -442,15 +444,19 @@ html(lang=language)
                         -
                           var appData = [
                             {
+                              id: 2,
+                              category: "物流运输", 
+                              name: "轻型市内/中型城际/<br/>重型省际物流车/牵引车头"
+                            }, {
+                              id: 1,
                               category:"公共交通", 
                               name: "公交巴士/通勤巴士"
                             }, {
-                              category: "物流运输", 
-                              name: "轻型市内/中型城际/<br/>重型省际物流车/牵引车头"
-                            },{
+                              id: 3,
                               category: "市政环卫", 
                               name: "清扫车/洒水车"
                             }, {
+                              id: 4,
                               category: "工程机械", 
                               name: "装载机/叉车/渣土车/<br/>港口机械/智能运输"
                             }
@@ -459,9 +465,9 @@ html(lang=language)
                         .swiper-slide.container-fluid
                           .row
                             .p6-text-area.col-xs-12.col-sm-12.col-md-5.stop-swiping
-                              span.p6-sub-title=val.category
+                              span.p6-sub-title!=val.category
                               .p6-modeltitle-region
-                                h3.p6-model-title!=val.name
+                                h3.p6-model-title(class=val.spec?val.spec:"")!=val.name
                                 .p6-tiny-icon
                               //- h3.p6-model-title CHANGING THE WORLD, <br>ONE CITY AT A TIME
                               //- p.p6-model-detail We care, we share, we believe. 
@@ -472,7 +478,7 @@ html(lang=language)
                               .p6-lt-icon
                               .p6-rb-icon
                               .p6-modelimg
-                                img(src=require("../images/p6_modelimg_"+(index+1)+".png"))
+                                img(src=require("../images/p6_modelimg_"+val.id+".png"))
 
           //- page7:: 新闻
           #section7.swiper-slide(data-history="media" data-hash="news")
@@ -511,53 +517,65 @@ html(lang=language)
                 .swiper-button-next.pretty-navigation.p7-next
                   .swiper-button-next-bg
 
-              #section8.p8-section
-                .c-section
-                  block mediaConts
-                    - var mediaData = {tit: "合作机构"}
-                  .p8-title.column-title
-                    p= mediaData.tit
-                    img(src=require("../images/p6_model_active.svg"))
-                  .p8-contents
-                    ul.p8-partner-left
-                      -for(var i=1; i<=3; i++)
-                        li
-                          img(src=require("../images/p8_partner_a"+(i<10?("0"+i):i)+".png"))
-                    ul.p8-partner-right
-                      -for(var j=1; j<=14; j++)
-                        li
-                          img(src=require("../images/p8_partner_b"+(j<10?("0"+j):j)+".png"))
-                .p8-rb-icon
-                  img(src=require("../images/p1_lb_icon.svg"))
+          #section8.swiper-slide.p8-section(data-history="partner" data-hash="partner")
+            .c-section
+              block mediaConts
+                - var mediaData = {tit: "合作机构"}
+              .p8-title.column-title
+                p= mediaData.tit
+                img(src=require("../images/p6_model_active.svg"))
+              block partnerConts
+                - var category = ["高校战略合作", "产业链战略合作"]
+              .p8-contents
+                .p8-partner-left
+                  h4= category[0]
+                  ul
+                    -for(var i=1; i<=3; i++)
+                      li
+                        img(src=require("../images/p8_partner_a"+(i<10?("0"+i):i)+".png"))
+                .p8-partner-right
+                  h4= category[1]
+                  ul
+                    -for(var j=1; j<=14; j++)
+                      li
+                        img(src=require("../images/p8_partner_b"+(j<10?("0"+j):j)+".png"))
+            .p8-rb-icon
+              img(src=require("../images/p1_lb_icon.svg"))
 
-            footer.footer
-              .footer-container.container-fluid
-                .row
-                  .footer-logo.col-xs-4.col-lg-4
-                    img.scaleable(src=require("../images/footer_logo.svg"))
-                  .shares.col-xs-1.col-lg-4
-                    svg.icon(aria-hidden="true")
-                      use(xlink:href="#icon-weixin")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-tubiaozhizuo-")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-linkedin")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-douyin")
-                  .footer-right.col-xs-5.col-lg-4
-                    img(src=require("../images/footer_right_proxy.png"))
-              .copyright
-                p 风氢扬科技有限公司版权所有 | Copyright &copy; 
-                p 
-                  span 内容自审制度
-                  span 经营许可证编号：XXX-1234567890
-                  span 沪ICP备12345678号
-                p 沪网文（2020）0460-123
-          //-#section100.swiper-slide(data-history="end" data-hash="end",style='height:0')
-          //-#section100.swiper-slide(style="height:0")
-
-
-
+          footer.swiper-slide.footer(data-history="footer" data-hash="footer")
+            .footer-container.container-fluid
+              .row
+                
+                .shares.col-xs-8.col-lg-8
+                  svg.icon(aria-hidden="true")
+                    use(xlink:href="#icon-weixin")
+                  //- svg.icon(aria-hidden="true")
+                  //-   use(xlink:href="#icon-tubiaozhizuo-")
+                  //- svg.icon(aria-hidden="true")
+                  //-   use(xlink:href="#icon-linkedin")
+                  //- svg.icon(aria-hidden="true")
+                  //-   use(xlink:href="#icon-douyin")
+                .footer-logo.col-xs-4.col-lg-4
+                  img.scaleable(src=require("../images/footer_logo.svg"))
+            block copyrightCont
+              -
+                var copyrightData = [
+                  "风氢扬氢能科技（上海）有限公司版权所有",
+                  "上海新能源汽车及关键零部件产业基地，恒裕路150号2栋",
+                  "电话 400 000 8100"
+                ]
+            .copyright
+              each paragraph in copyrightData
+                p= paragraph
+              //- p 风氢扬氢能科技（上海）有限公司版权所有 | Copyright &copy; 
+              //- p 上海新能源汽车及关键零部件产业基地，恒裕路150号2栋
+              //- p 电话 400 000 8100
+              
+              //- p 
+                span 内容自审制度
+                span 经营许可证编号：XXX-1234567890
+                span 沪ICP备12345678号
+              //- p 沪网文（2020）0460-123
 
         .main-scrollbar.swiper-scrollbar
 
@@ -576,4 +594,3 @@ html(lang=language)
           //- p CHIGMA 120系统，是风氢扬科技针对中国重卡车型长时间运行、高负载率及工况恶劣等运营工况开发而成的大功率燃料电池系统；CHIGMA120系统通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。
           //- img(src=require("../images/news_proxy.png"))
           //- p FCVC2020正在如火如荼的进行中，我们期待更多的新老朋友莅临B109风氢扬展台，与我们互动交流、沟通合作，共话中国氢能美好明天！
-  //script(src="/fonts/iconfont.js")

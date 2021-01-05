@@ -4,6 +4,10 @@ extends index_cn.pug
 block language
   - var language = 'en';
 
+block svginc
+  include ../images/models_en_inc.svg
+  include ../images/slogn_en_inc.svg
+
 //- 栏目菜单 slide
 block vars
  - var menus={home: "HOME", "G-POWER":"G-POWER", "products-service":"PRODUCT&SERVICE",  applications:"APPLICATIONS", media:"MEDIA"};
@@ -65,9 +69,11 @@ block afterSaleConts
       desc: 'While providing reliable products is only the first step, we also provide a complete support system covering user guidance, vehicle maintenance and data monitoring management as a strong guarantee to our customers ',
       conts: [
         {
+          spec: "wider-center",
           boxTit: 'Data Service<br/>Platform',
           desc: "With the self-developed big data platform, we are able to achieve real-time monitoring of vehicle operation, continuously improve operation efficiency, predict and prevent problems in vehicle operation, and ensure driving safety. "
         },{
+          spec: "wider-center",
           boxTit: 'Operation and<br/>Maintenance<br/>Support Service',
           desc: "With the development of commercial operation of hydrogen fuel cell vehicles in China, we have established a professional after-sales service system for the operation and maintenance of hydrogen fuel cell vehicles, in order to provide professional after-sales services for the growing hydrogen fuel cell vehicle market. "
         },{
@@ -82,15 +88,20 @@ block appConts
   -
     var appData = [
       {
+        id: 2,
+        category: "Logistics", 
+        name: "Light/Middle/<br/>Heavy logistics truck/"
+      }, {
+        id: 1,
         category:"Public transportation", 
         name: "Bus/Commuting Bus/"
       }, {
-        category: "Logistics", 
-        name: "Light/Middle/<br/>Heavy logistics truck/"
-      },{
-        category: "Municipal environmental and sanitation", 
+        id: 3,
+        category: "Municipal environmental<br/>and sanitation", 
         name: "Sprinkling/<br/>Sweeping truck"
       }, {
+        id: 4,
+        spec: "triplex",
         category: "Construction machinery", 
         name: "Loader/Forklift Truck/<br/>Port Machinery/<br/>Intelligent Transportation/"
       }
@@ -99,3 +110,14 @@ block appConts
 //- 媒体
 block mediaConts
   - var mediaData = {tit: "Cooperative organization"}
+
+block partnerConts
+  - var category = ["Strategic cooperation in Colleges and University", "Strategic cooperation of industrial chain"]
+
+block copyrightCont
+  -
+    var copyrightData = [
+      "G-Power Technology (Shanghai) Co.,Ltd",
+      "Bldg.2,150 Hengyu Rd.,Jiading Dist.,Shanghai,China",
+      "TEL 400 000 8100"
+    ]
