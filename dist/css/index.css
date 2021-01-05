@@ -2716,7 +2716,7 @@ body {
 .langBtn {
   display: block;
   position: absolute;
-  right: -1.25rem;
+  right: -1.8rem;
   top: 0.5rem;
   width: 1.25rem;
   height: 1.25rem;
@@ -2731,6 +2731,9 @@ body {
     right: auto;
     top: auto;
     bottom: 1.5625rem;
+    width: 2.8125rem;
+    height: 2.8125rem;
+    background-size: auto;
     filter: invert(100%);
   }
 }
@@ -2895,10 +2898,16 @@ main.swiper-wrapper > .swiper-slide {
 }
 
 @media (max-width: 749.98px) {
-  #section3, #section4, #section5, #section6 {
+  #section3,
+  #section4,
+  #section5,
+  #section6 {
     height: auto;
   }
-  #section3 .c-section, #section4 .c-section, #section5 .c-section, #section6 .c-section {
+  #section3 .c-section,
+  #section4 .c-section,
+  #section5 .c-section,
+  #section6 .c-section {
     height: auto;
   }
 }
@@ -3200,11 +3209,13 @@ main.swiper-wrapper > .swiper-slide {
   }
 }
 
-.slogncn-2, .slogn-2 {
+.slogncn-2,
+.slogn-2 {
   opacity: 0;
 }
 
-.is-loaded .slogncn-2, .is-loaded .slogn-2 {
+.is-loaded .slogncn-2, .is-loaded
+.slogn-2 {
   -webkit-animation: fadeIn .5s linear 3s both;
           animation: fadeIn .5s linear 3s both;
 }
@@ -3937,17 +3948,20 @@ main.swiper-wrapper > .swiper-slide {
   
   .p4-prodect-tittext,
   .p4-prodect-tittext-md,
-  .p5-prodect-tittext-md, .p5-prodect-tittext {
+  .p5-prodect-tittext-md,
+  .p5-prodect-tittext {
     display: none;
   }
 }
 
-.p4-prodect-tittext-md, .p5-prodect-tittext-md {
+.p4-prodect-tittext-md,
+.p5-prodect-tittext-md {
   display: none;
 }
 
 @media (max-width: 749.98px) {
-  .p4-prodect-tittext-md, .p5-prodect-tittext-md {
+  .p4-prodect-tittext-md,
+  .p5-prodect-tittext-md {
     display: inline-block;
   }
 }
@@ -3989,10 +4003,16 @@ main.swiper-wrapper > .swiper-slide {
   .p5-prodect-index svg {
     height: 2.125rem;
   }
-  .p3index-1, .p3index-3, .p4index-1, .p5index-1, .p5index-3 {
+  .p3index-1,
+  .p3index-3,
+  .p4index-1,
+  .p5index-1,
+  .p5index-3 {
     fill: white !important;
   }
-  .p3index-2, .p4index-2, .p5index-2 {
+  .p3index-2,
+  .p4index-2,
+  .p5index-2 {
     stroke: white !important;
   }
 }
@@ -5224,25 +5244,25 @@ main.swiper-wrapper > .swiper-slide {
   }
 }
 
-.p8-section {
+.p8-section, footer {
   position: relative;
   height: auto;
 }
 
-.p8-section .c-section {
+.p8-section .c-section, footer .c-section {
   margin: 11vh auto 0;
   width: 78.92857vw;
   height: auto;
 }
 
 @media (max-width: 991.98px) {
-  .p8-section .c-section {
+  .p8-section .c-section, footer .c-section {
     width: 84.63542vw;
   }
 }
 
 @media (max-width: 749.98px) {
-  .p8-section .c-section {
+  .p8-section .c-section, footer .c-section {
     margin-top: 1.875rem;
   }
 }
@@ -5451,13 +5471,47 @@ footer {
   background-color: black;
 }
 
+footer .c-section {
+  margin: auto;
+  position: relative;
+  height: auto;
+}
+
 footer.swiper-slide {
   height: auto;
 }
 
-@media (max-width: 749.98px) {
-  footer {
-    padding-bottom: 3.125rem;
+.footer-qrcode-area {
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+}
+
+@media (max-width: 991.98px) {
+  .footer-qrcode-area {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: 0 auto;
+    width: 6.25rem;
+    text-align: center;
+  }
+  .footer-qrcode-area .qrcode-box {
+    width: 6.25rem;
+    height: 6.25rem;
+  }
+}
+
+.qrcode-box {
+  display: inline-block;
+  vertical-align: top;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+@media (max-width: 991.98px) {
+  .qrcode-box {
+    display: block;
   }
 }
 
@@ -5478,7 +5532,7 @@ footer.swiper-slide {
 
 .footer-container {
   display: relative;
-  width: 31.5rem !important;
+  width: 100vw;
   margin: 0 auto;
   padding-top: 1rem;
   padding-bottom: 0.8rem;
@@ -5499,6 +5553,25 @@ footer.swiper-slide {
   overflow: hidden;
 }
 
+.weixin-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.footer-logo-area {
+  position: absolute;
+  right: 2.85714vw;
+  top: 1.2rem;
+  width: 10.35714vw;
+}
+
+@media (max-width: 991.98px) {
+  .footer-logo-area {
+    right: -4.94792vw;
+    width: 20.83333vw;
+  }
+}
+
 .footer-right {
   padding: 0;
   font-size: 12px;
@@ -5514,8 +5587,8 @@ footer.swiper-slide {
 .copyright {
   width: 15.25rem;
   margin: 0 auto;
-  padding-top: 1rem;
-  border-top: 1px solid #808080;
+  padding-top: 2.3rem;
+  padding-bottom: 2.5rem;
   min-width: 31.5rem;
 }
 
@@ -5534,6 +5607,8 @@ footer.swiper-slide {
 
 @media (max-width: 991.98px) {
   .copyright {
+    padding-top: 0.625rem;
+    padding-bottom: 1.5rem;
     font-size: 0.875rem;
     line-height: 1.5rem;
     text-indent: 2em;
@@ -5659,4 +5734,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?6ec51*/
+/*# sourceMappingURL=index.css.map?68dcf*/

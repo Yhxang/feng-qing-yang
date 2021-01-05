@@ -606,9 +606,9 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       console.log('p',ctx)
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
-      //mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
+      mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
       var a =document.createElement("a")
-      a.setAttribute("href", "./"+pageIndex)
+      a.setAttribute("href", "./" + pageIndex)
       a.dispatchEvent(new Event('click'))
       $$("html").classList.remove("open-news");
     })
