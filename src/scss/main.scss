@@ -14,7 +14,7 @@
 @import "./animation.scss";
 
 $logoCol: #383e96;
-
+$primaryFont: "Source Han Sans CN Regular";
 @mixin transition-opc-trf {
   transition: opacity 0s cubic-bezier(0.215, 0.61, 0.355, 1),
     transform 0s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -122,6 +122,10 @@ figure {
   @return $px / map-get($design-height, $design-height-key) * 100vh;
 }
 
+.model-cn-16,.model-cn-2,.model-cn-3{
+  font-family:  $primaryFont, $font-family-sans-serif !important;
+}
+
 :root {
   font-size: map-get($root-font-size, xs);
 
@@ -176,7 +180,7 @@ html ::selection {
 
 body {
   color: $logoCol;
-  font-family: "Source Han Sans CN Regular", Helvetica;
+  font-family: $primaryFont, Helvetica;
   font-weight: normal;
   font-size: inherit;
   background: url("../images/bg_point.png") 0 0 repeat;
@@ -1279,7 +1283,7 @@ $title-font-size: pxToRem(26px);
   text-align: right;
 
   [lang="en"] & {
-    height: pxToVh(228px, xl);
+    height: pxToVh(180px, xl);
   }
 
   @include media-breakpoint-down(md) {
@@ -1503,14 +1507,17 @@ $title-font-size: pxToRem(26px);
   column-count: 2;
   column-gap: pxToVw(38px, xl);
 }
-
+.column-count-1 {
+  column-count: auto;
+  column-gap: normal;
+}
 .p2-cont-detal {
   margin-top: pxToRem(36px); //pxToRem(48px);
   clear: left;
   width: 100%;
   overflow: hidden;
   color: $logoCol;
-  font-size: 1rem;
+  font-size: pxToRem(20px, xl);
   line-height: 1.2; //pxToRem(30px);
 
 
@@ -1518,9 +1525,15 @@ $title-font-size: pxToRem(26px);
     white-space: nowrap;
   }
 
-  [lang="zh-CN"] p {
+  [lang="zh-CN"] & p {
     text-align: justify;
     text-align-last: left;
+  }
+
+  [lang="en"] & p {
+    margin-bottom: pxToRem(18px, xl);
+    line-height: pxToRem(26px, xl);
+    letter-spacing: -1px;
   }
 
   @include media-breakpoint-down(md) {
@@ -1532,6 +1545,9 @@ $title-font-size: pxToRem(26px);
     [lang="en"] & {
       font-size: pxToRem(12px, sm);
       line-height: (17px / 12px);
+    }
+    [lang="en"] & p {
+      letter-spacing: normal;
     }
   }
 
@@ -1973,7 +1989,12 @@ $title-font-size: pxToRem(26px);
   top: pxToVh(640px, xl);
   right: pxToVw(430px, xl);
   width: pxToVw(462px, xl);
-  height: pxToVh(311px, xl);
+  height: pxToVh(300px, xl);//pxToVh(311px, xl);
+  overflow: hidden;
+  img{
+    width: pxToVw(462px, xl);
+    height: pxToVh(311px, xl);
+  }
 }
 
 .p4-prodect-title {
@@ -3028,9 +3049,11 @@ $p6-contents-height: 458px;
   img {
     position: absolute;
     margin-top: pxToRem(12px);
-    width: pxToRem(50px);
+    width: pxToRem(52px);
   }
-
+  [lang="en"] &{
+    margin-left: pxToRem(-50px, xl);
+  }
   [lang="en"] & p {
     display: block;
   }
@@ -3246,7 +3269,7 @@ footer {
 .footer-qrcode-area {
   position: absolute;
   left: 0;
-  top: pxToRem(12px, xl);
+  top: pxToRem(40px, xl);
 
   @include media-breakpoint-down(md) {
     position: relative;
@@ -3323,7 +3346,7 @@ footer {
 .footer-logo-area {
   position: absolute;
   right: pxToVw(40px, xl);
-  top: pxToRem(24px, xl);
+  top: pxToRem(40px, xl);
   width: pxToVw(145px, xl);
 
   @include media-breakpoint-down(md) {
@@ -3435,6 +3458,9 @@ footer {
       width: 100%;
       margin: pxToRem(20px) 0;
     }
+    @include media-breakpoint-down(sm){
+      margin-bottom: 0;
+    }
   }
 
   footer {
@@ -3467,6 +3493,9 @@ footer {
       margin-top: pxToRem(60px, sm);
       font-size: 1rem;
       line-height: 1.7;
+    }
+    footer{
+      margin-top:pxToRem(80px, sm);
     }
   }
 }

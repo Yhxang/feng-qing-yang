@@ -2413,6 +2413,10 @@ figure {
   display: none !important;
 }
 
+.model-cn-16, .model-cn-2, .model-cn-3 {
+  font-family: "Source Han Sans CN Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
 :root {
   font-size: 14px;
 }
@@ -3526,7 +3530,7 @@ main.swiper-wrapper > .swiper-slide {
 }
 
 [lang="en"] .p2-stripe-2 {
-  height: 28.5vh;
+  height: 22.5vh;
 }
 
 @media (max-width: 991.98px) {
@@ -3778,6 +3782,13 @@ main.swiper-wrapper > .swiper-slide {
        column-gap: 2.71429vw;
 }
 
+.column-count-1 {
+  -moz-column-count: auto;
+       column-count: auto;
+  -moz-column-gap: normal;
+       column-gap: normal;
+}
+
 .p2-cont-detal {
   margin-top: 1.8rem;
   clear: left;
@@ -3792,10 +3803,16 @@ main.swiper-wrapper > .swiper-slide {
   white-space: nowrap;
 }
 
-.p2-cont-detal [lang="zh-CN"] p {
+[lang="zh-CN"] .p2-cont-detal p {
   text-align: justify;
   -moz-text-align-last: left;
        text-align-last: left;
+}
+
+[lang="en"] .p2-cont-detal p {
+  margin-bottom: 0.9rem;
+  line-height: 1.3rem;
+  letter-spacing: -1px;
 }
 
 @media (max-width: 991.98px) {
@@ -3809,6 +3826,9 @@ main.swiper-wrapper > .swiper-slide {
   [lang="en"] .p2-cont-detal {
     font-size: 0.75rem;
     line-height: 1.41667;
+  }
+  [lang="en"] .p2-cont-detal p {
+    letter-spacing: normal;
   }
 }
 
@@ -4254,6 +4274,12 @@ main.swiper-wrapper > .swiper-slide {
   position: absolute;
   top: 80vh;
   right: 30.71429vw;
+  width: 33vw;
+  height: 37.5vh;
+  overflow: hidden;
+}
+
+.p4-stripe-1 img {
   width: 33vw;
   height: 38.875vh;
 }
@@ -5276,7 +5302,11 @@ main.swiper-wrapper > .swiper-slide {
 .p8-title img {
   position: absolute;
   margin-top: 0.6rem;
-  width: 2.5rem;
+  width: 2.6rem;
+}
+
+[lang="en"] .p8-title {
+  margin-left: -2.5rem;
 }
 
 [lang="en"] .p8-title p {
@@ -5484,7 +5514,7 @@ footer.swiper-slide {
 .footer-qrcode-area {
   position: absolute;
   left: 0;
-  top: 0.6rem;
+  top: 2rem;
 }
 
 @media (max-width: 991.98px) {
@@ -5561,7 +5591,7 @@ footer.swiper-slide {
 .footer-logo-area {
   position: absolute;
   right: 2.85714vw;
-  top: 1.2rem;
+  top: 2rem;
   width: 10.35714vw;
 }
 
@@ -5676,6 +5706,12 @@ footer.swiper-slide {
   margin: 1rem 0;
 }
 
+@media (max-width: 749.98px) {
+  .news_page .news-page-body {
+    margin-bottom: 0;
+  }
+}
+
 .news_page footer {
   margin-top: 0;
 }
@@ -5704,6 +5740,9 @@ footer.swiper-slide {
     margin-top: 3.75rem;
     font-size: 1rem;
     line-height: 1.7;
+  }
+  .news_page footer {
+    margin-top: 5rem;
   }
 }
 
@@ -5734,4 +5773,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?68dcf*/
+/*# sourceMappingURL=index.css.map?024a0*/

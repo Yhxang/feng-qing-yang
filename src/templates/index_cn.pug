@@ -22,7 +22,7 @@ html(lang=language)
           image(xlink:href=require("../images/model_img_3.png"),id="model_img_3" width="577" height="391")
           image(xlink:href=require("../images/model_img_4.png"),id="model_img_4" width="636" height="537")
       block svginc
-        include ../images/models_inc.svg
+        include ../images/models_cn_css_inc.svg
         include ../images/slogn_cn_inc.svg 
       //- 如果用xlink:href外链，将会获取不到svg dom
     </div>
@@ -171,7 +171,7 @@ html(lang=language)
                             "它使用宇宙中最丰富的元素 - “氢”替代传统化石能源，通过电解反应将化学能转化为电能。已在全球各地的公共交通、物流运输、市政环卫、工程机械等领域得到了广泛应用，为真正的零碳排贡献着卓越的力量。",
                             "一群人再次因对前沿技术的追逐探索集结在一起，以<strong>“G-POWER”</strong>作为自己出征的徽章，佩戴着自信的利刃，天际慕白的晨光洒在身上，他们紧握剑柄，高唱战歌，用坚韧和灿烂砌成巴别高塔，向深邃的苍穹攀登。"
                           ],
-                          columnsCn: 3
+                          columnsCn: 3 // 中文版分栏数
                         },{
                           title: "/关于我们/", 
                           detail: [
@@ -236,6 +236,16 @@ html(lang=language)
                   data-scroll-direction="horizontal")
               //- .p3-right-side
               //-   p NO CARBON EMISSION
+              block productConts
+                -
+                  var productData = {
+                    tit: "/CHIGMA系列",
+                    paragraph: [
+                      '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
+                      '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并以与诸多国内主机厂商开展战略合作和产品应用落地。',
+                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。期的成本降低。'
+                    ]
+                  }
               .p3-contents.container-fluid
                 .row
                   .p3-cont-left.col-sm-12.col-md-6.col-lg-7.col-xxl-6
@@ -243,7 +253,7 @@ html(lang=language)
                       //- img.p3-prodect-index(src=require("../images/p3_index.svg"))
                       .p3-prodect-index
                         include ../images/p3_index_inc.svg
-                      h3.p3-prodect-tittext /CHIGMA系列
+                      h3.p3-prodect-tittext= productData.tit
                     .p3-product-region
                       .p3-product-msg.swiper-containers
                         .swiper-wrapper
@@ -270,14 +280,7 @@ html(lang=language)
                   .p3-cont-right.stop-swiping.col-sm-11.col-md-6.col-lg-5.col-xxl-6
                     .p3-paragraph
                       .p3-vertical-border
-                      block productParagraph
-                        -
-                          var productData = [
-                            '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
-                            '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并以与诸多国内主机厂商开展战略合作和产品应用落地。',
-                            '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。期的成本降低。'
-                          ]
-                      each data in productData
+                      each data in productData.paragraph
                         p!= data
                       //- p(data-swiper-animation="animate__fadeInUp" 
                       //-   data-duration=".5s"
@@ -597,7 +600,7 @@ html(lang=language)
           span.publish-date
           //-  2020-9-15
           .news-page-body
-        .news-rb-icon
+        //- .news-rb-icon
           img(src=require("../images/p1_lb_icon.svg"))
 
           //- p 9月14-16日，由中国汽车工程学会和国际氢能与燃料电池协会（筹）共同主办的“第五届国际氢能与燃料电池汽车大会”（FCVC 2020）在上海汽车会展中心隆重召开，风氢扬科技携最新大功率燃料电池系统-CHIGMA 120系统参展。CHIGMA 120系统一亮相，便吸引众多参会代表前来围观交流，成为整个展馆炙手可热的展品之一。
