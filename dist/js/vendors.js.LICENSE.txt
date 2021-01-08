@@ -5,12 +5,6 @@ object-assign
 */
 
 /*!
-	    Mock - 模拟请求 & 模拟数据
-	    https://github.com/nuysoft/Mock
-	    墨智 mozhi.gyy@taobao.com nuysoft@gmail.com
-	*/
-
-/*!
  * @pixi/core - v5.3.3
  * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *

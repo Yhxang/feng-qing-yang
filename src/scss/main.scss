@@ -122,7 +122,7 @@ figure {
   @return $px / map-get($design-height, $design-height-key) * 100vh;
 }
 
-.model-cn-16,.model-cn-2,.model-cn-3{
+.model-cn-16,.model-cn-2,.model-cn-3,.model-en-18, .model-en-2, .model-en-56, .model-en-7{
   font-family:  $primaryFont, $font-family-sans-serif !important;
 }
 
@@ -277,7 +277,7 @@ body {
     background-color: rgba(black, .8);
   }
 
-  &.nav-on {
+  .nav-on & {
     transform: none;
   }
 }
@@ -737,6 +737,9 @@ $p2-top: 66px;
   .is-loaded & {
     transform: none;
   }
+  .nav-on &{
+    transform: translateY(-150px);
+  }
 
   @include media-breakpoint-down(md) {
     display: none;
@@ -1064,15 +1067,11 @@ $logo-layout-height-sm: 151px;
   }
 }
 
+/*
+// 暂时隐藏 P1::多媒体
 .media-slide {
   overflow: hidden;
 
-  // @include media-breakpoint-down(md){
-  //   height: pxToRem(212px, md);
-  //   img{
-  //     height: 100%;
-  //   }
-  // }
   .media-content {
     width: 100%;
     height: 100%;
@@ -1084,6 +1083,7 @@ $logo-layout-height-sm: 151px;
     width: 100%;
   }
 }
+*/
 
 .p1-detail {
   position: absolute;
@@ -3114,18 +3114,6 @@ $p6-contents-height: 458px;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-  }
-
-  li {
-    img {
-      // opacity: .47;
-      transition: transform .2s;
-    }
-
-    &:hover img {
-      opacity: 1;
-      transform: scale(1.05);
-    }
   }
 
   @include media-breakpoint-down(md) {

@@ -73,6 +73,7 @@
     url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
     url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
+@charset "UTF-8";
 .container,
 .container-fluid,
 .container-xs,
@@ -2413,7 +2414,7 @@ figure {
   display: none !important;
 }
 
-.model-cn-16, .model-cn-2, .model-cn-3 {
+.model-cn-16, .model-cn-2, .model-cn-3, .model-en-18, .model-en-2, .model-en-56, .model-en-7 {
   font-family: "Source Han Sans CN Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
@@ -2575,7 +2576,7 @@ body {
   }
 }
 
-.c-menubox.nav-on {
+.nav-on .c-menubox {
   -ms-transform: none;
       transform: none;
 }
@@ -3042,6 +3043,11 @@ main.swiper-wrapper > .swiper-slide {
       transform: none;
 }
 
+.nav-on .p0-ltlogo {
+  -ms-transform: translateY(-150px);
+      transform: translateY(-150px);
+}
+
 @media (max-width: 991.98px) {
   .p0-ltlogo {
     display: none;
@@ -3337,21 +3343,23 @@ main.swiper-wrapper > .swiper-slide {
   }
 }
 
+/*
+// 暂时隐藏 P1::多媒体
 .media-slide {
   overflow: hidden;
-}
 
-.media-slide .media-content {
-  width: 100%;
-  height: 100%;
-  background: url(../images/p1_proxy.png?10b52) center center no-repeat;
-  background-size: cover;
-}
+  .media-content {
+    width: 100%;
+    height: 100%;
+    background: url(../images/p1_proxy.png) center center no-repeat;
+    background-size: cover;
+  }
 
-.media-slide img {
-  width: 100%;
+  img {
+    width: 100%;
+  }
 }
-
+*/
 .p1-detail {
   position: absolute;
   left: 50%;
@@ -5369,16 +5377,6 @@ main.swiper-wrapper > .swiper-slide {
       align-items: center;
 }
 
-.p8-contents li img {
-  transition: transform .2s;
-}
-
-.p8-contents li:hover img {
-  opacity: 1;
-  -ms-transform: scale(1.05);
-      transform: scale(1.05);
-}
-
 @media (max-width: 991.98px) {
   .p8-contents {
     -ms-flex-direction: column;
@@ -5773,4 +5771,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?024a0*/
+/*# sourceMappingURL=index.css.map?e8f70*/

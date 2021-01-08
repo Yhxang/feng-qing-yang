@@ -36,12 +36,14 @@ import SwiperAnimation from "@cycjimmy/swiper-animation";
 import "../scss/main.scss"; // sideEffects
 
 import axios from "axios";
+import Qs from "qs"
 
+import {param } from "./utils"
 import urls from "../mock/urls";
-import "../mock/mock.js"; // sideEffects
+//import "../mock/mock.js"; // sideEffects
 
 const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
-
+const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.com.cn" : "";
 (function () {
   const $$ = $sel => document.querySelector($sel);
   const docEl = $$('html');
@@ -112,12 +114,8 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
     console.log('loaded')
 
     // svg 动画
-    let svgTarget;
-    if (lang == "en") {
-      svgTarget = '#slogn .slogn-1'
-    } else if (lang === "zh-CN") {
-      svgTarget = '#slogn-cn .slogncn-1'
-    }
+    let svgTarget = '#slogan .slogan-1'
+
     anime({
       targets: svgTarget,
       strokeDashoffset: [anime.setDashoffset, 0],
@@ -282,7 +280,7 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
       slideChangeTransitionEnd: function () {
         this.slides[this.realIndex].classList.add("first-active");
         if (this.realIndex !== 0) {
-          document.querySelector(".c-menubox").classList.add("nav-on");
+          docEl.classList.add("nav-on");
           return;
           if (this.realIndex == 1) {
             this.allowSlidePrev = false;
@@ -626,11 +624,11 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 
     var page = ctx.params.page;//~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
-    axios[urls.newsArticleData.type](urls.newsArticleData.url, {
+    axios[urls.newsArticleData.type](urls.newsArticleData.url +"?"+ param({
       lang,
       act: "news",
       newsId: page
-    })
+    }))
       .then(function (response) {
         let newsData = response && response.data;
         $$(".news-page-title").innerHTML = newsData.pageTitle;
@@ -649,10 +647,25 @@ const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
   page();
   page.start();
 
-  axios[urls.newsListData.type](urls.newsListData.url, {
+  // var axiosAjax = axios.create({
+  //   baseURL:'/dist/',
+  //   transformRequest: [function (data) { // <--- here 转换数据
+  //     data = Qs.stringify(data); // 通过Qs.stringify转换为表单查询参数
+  //     return data;
+  //   }],
+  //   headers:{
+  //     'Content-Type':'application/x-www-form-urlencoded'
+  //   }
+  // })
+console.log(param({
+  lang,
+  act: "newslist"
+}))
+console.log(1111)
+  axios[urls.newsListData.type](urls.newsListData.url+"?"+param({
     lang,
     act: "newslist"
-  })
+  }))
     .then(function (response) {
       let newsListData = response && response.data;
       let newsTemplate = document.getElementById("newsTemplate").innerHTML;

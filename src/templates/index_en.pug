@@ -12,6 +12,18 @@ block svginc
 block vars
  - var menus={home: "HOME", "G-POWER":"G-POWER", "products-service":"PRODUCT&SERVICE",  applications:"APPLICATIONS", media:"MEDIA"};
 
+//- slogan SVG
+block sloganConts
+  -
+    var slogan = {
+      lang: "en",
+      region: [
+        [0, 0, 100, 11.29],
+        [122.18, 0, 183, 11.29],
+        [325, 0, 166, 11.29]
+      ]
+    }
+
 //- 风氢扬科技 slide
 block techSlides
   -
@@ -92,11 +104,11 @@ block appConts
       {
         id: 2,
         category: "Logistics", 
-        name: "Light/Middle/<br/>Heavy logistics truck/"
+        name: "Light/Middle/<br/>Heavy logistics truck"
       }, {
         id: 1,
         category:"Public transportation", 
-        name: "Bus/Commuting Bus/"
+        name: "Bus/Commuting Bus"
       }, {
         id: 3,
         category: "Municipal environmental<br/>and sanitation", 
@@ -105,7 +117,7 @@ block appConts
         id: 4,
         spec: "triplex",
         category: "Construction machinery", 
-        name: "Loader/Forklift Truck/<br/>Port Machinery/<br/>Intelligent Transportation/"
+        name: "Loader/Forklift Truck/<br/>Port Machinery/<br/>Intelligent Transportation"
       }
     ]
 

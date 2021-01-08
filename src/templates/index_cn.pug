@@ -84,24 +84,21 @@ html(lang=language)
                   .p0-mainlogo
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image#p0-mainlogo-image(data-scroll data-scroll-speed=3 data-scroll-position="top")
-                  .p0-logotext.en
+                  block sloganConts
+                    -
+                      var slogan = {
+                        lang: "cn",
+                        region: [
+                          [0, 0, 50, 14.27], 
+                          [75, 0, 50, 14.27], 
+                          [148, 0, 50, 14.27]
+                        ]
+                      }
+                  .p0-logotext(class=slogan.lang)
                     ul
-                      -var slognEn=[[0,0,109,11.32],[126.04,0,186,11.32],[327.15,0,188,11.32]]
-                      each region,index in slognEn
+                      each region,index in slogan.region
                         li
-                          +svguse("#slogn-en-p"+(index+1),region)
-                  .p0-logotext.cn
-                    ul
-                      -var slognEn=[[0,0,50,14.27],[75,0,50,14.27],[148,0,50,14.27]]
-                      each region,index in slognEn
-                        li
-                          +svguse("#slogn-cn-p"+(index+1),region)
-                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 109 11.32")
-                    //-   use(xlink:href="#slogn-en-p1")
-                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="126.04 0 "+(126.04 + 186)+" 11.32")
-                    //-   use(xlink:href="#slogn-en-p2")
-                    //- svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 188 11.32")
-                    //-   use(xlink:href="#slogn-en-p3")
+                          +svguse("#slogan-p"+(index+1), region)
 
 
           //- page1:: 多媒体页 - 暂时隐藏
@@ -243,7 +240,7 @@ html(lang=language)
                     paragraph: [
                       '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
                       '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并以与诸多国内主机厂商开展战略合作和产品应用落地。',
-                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。期的成本降低。'
+                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。'
                     ]
                   }
               .p3-contents.container-fluid
