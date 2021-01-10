@@ -40,7 +40,7 @@ import Qs from "qs"
 
 import {param } from "./utils"
 import urls from "../mock/urls";
-//import "../mock/mock.js"; // sideEffects
+// import "../mock/mock.js"; // sideEffects
 
 const base = process.env.NODE_ENV == "development" ? "/dist/" : "/";
 const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.com.cn" : "";
@@ -94,9 +94,9 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
       // Or do it your own way 😎
   });
     */
-  let logogifimg = require("../images/logo_anim.gif");
-  let logogif = new Image();
-  logogif.src = logogifimg;
+  //let logogifimg = require("../images/logo_anim.gif");
+  //let logogif = new Image();
+  //logogif.src = logogifimg;
 
   function timeout(ms) {
     return new Promise((resolve, reject) => {
@@ -105,11 +105,18 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   }
 
   new Promise((resolve, reject) => {
-
-    logogif.addEventListener("load", resolve);
-    logogif.addEventListener("error", reject);
+    let logogif = $$("#logo-gif-img");
+    window.logogif = logogif;
+    if(logogif.complete){
+      resolve();
+    }else{
+      logogif.addEventListener("load", resolve);
+      logogif.addEventListener("error", reject);
+    }
 
   }).then(value => {
+    logogif.src = logogif.src;
+
     docEl.classList.add("is-loaded");
     console.log('loaded')
 
@@ -260,12 +267,12 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
           }
         }
 
-        let columnIndex = activeIndex; // 栏目index
-
-        if (activeIndex > 2 && activeIndex <= 4) {
+        let _columnIndex = activeIndex - 1; // 栏目index 首页不算正式页面所以减一
+        let columnIndex = _columnIndex;
+        if (_columnIndex > 2 && _columnIndex <= 4) {
           columnIndex = 2;
-        } else if (activeIndex > 4) {
-          columnIndex = activeIndex - 2;
+        } else if (_columnIndex > 4) {
+          columnIndex = _columnIndex - 2;
         }
 
         //console.log({activeIndex, columnIndex, pages, page:pages[columnIndex]})
@@ -281,7 +288,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
         this.slides[this.realIndex].classList.add("first-active");
         if (this.realIndex !== 0) {
           docEl.classList.add("nav-on");
-          return;
+
           if (this.realIndex == 1) {
             this.allowSlidePrev = false;
           } else {
@@ -378,8 +385,8 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
       }
     }
   }
-  // 暂时隐藏该栏目
-  // var mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
+
+  var mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
 
   let techOptions = {
     speed: 1200,
@@ -596,18 +603,18 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   document.querySelectorAll(".menu-ul li a").forEach(a => {
     pages.push(a.getAttribute("href").slice(2).replace('&', "").trim());
   });
-  console.log(pages)
+  console.log(pages);
   pages.forEach((pageIndex, idx) => {
-    let slideIdxTarget = idx > 2 ? idx + 2 : idx; // 隐藏多媒体
+    let slideIdxTarget = idx >= 3 ? idx + 3 : idx + 1; // 隐藏多媒体
     console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
     page(new RegExp("(en\\/)?" + pageIndex +"\\/?$"), function (ctx) {
-      console.log('p',ctx)
+      console.log('page context：', ctx);
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
       mainSwiper.slideTo(slideIdxTarget); // 隐藏多媒体
-      var a =document.createElement("a")
-      a.setAttribute("href", "./" + pageIndex)
-      a.dispatchEvent(new Event('click'))
+      var a = document.createElement("a");
+      a.setAttribute("href", "./" + pageIndex);
+      a.dispatchEvent(new Event('click'));
       $$("html").classList.remove("open-news");
     })
   })
@@ -620,7 +627,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   //http://127.0.0.1:3000/dist/media/article/01
   function showNews(ctx) {
     $$("html").classList.add("open-news")
-    console.log('n', ctx)
+    console.log('page context:showNews:: ', ctx);
 
     var page = ctx.params.page;//~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)

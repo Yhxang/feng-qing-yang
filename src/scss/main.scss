@@ -1067,15 +1067,17 @@ $logo-layout-height-sm: 151px;
   }
 }
 
-/*
-// 暂时隐藏 P1::多媒体
+
+// P1::多媒体
 .media-slide {
   overflow: hidden;
 
   .media-content {
     width: 100%;
     height: 100%;
-    background: url(../images/p1_proxy.png) center center no-repeat;
+    //background: url(../images/p1_proxy.png) center center no-repeat;
+    background-position: left bottom;
+    background-repeat: no-repeat;
     background-size: cover;
   }
 
@@ -1083,7 +1085,7 @@ $logo-layout-height-sm: 151px;
     width: 100%;
   }
 }
-*/
+
 
 .p1-detail {
   position: absolute;

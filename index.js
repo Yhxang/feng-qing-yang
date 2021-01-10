@@ -176,5 +176,5 @@ app.listen(ports, function () {
     console.log('\x1B[36m%s\x1B[0m', `Express app listening on port ${ports}!
 Local http://127.0.0.1:${ports}/${basePath}
 Com   http://192.168.123.1:${ports}/${basePath}
-Home  http://172.40.11.193:${ports}/${basePath}`);
+Home  http://192.168.2.143:${ports}/${basePath}`);
 })

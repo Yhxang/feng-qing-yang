@@ -42,7 +42,6 @@ html(lang=language)
               span.menu-burger-line
               span.menu-burger-line
               span.menu-burger-line
-              //img(src=require("../images/p_logo.svg"))
           
           nav.menu-nav
             ul.menu-ul
@@ -84,6 +83,7 @@ html(lang=language)
                   .p0-mainlogo
                     .p0-mainlogo-wrapper
                       .p0-mainlogo-image#p0-mainlogo-image(data-scroll data-scroll-speed=3 data-scroll-position="top")
+                        img#logo-gif-img(src=require("../images/logo_anim.gif"))
                   block sloganConts
                     -
                       var slogan = {
@@ -101,8 +101,8 @@ html(lang=language)
                           +svguse("#slogan-p"+(index+1), region)
 
 
-          //- page1:: 多媒体页 - 暂时隐藏
-          //- #section1.swiper-slide(data-history="home" data-hash="home")
+          //- page1:: 多媒体页
+          #section1.swiper-slide(data-history="home" data-hash="home")
             section.c-section
               .bg-holder.p0-stripe-1.stripe-bg
                 img.p0-stripe-img.scaleable(src=require("../images/p0_blueline_bg.png"))
@@ -110,17 +110,17 @@ html(lang=language)
                 .p1-contents-height
                   #p1-contents.p1-contents.swiper-container
                     .swiper-wrapper
-                      -for(var x = 1; x <= 3; x++)
+                      - var multimediaNums = 1;
+                      -for(var x = 1; x <= multimediaNums; x++)
                         .swiper-slide.media-slide
-                          .media-content
-                          //-img(src=require("../images/p1_proxy.png"))
-                          a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
+                          .media-content(style={"background-image": "url("+require("../images/p1_multi_" + (language=="zh-CN"?"cn":language) + "_" + x + ".jpg")+")"})
+                          //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
                             span="P"+x+" DETAIL"
                       
                     .swiper-button-prev
                     .swiper-button-next
                   img.p1-slide-tip(src=require("../images/p1_slide_tip.png"))
-              .p1-ltlogo
+              //- .p1-ltlogo
                 img(src=require("../images/p1_lt_logo.svg"))
               .p1-lb-icon
                 img(src=require("../images/p1_lb_icon.svg"))

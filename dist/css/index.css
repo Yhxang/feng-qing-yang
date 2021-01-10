@@ -73,7 +73,6 @@
     url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
     url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
-@charset "UTF-8";
 .container,
 .container-fluid,
 .container-xs,
@@ -3343,23 +3342,22 @@ main.swiper-wrapper > .swiper-slide {
   }
 }
 
-/*
-// 暂时隐藏 P1::多媒体
 .media-slide {
   overflow: hidden;
-
-  .media-content {
-    width: 100%;
-    height: 100%;
-    background: url(../images/p1_proxy.png) center center no-repeat;
-    background-size: cover;
-  }
-
-  img {
-    width: 100%;
-  }
 }
-*/
+
+.media-slide .media-content {
+  width: 100%;
+  height: 100%;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.media-slide img {
+  width: 100%;
+}
+
 .p1-detail {
   position: absolute;
   left: 50%;
@@ -5771,4 +5769,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?e8f70*/
+/*# sourceMappingURL=index.css.map?5d6c0*/
