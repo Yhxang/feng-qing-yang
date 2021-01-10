@@ -1120,8 +1120,10 @@ $logo-layout-height-sm: 151px;
   left: pxToVw(88px, xl);
   top: pxToVh(48px, xl);
   width: pxToRem(200px);
+  display: none;
 
   @include media-breakpoint-down(md) {
+    display: block;
     top: pxToVh(58px, xl);
   }
 

@@ -3388,10 +3388,12 @@ main.swiper-wrapper > .swiper-slide {
   left: 6.28571vw;
   top: 6vh;
   width: 10rem;
+  display: none;
 }
 
 @media (max-width: 991.98px) {
   .p1-ltlogo {
+    display: block;
     top: 7.25vh;
   }
 }
@@ -5769,4 +5771,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?5d6c0*/
+/*# sourceMappingURL=index.css.map?7ca49*/

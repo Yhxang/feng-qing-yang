@@ -38,7 +38,9 @@ import "../scss/main.scss"; // sideEffects
 import axios from "axios";
 import Qs from "qs"
 
-import {param } from "./utils"
+import {
+  param
+} from "./utils"
 import urls from "../mock/urls";
 // import "../mock/mock.js"; // sideEffects
 
@@ -107,9 +109,9 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   new Promise((resolve, reject) => {
     let logogif = $$("#logo-gif-img");
     window.logogif = logogif;
-    if(logogif.complete){
+    if (logogif.complete) {
       resolve();
-    }else{
+    } else {
       logogif.addEventListener("load", resolve);
       logogif.addEventListener("error", reject);
     }
@@ -151,7 +153,8 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   })
 
   // 应用案例栏目的圆圈动画
-  void function solarsysSVG() {
+  void
+  function solarsysSVG() {
     //var path = anime.path('.solar-10');
     let svgObj = {
       deg1: 0,
@@ -255,7 +258,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
         console.log('swiper resize!')
       },
       slideChange: function (swiper) {
-        swiperAnimation.init(this).animate();        
+        swiperAnimation.init(this).animate();
       },
       slideChangeTransitionStart: function (swiper) {
         let activeIndex = swiper.activeIndex; // main swiper index
@@ -289,6 +292,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
         if (this.realIndex !== 0) {
           docEl.classList.add("nav-on");
 
+          return;
           if (this.realIndex == 1) {
             this.allowSlidePrev = false;
           } else {
@@ -607,7 +611,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   pages.forEach((pageIndex, idx) => {
     let slideIdxTarget = idx >= 3 ? idx + 3 : idx + 1; // 隐藏多媒体
     console.log('each:', pageIndex, idx, "slideTo:", slideIdxTarget);
-    page(new RegExp("(en\\/)?" + pageIndex +"\\/?$"), function (ctx) {
+    page(new RegExp("(en\\/)?" + pageIndex + "\\/?$"), function (ctx) {
       console.log('page context：', ctx);
       console.log(pageIndex, idx);
       //mainSwiper.slideTo(idx >= 3 ? idx + 3 : idx + 1); // 隐藏多媒体
@@ -618,7 +622,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
       $$("html").classList.remove("open-news");
     })
   })
-  
+
   // page(new RegExp("(en\\/)?" + 'media\\/article\\/\\'+ ":page"), showNews); ????正则获取page失败
   page('media/article/:page', showNews);
   page('en/media/article/:page', showNews);
@@ -629,13 +633,13 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
     $$("html").classList.add("open-news")
     console.log('page context:showNews:: ', ctx);
 
-    var page = ctx.params.page;//~~ctx.params.page;
+    var page = ctx.params.page; //~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
-    axios[urls.newsArticleData.type](urls.newsArticleData.url +"?"+ param({
-      lang,
-      act: "news",
-      newsId: page
-    }))
+    axios[urls.newsArticleData.type](urls.newsArticleData.url + "?" + param({
+        lang,
+        act: "news",
+        newsId: page
+      }))
       .then(function (response) {
         let newsData = response && response.data;
         $$(".news-page-title").innerHTML = newsData.pageTitle;
@@ -664,15 +668,11 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   //     'Content-Type':'application/x-www-form-urlencoded'
   //   }
   // })
-console.log(param({
-  lang,
-  act: "newslist"
-}))
-console.log(1111)
-  axios[urls.newsListData.type](urls.newsListData.url+"?"+param({
-    lang,
-    act: "newslist"
-  }))
+
+  axios[urls.newsListData.type](urls.newsListData.url + "?" + param({
+      lang,
+      act: "newslist"
+    }))
     .then(function (response) {
       let newsListData = response && response.data;
       let newsTemplate = document.getElementById("newsTemplate").innerHTML;
@@ -691,7 +691,7 @@ console.log(1111)
 
       let newsDesc = document.getElementsByClassName("news-desc");
       for (let i = 0; i < newsDesc.length; i++) {
-        formatStr(newsDesc[i])
+        formatStr(newsDesc[i]);
       }
       let newsLink = document.querySelectorAll(".p7-news-link")
       for (let i = 0; i < newsLink.length; i++) {
