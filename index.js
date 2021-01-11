@@ -7,6 +7,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const Qs = require('qs');
 var request = require('request');
 var cors = require('cors');
+// const {param} = require("./src/js/utils")
 
 let { mode } = require('minimist')(process.argv.slice(2));
 if (!mode) {
@@ -73,11 +74,12 @@ base.get("/", function (req, res) {
 
 pages.forEach(page=> {
     base.get(`/${page}`, function (req, res) {
+        console.log(`router: ${page}`)
         res.sendFile(path.resolve(__dirname, dist, "cn" , 'index.html'));
     })
 })
 base.get("/media/article/:page", function (req, res) {
-    res.sendFile(path.resolve(__dirname, dist, "en" , 'index.html'));
+    res.sendFile(path.resolve(__dirname, dist, "cn" , 'index.html'));
 })
 
 // http://127.0.0.1:3000/dist/media/article/01
@@ -125,7 +127,8 @@ function setResHeader(res) {
     res.setHeader('Access-Control-Allow-Headers', 'Authorization,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,RequestID,X-Content-Type-Options,X-Content-Type-Options,X-Frame-Options,X-Powered-By,X-Version,x-xss-protection,Strict-Transport-Security') // If needed
     res.setHeader('Access-Control-Allow-Credentials', true); // If neede
 }
-base.get("/api.php",jsonParser,function(req ,res){
+
+base.get("/api.php",function(req ,res){
     //console.dir(req.body)
     //服务器获取数据，将不会产生跨域问题
     // axios.post("http://g-powertech.com.cn/api.php", {lang: "zh-CN", act: "newslist"})//req.body)
@@ -134,21 +137,26 @@ base.get("/api.php",jsonParser,function(req ,res){
     //     console.dir(response)
     //     res.json(response.data);
     // })
+    //console.log(req.query)
     setResHeader(res)
     var redirectURL = gUrl + req.path;
     delete req.headers.host;
     request.get({ 
         url: redirectURL, 
         //headers: req.headers, 
-        body: JSON.stringify(req.body) 
+        //body: JSON.stringify(req.body) 
+        qs: req.query
     }, function (error, response, body) {
-        console.log(req.headers, JSON.stringify(req.body) )
-        console.dir(response)
+        //console.log(req.headers, JSON.stringify(req.body) )
+        //console.dir(response)
         if (response) {
           if (response.statusCode !== 200 && response.statusCode !== 201) {
             res.status(response.statusCode).send(response.body ? response.body : '');
           } else {
-            res.send(response.body);
+              let resMsg = response.body;
+              console.log(req.query)
+              resMsg = resMsg.replace(new RegExp("(?=\\\\\/uploadfile)","g"), `http:\\/\\/${req.query.lang=="en"?"en.":""}g-powertech.com.cn`)
+            res.send(resMsg);
           }
         }
         else {
@@ -168,7 +176,9 @@ base.get("/api.php",jsonParser,function(req ,res){
 
 //base.use('api.php', apiProxy);
 // base.use('/api.php', apiProxy);
-
+// app.use("*", function(req, res){
+//     console.log(req)
+// })
 
 
 const ports = 3000;
@@ -176,5 +186,5 @@ app.listen(ports, function () {
     console.log('\x1B[36m%s\x1B[0m', `Express app listening on port ${ports}!
 Local http://127.0.0.1:${ports}/${basePath}
 Com   http://192.168.123.1:${ports}/${basePath}
-Home  http://192.168.2.143:${ports}/${basePath}`);
+Home  http://172.40.11.193:${ports}/${basePath}`);
 })

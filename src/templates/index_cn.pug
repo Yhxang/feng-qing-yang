@@ -1,14 +1,15 @@
 doctype html
-block language
-  - var language = "zh-CN";
-html(lang=language)
-  
+- var language = htmlWebpackPlugin.options.lang;
+html(lang= language=="cn" ? "zh-CN" : language)
+  - var PRODUCTION = htmlWebpackPlugin.options.PRODUCTION;
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
     //- , viewport-fit=cover
     title G-POWER
     meta(name="description", content=language)
+    //- base(href=(PRODUCTION==true?"/":"./dist/"))
+    //- base(href="/")
   body
     
     mixin svguse(svgid, vb)
@@ -150,11 +151,12 @@ html(lang=language)
               .p2-title.column-title
                 p 风氢扬科技
                 img.p2-lbbg-img.column-title-img(src=require("../images/p2_lbbg_img.svg"))
-              .p2-contents.swiper-containers(data-swiper-animation="animate__fadeIn" 
-                data-duration=".5s"
-                data-delay=".2s" 
-                data-swiper-out-animation="animate__fadeOut"
-                data-out-duration=".2s"
+              .p2-contents.swiper-containers(
+                \\data-swiper-animation="animate__fadeIn" 
+                \\data-duration=".5s"
+                \\data-delay=".2s" 
+                \\data-swiper-out-animation="animate__fadeOut"
+                \\data-out-duration=".2s"
                 )
                 .swiper-wrapper
                   block techSlides
@@ -173,7 +175,7 @@ html(lang=language)
                           title: "/关于我们/", 
                           detail: [
                             "<strong>G-POWER</strong>风氢扬科技成立于2019年，核心研发团队来自国内外知名燃料电池及整车开发企业。公司位于上海新能源汽车及关键零部件产业基地的研发中心在2020年投入运营，已形成完备的从核心零部件到燃料电池系统及功能样车的全套开发、测试与试制能力，并与国内诸多一线整车企业合作开发燃料电池汽车车型，为发展迅速且多样化的燃料电池应用场景提供先进的燃料电池技术和完整的动力系统总成解决方案。",
-                            "<strong>G-POWER</strong>风氢扬科技研发团队具有丰富专业的燃料电池及整车开发经验，在持续自主研发的同时，与多所国内外知名高校积极合作，共同开展关键技术的联合研究开发工作。截止2020年8月，专利申报已达187项，2020年专利整体规划将突破200项，全面覆盖核心零部件研发、系统集成设计、控制策略开发等核心技术，并获得ISO9001质量管理体系认证。"
+                            "<strong>G-POWER</strong>风氢扬科技研发团队具有丰富专业的燃料电池及整车开发经验，在持续自主研发的同时，与多所国内外知名高校积极合作，共同开展关键技术的联合研究开发工作。截止2020年底，专利申报已突破200项，2020年专利整体规划将突破200项，全面覆盖核心零部件研发、系统集成设计、控制策略开发等核心技术，并获得ISO9001质量管理体系认证。"
                           ],
                           columnsCn: 2
                         }]
@@ -239,13 +241,14 @@ html(lang=language)
                     tit: "/CHIGMA系列",
                     paragraph: [
                       '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
-                      '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并以与诸多国内主机厂商开展战略合作和产品应用落地。',
-                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。'
+                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。',
+                      '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并已与诸多国内主机厂商开展战略合作和产品应用落地。',
+                      '此外，体积小巧的<strong>CHIGMA 10</strong>燃料电池系统专为叉车、智能搬运等批量化轻载作业设备量身打造，使<strong>CHIGMA</strong>系列成为可为用户提供完善的全功率覆盖动力解决方案的产品系列。'
                     ]
                   }
               .p3-contents.container-fluid
                 .row
-                  .p3-cont-left.col-sm-12.col-md-6.col-lg-7.col-xxl-6
+                  .p3-cont-left.col-sm-12.col-md-6
                     .p3-prodect-title.clearfix
                       //- img.p3-prodect-index(src=require("../images/p3_index.svg"))
                       .p3-prodect-index
@@ -274,7 +277,7 @@ html(lang=language)
                         .swiper-pagination
                       .p3-prev
                       .p3-next
-                  .p3-cont-right.stop-swiping.col-sm-11.col-md-6.col-lg-5.col-xxl-6
+                  .p3-cont-right.stop-swiping.col-sm-11.col-md-6
                     .p3-paragraph
                       .p3-vertical-border
                       each data in productData.paragraph

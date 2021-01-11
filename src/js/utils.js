@@ -17,4 +17,4 @@ function param(json) {
     })).join('&')
 }
 
-export {param,cleanArray}
+export  {param, cleanArray};

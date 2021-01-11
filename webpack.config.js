@@ -123,6 +123,7 @@ const config = {
             loader: 'pug-loader',
             options: {
               //pretty: true // 可能出错，后期删除此配置
+              envir: "Destination"        
             }
           }
         ]
@@ -183,22 +184,25 @@ const config = {
     // })
   ]
 }
-const langs = ['cn','en']
-const pages = Object.keys(config.entry);
-langs.forEach(lang => {
-  config.plugins = config.plugins.concat(pages.map(page => {
-    return new HtmlWebpackPlugin({
-      filename: page === "index" ? `${lang}/${page}.html` : `${lang}/${page}/index.html`,
-      template: path.resolve(__dirname, `./src/templates/${page}_${lang}.pug`),
-      chunks: [page]
-    })
-  }))
-})
-
 
 module.exports = (env, argv) => {
   //console.log(env, argv)
   config.mode = argv.mode;
+
+  const langs = ['cn','en'];
+  const pages = Object.keys(config.entry);
+  langs.forEach(lang => {
+    config.plugins = config.plugins.concat(pages.map(page => {
+
+      return new HtmlWebpackPlugin({
+        filename: page === "index" ? `${lang}/${page}.html` : `${lang}/${page}/index.html`,
+        template: path.resolve(__dirname, `./src/templates/${page}_${lang}.pug`),
+        chunks: [page],
+        lang: lang,
+        PRODUCTION: config.mode === "production"
+      })
+    }))
+  })
 
   if(argv.mode === "development"){
     //config.devtool = false; //????

@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve",
-    "build": "webpack --mode=production && node index.js --mode=production",
+    "build": "webpack --mode=production && node --inspect index.js --mode=production",
     "dev": "webpack --mode=development && node index.js --mode=development",
-    "watch": "webpack --mode=development --watch && node index.js --mode=development",
+    "watch": "webpack --mode=development --watch && node --inspect index.js --mode=development",
     "build:i18n": "webpack --config webpack.i18n.js"
   },
   "author": "",

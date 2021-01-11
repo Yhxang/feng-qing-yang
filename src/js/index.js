@@ -36,7 +36,7 @@ import SwiperAnimation from "@cycjimmy/swiper-animation";
 import "../scss/main.scss"; // sideEffects
 
 import axios from "axios";
-import Qs from "qs"
+// import Qs from "qs"
 
 import {
   param
@@ -227,6 +227,10 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
     speed: 900,
     mousewheel: true,
     parallax: true,
+    resistanceRatio: 0, //第一个和最后一个slide 禁止拖动
+    observer: true,
+    // observeParents: true,
+    observeSlideChildren: true,
     scrollbar: {
       el: '.main-scrollbar',
       draggable: true,
@@ -345,7 +349,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
 
   const mediaSwiperOption = {
     speed: 1100,
-    loop: true,
+    //loop: true,
     parallax: true,
     nested: true, // 阻止父级切换
     resistanceRatio: 0,
@@ -393,7 +397,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   var mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
 
   let techOptions = {
-    speed: 1200,
+    speed: 800,
     //loop: true,
     autoHeight: true,
     spaceBetween: 80,
@@ -419,6 +423,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
     breakpoints: {
       768.001: {
         //shortSwipes: false,
+        speed: 1200,
         spaceBetween: 800,
         noSwipingClass: "stop-swiping",
       },
@@ -635,7 +640,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
 
     var page = ctx.params.page; //~~ctx.params.page;
     //console.log(urls.newsArticleData.type, urls.newsArticleData.url + page)
-    axios[urls.newsArticleData.type](urls.newsArticleData.url + "?" + param({
+    axios[urls.newsArticleData.type](base.replace(/\/$/, '') + urls.newsArticleData.url + "?" + param({
         lang,
         act: "news",
         newsId: page
@@ -669,7 +674,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
   //   }
   // })
 
-  axios[urls.newsListData.type](urls.newsListData.url + "?" + param({
+  axios[urls.newsListData.type](base.replace(/\/$/, '') +  urls.newsListData.url + "?" + param({
       lang,
       act: "newslist"
     }))
@@ -722,6 +727,7 @@ const publicPath = process.env.NODE_ENV == "development" ? "http://g-powertech.c
     initialSlide: 2,
     loop: true,
     loopAdditionalSlides: 1,
+    slideToClickedSlide: true,
     grabCursor: true,
     navigation: {
       nextEl: '.p7-prev',
