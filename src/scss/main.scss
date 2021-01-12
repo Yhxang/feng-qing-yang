@@ -542,7 +542,7 @@ body {
 .o-scroll {
   width: 100vw;
   height: 100vh;
-  transform: translate3d(0, 20vh, 0);
+  // transform: translate3d(0, 20vh, 0);
   @include transition-trf;
   transition-duration: 0.8s;
   transition-delay: -0.1s;
@@ -2928,6 +2928,7 @@ $p6-contents-height: 458px;
 
   @include media-breakpoint-down(sm) {
     width: pxToVw(426px, md);
+    height:  calc(#{pxToVw(426px, md) * .6625} + #{pxToRem(188px, sm)});//pxToVw(426px, md);
     overflow: visible;
   }
 }
@@ -3401,6 +3402,7 @@ footer {
     text-align: center;
     color: #808080;
     font-size: 8px;
+    white-space: nowrap;
   }
 
   span {

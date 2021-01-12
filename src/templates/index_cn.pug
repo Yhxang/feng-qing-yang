@@ -65,9 +65,8 @@ html(lang= language=="cn" ? "zh-CN" : language)
           .blueline-mobile-img
         main.swiper-wrapper
           
-
           //- page0:: logo页
-          #section0.swiper-slide(data-history="home" data-hash="start")
+          #section0.swiper-slide(data-history="" data-hash="start")
             section(class="c-section")
               .o-container
                 .p0-linebg
@@ -175,7 +174,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                           title: "/关于我们/", 
                           detail: [
                             "<strong>G-POWER</strong>风氢扬科技成立于2019年，核心研发团队来自国内外知名燃料电池及整车开发企业。公司位于上海新能源汽车及关键零部件产业基地的研发中心在2020年投入运营，已形成完备的从核心零部件到燃料电池系统及功能样车的全套开发、测试与试制能力，并与国内诸多一线整车企业合作开发燃料电池汽车车型，为发展迅速且多样化的燃料电池应用场景提供先进的燃料电池技术和完整的动力系统总成解决方案。",
-                            "<strong>G-POWER</strong>风氢扬科技研发团队具有丰富专业的燃料电池及整车开发经验，在持续自主研发的同时，与多所国内外知名高校积极合作，共同开展关键技术的联合研究开发工作。截止2020年底，专利申报已突破200项，2020年专利整体规划将突破200项，全面覆盖核心零部件研发、系统集成设计、控制策略开发等核心技术，并获得ISO9001质量管理体系认证。"
+                            "<strong>G-POWER</strong>风氢扬科技研发团队具有丰富专业的燃料电池及整车开发经验，在持续自主研发的同时，与多所国内外知名高校积极合作，共同开展关键技术的联合研究开发工作。截止2020年底，专利申报已突破200项，全面覆盖核心零部件研发、系统集成设计、控制策略开发等核心技术，并获得ISO9001质量管理体系认证。"
                           ],
                           columnsCn: 2
                         }]
@@ -188,28 +187,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
                         each paragraph in data.detail
                           p!= paragraph
 
-
-                  //- .swiper-slide.tech-slide
-                    h2.p2-cont-tit(data-swiper-parallax-opacity="0")
-                      p(data-swiper-parallax-x="100" )
-                        span /你好世界/
-                      //- p(data-swiper-parallax-x="300")
-                      //-   span /Hello world/
-                    .p2-cont-detal.column-count-3.stop-swiping
-                      p 燃料电池系统的原型可追溯至1839年，英国科学家威廉·格罗夫进行了人类历史上第一次燃料电池实验。<br>
-                      p 如今，这个“盒子”已成为全球各国能源战略的重要载体，正在改变并改善着人类赖以生存的生活环境和动力驱动方式。
-                      p  它使用宇宙中最丰富的元素 - “氢”替代传统化石能源，通过电解反应将化学能转化为电能。已在全球各地的公共交通、物流运输、市政环卫、工程机械等领域得到了广泛应用，为真正的零碳排贡献着卓越的力量。
-                      p  一群人再次因对前沿技术的追逐探索集结在一起，以#[strong “G-POWER”]作为自己出征的徽章，佩戴着自信的利刃，天际慕白的晨光洒在身上，他们紧握剑柄，高唱战歌，用坚韧和灿烂砌成巴别高塔，向深邃的苍穹攀登。
-
-                  //- .swiper-slide.tech-slide
-                    h2.p2-cont-tit(data-swiper-parallax-opacity="0")
-                      p(data-swiper-parallax-x="100" )
-                        span /关于我们/
-                      //- p(data-swiper-parallax-x="300")
-                      //-   span /About us/
-                    .p2-cont-detal.column-count-2.stop-swiping
-                      p #[strong G-POWER]风氢扬科技成立于2019年，核心研发团队来自国内外知名燃料电池及整车开发企业。公司位于上海新能源汽车及关键零部件产业基地的研发中心在2020年投入运营，已形成完备的从核心零部件到燃料电池系统及功能样车的全套开发、测试与试制能力，并与国内诸多一线整车企业合作开发燃料电池汽车车型，为发展迅速且多样化的燃料电池应用场景提供先进的燃料电池技术和完整的动力系统总成解决方案。
-                      p #[strong G-POWER]风氢扬科技研发团队具有丰富专业的燃料电池及整车开发经验，在持续自主研发的同时，与多所国内外知名高校积极合作，共同开展关键技术的联合研究开发工作。截止2020年8月，专利申报已达187项，2020年专利整体规划将突破200项，全面覆盖核心零部件研发、系统集成设计、控制策略开发等核心技术，并获得ISO9001质量管理体系认证。
                 .p2-thumb-scrollbar.swiper-scrollbar
                   .swiper-scrollbar-drag
                     .scroll-tip
@@ -220,6 +197,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                 .swiper-button-next.pretty-navigation
                   .swiper-button-next-bg
               //- img.p2-mobile-tip(src=require("../images/p2_mobile_tip.png"))
+
           //- page3:: 产品与服务
           #section3.swiper-slide(data-history="products-service" data-hash="products")
             section.c-section.md-pad
@@ -282,21 +260,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                       .p3-vertical-border
                       each data in productData.paragraph
                         p!= data
-                      //- p(data-swiper-animation="animate__fadeInUp" 
-                      //-   data-duration=".5s"
-                      //-   data-delay=".2s"
-                      //-   data-swiper-out-animation="animate__fadeOut"
-                      //-   data-out-duration=".3s") #[strong CHIGMA]系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。
-                      //- p(data-swiper-animation="animate__fadeInUp" 
-                      //-   data-duration=".5s"
-                      //-   data-delay=".25s"
-                      //-   data-swiper-out-animation="animate__fadeOut"
-                      //-   data-out-duration=".3s") #[strong CHIGMA 60]及#[strong CHIGMA 80]燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并以与诸多国内主机厂商开展战略合作和产品应用落地。
-                      //- p(data-swiper-animation="animate__fadeInUp" 
-                      //-   data-duration=".5s"
-                      //-   data-delay=".3s"
-                      //-   data-swiper-out-animation="animate__fadeOut"
-                      //-   data-out-duration=".3s") #[strong CHIGMA 120]燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。
+
           //- page4:: 工程服务
           #section4.swiper-slide(data-history="products-service" data-hash="service")
             section.c-section.md-pad
@@ -331,22 +295,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   li
                     h3.p4-box!= data.boxTit
                     p!= data.desc
-
-              //- .p4-prodect-title.clearfix
-              //-   //- img.p4-prodect-index(src=require("../images/p4_index_inc.svg"))
-              //-   .p-title-holder
-              //-     .p4-prodect-index
-              //-       include ../images/p4_index_inc.svg
-              //-     h3.p4-prodect-tittext-md /工程服务
-              //-   h3.p4-prodect-tittext /工程服务
-              //-   p.stop-swiping 我们的工程师是氢燃料电池技术的顶尖从业者，可提供从定制系统零部件到为客户开发完整的燃料电池系统，从原型样车试制到车型量产配合的全方位产品及应用工程的咨询服务。
-              //- ul.p4-contents
-              //-   li
-              //-     h3.p4-box 整车动力系统<br>工程应用服务
-              //-     p 从整车布局设计到车辆认证的氢燃料电池汽车动力总成端到端旗舰应用工程服务。
-              //-   li
-              //-     h3.p4-box 氢燃料电池系统<br>及零部件定制服务
-              //-     p 针对非标准应用、集成、及场景的定制解决方案。
 
           //- page5:: 售后支持
           #section5.swiper-slide(data-history="products-service" data-hash="supports")
@@ -390,29 +338,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   .swiper-button-next-bg
                 .swiper-button-next.pretty-navigation
                   .swiper-button-next-bg
-              //- .p5-prodect-title.clearfix
-              //-   //- img.p5-prodect-index(src=require("../images/p5_index.svg"))
-              //-   .p-title-holder
-              //-     .p5-prodect-index
-              //-       include ../images/p5_index_inc.svg
-              //-     h3.p5-prodect-tittext-md /售后支持
-              //-   h3.p5-prodect-tittext /售后支持
-              //-   p.stop-swiping 提供可靠的产品只是第一步，一套涵盖使用指导、车辆保养维修、数据监控管理的完善体系是我们为客户进行售后运营维护的有力保障。
-              //- .p5-contents.swiper-containers
-              //-   .swiper-wrapper
-              //-     .swiper-slide 
-              //-       h3.p5-box.stop-swiping 数据业务平台/
-              //-       p.p5-detail.stop-swiping 自主开发大数据平台，对车辆运行情况进行实时监控，从而持续改善运营效率，预测并防止车辆运行中出现的问题，保障行驶安全。
-              //-     .swiper-slide
-              //-       h3.p5-box.stop-swiping 运维保障服务/
-              //-       p.p5-detail.stop-swiping 随着中国市场氢燃料电池汽车的商业化运营推行，我们建立了专业面向氢燃料电池汽车运维的售后服务体系，为不断增长的氢燃料电池汽车市场提供专业的售后服务。
-              //-     .swiper-slide
-              //-       h3.p5-box.stop-swiping 产品指引手册/
-              //-       p.p5-detail.stop-swiping 提供全方位的操控、维护、保养指导，并提供标准化的备品备件清单
-              //-   .swiper-button-prev.pretty-navigation
-              //-     .swiper-button-next-bg
-              //-   .swiper-button-next.pretty-navigation
-              //-     .swiper-button-next-bg
 
           //- page6:: 应用案例
           #section6.swiper-slide(data-history="applications" data-hash="case")
@@ -474,10 +399,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                               .p6-modeltitle-region
                                 h3.p6-model-title(class=val.spec?val.spec:"")!=val.name
                                 .p6-tiny-icon
-                              //- h3.p6-model-title CHANGING THE WORLD, <br>ONE CITY AT A TIME
-                              //- p.p6-model-detail We care, we share, we believe. 
-                                | <br>
-                                | We develop, market, and help operate customized micromobility solutions in cities across the globe, leading the industry in sustainable bike share systems.
+
                             .p6-imageholder.col-xs-12.col-sm-12.col-md-7
                               //- include ../images/p6_imgholder_inc.svg
                               .p6-lt-icon
@@ -506,17 +428,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                             span {{date}}
                             h3 {{title}}
                             p.news-desc {{description}}
-                    //- -for(var i =1; i<=7; i++)
-                      .news-slide.swiper-slide
-                        a.p6-news-link(href="#")
-                          figure.p6-newsimg-size
-                            .p6-img-wrapper
-                              img(src=require("../images/p6_news_1.jpg"))
-                          .p6-news-info
-                            span 2020-9-15
-                            h3 CHANGING THE WORLD
-                            p We care, we share, we belivie.<br>
-                              | We develop, market, and help operate customized micromobility solutions in cities across the globe, leading the industry in sustainable bike share systems.
+
                 .swiper-button-prev.pretty-navigation.p7-prev
                   .swiper-button-next-bg
                 .swiper-button-next.pretty-navigation.p7-next
@@ -549,20 +461,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
 
           footer.swiper-slide.footer(data-history="footer" data-hash="footer")
             .c-section
-              //- .footer-container.container-fluid
-                .row
-                  
-                  .shares.col-xs-8.col-lg-8
-                    svg.icon(aria-hidden="true")
-                      use(xlink:href="#icon-weixin")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-tubiaozhizuo-")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-linkedin")
-                    //- svg.icon(aria-hidden="true")
-                    //-   use(xlink:href="#icon-douyin")
-                  .footer-logo.col-xs-4.col-lg-4
-                    img.scaleable(src=require("../images/footer_logo.svg"))
               .footer-qrcode-area
                 svg.icon.weixin-icon(aria-hidden="true")
                   use(xlink:href="#icon-weixin")
@@ -580,15 +478,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
               .copyright
                 each paragraph in copyrightData
                   p= paragraph
-                //- p 风氢扬氢能科技（上海）有限公司版权所有 | Copyright &copy; 
-                //- p 上海新能源汽车及关键零部件产业基地，恒裕路150号2栋
-                //- p 电话 400 000 8100
-                
-                //- p 
-                  span 内容自审制度
-                  span 经营许可证编号：XXX-1234567890
-                  span 沪ICP备12345678号
-                //- p 沪网文（2020）0460-123
 
         .main-scrollbar.swiper-scrollbar
 
@@ -596,9 +485,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
         .news_contents
           a.news-back &larr;返回
           h2.news-page-title
-          //-  风氢扬科技CHIGMA 120系统正式亮相FCVC2020
           span.publish-date
-          //-  2020-9-15
           .news-page-body
         //- .news-rb-icon
           img(src=require("../images/p1_lb_icon.svg"))
