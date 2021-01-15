@@ -1553,7 +1553,6 @@ $title-font-size: pxToRem(26px);
   font-size: pxToRem(20px, xl);
   line-height: 1.2; //pxToRem(30px);
 
-
   strong {
     white-space: nowrap;
   }
@@ -1580,6 +1579,7 @@ $title-font-size: pxToRem(26px);
       line-height: (17px / 14px);
     }
     [lang="en"] & p {
+      margin-bottom: 0;
       letter-spacing: normal;
     }
   }
@@ -1929,6 +1929,19 @@ $title-font-size: pxToRem(26px);
     background-color: $logoCol;
   }
 
+  // SVG <use>引用的元素，无法在引用位置控制其样式，只能在被引用的源位置控制样式变化
+  // #machine1, #machine2, #machine3, #machine4 {
+  //   transform: translate3d(0, -20px, 0);
+  //   opacity: 0;
+  //   .swiper-slide-active &{
+  //     @include transition-opc-trf;
+  //     transition-duration: .2s;
+  //     transition-delay: .2s;
+  //     transform: none;
+  //     opacity: 1;
+  //   }
+  // }
+
   @include media-breakpoint-down(sm) {
     padding-bottom: pxToRem(20px, sm);
 
@@ -1947,7 +1960,9 @@ $title-font-size: pxToRem(26px);
       margin: 0 pxToRem(4px, sm) !important;
     }
   }
+
 }
+
 
 .p3-prev,
 .p3-next {
@@ -2072,7 +2087,7 @@ $title-font-size: pxToRem(26px);
     float: left;
     margin-left: -$gap-width-md;
     margin-right: pxToRem(12px, sm);
-    padding-bottom: 30px;
+    // padding-bottom: 30px;
   }
 }
 

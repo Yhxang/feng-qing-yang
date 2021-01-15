@@ -19,9 +19,9 @@ html(lang= language=="cn" ? "zh-CN" : language)
     <div aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
       svg(xmlns="http://www.w3.org/2000/svg")
         def
-          image(xlink:href="",data-load-src=require("../images/model_img_1.png"),id="model_img_1",width="630",height="578")
-          image(xlink:href="",data-load-src=require("../images/model_img_3.png"),id="model_img_3",width="577",height="391")
-          image(xlink:href="",data-load-src=require("../images/model_img_4.png"),id="model_img_4",width="636",height="537")
+          image.engine(xlink:href=require("../images/model_img_1.png"),data-load-src=require("../images/model_img_1.png"),id="model_img_1",width="630",height="578")
+          image.engine(xlink:href=require("../images/model_img_3.png"),data-load-src=require("../images/model_img_3.png"),id="model_img_3",width="577",height="391")
+          image.engine(xlink:href=require("../images/model_img_4.png"),data-load-src=require("../images/model_img_4.png"),id="model_img_4",width="636",height="537")
       block svginc
         include ../images/models_cn_css_inc.svg
         include ../images/slogn_cn_inc.svg 

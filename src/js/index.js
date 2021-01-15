@@ -129,10 +129,11 @@ class PageSwipers {
       if (window.innerWidth < 768.001) {
         AllSwipers.mainSwiper.params.freeMode = true;
         swiperOptions.mainSwiperOption.freeMode = true;
-        console.log('free mode');
+        console.log('Freemode true');
       } else {
         AllSwipers.mainSwiper.params.freeMode = false;
         swiperOptions.mainSwiperOption.freeMode = false;
+        console.log('Freemode false');
       }
 
       AllSwipers.mainSwiper.update();
@@ -205,14 +206,6 @@ class PageSwipers {
     // js替换的src，不会被计入document的load事件，因此要手动侦听所有img的load
     function loadImg(imgEle) {
       const $imgEle = imgEle;
-      // let imgType;
-      // if ($imgEle instanceof HTMLImageElement) {
-      //   imgType = 'htmlimage';
-      // }
-      // if ($imgEle instanceof SVGImageElement) {
-      //   imgType = 'svgimage';
-      // }
-
       return new Promise((resolve, reject) => {
         const loadSrc = $imgEle.getAttribute('data-load-src');
         const tagName = $imgEle.tagName.toLowerCase();
@@ -230,7 +223,8 @@ class PageSwipers {
       });
     }
     const promises = Array.from(document.querySelectorAll('img')).map(loadImg);
-    promises.concat(Array.from(document.querySelectorAll('image')).map(loadImg));
+    // promises.concat(Array.from(document.querySelectorAll('image')).map(loadImg));
+    // ios中SVG image未加载xlink:href
     Promise.all(promises).then(() => {
       AllSwipers.mainSwiper.update();
       console.log('All images loaded!');
