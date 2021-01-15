@@ -56,9 +56,9 @@ $primaryFont: "Source Han Sans CN Regular";
   // }
 }
 
-html {
-  // filter: grayscale(100%)
-}
+// html {
+//   // filter: grayscale(100%)
+// }
 
 .swiper-wrapper {
   transition-timing-function: myease();
@@ -553,44 +553,61 @@ body {
   }
 }
 
-.blueline-mobile {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: none;
+// .blueline-mobile {
+//   width: 100%;
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   display: none;
 
-  @include media-breakpoint-down(md) {
-    display: block;
+//   @include media-breakpoint-down(md) {
+//     display: block;
+//   }
+// }
+
+// .blueline-mobile-img {
+//   padding-bottom: (8432px)/768px *100%;
+//   background: url(../images/blueline_mobile.png) 0 0 no-repeat;
+//   background-size: 100% 100%;
+//   opacity: .2;
+// }
+main.swiper-wrapper{
+  height: auto;
+}
+@include media-breakpoint-down(md) {
+  main.swiper-wrapper::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background: url(../images/blueline_mobile.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    opacity: .2;
   }
 }
 
-.blueline-mobile-img {
-  padding-bottom: (8432px)/768px *100%;
-  background: url(../images/blueline_mobile.png) 0 0 no-repeat;
-  background-size: 100% 100%;
-  opacity: .2;
-}
-
-main.swiper-wrapper>.swiper-slide {
+.section-slide {
   transform: translateZ(0); // fix swiper flash
   //min-height: 667px;
 }
 
-@include media-breakpoint-down(sm) {
-  @media (min-aspect-ratio: 360/600) {
-    main.swiper-wrapper>.swiper-slide:not(#section7) {
-      //min-height: calc(100vw*697/360);
-      height: auto;
-    }
+.c-section {
+  position: relative;
+  height: 100vh;
+  padding-top: 1px;
+}
 
-  }
-  #section1,
-  #section2,
-  #section3,
-  #section4,
-  #section5,
-  #section6 {
+@include media-breakpoint-down(sm) {
+  // @media (min-aspect-ratio: 360/600) {
+  //   main.swiper-wrapper>.swiper-slide:not(#section7) {
+  //     //min-height: calc(100vw*697/360);
+  //     height: auto;
+  //   }
+  // }
+  .sm-height-auto {
     height: auto;
 
     .c-section {
@@ -601,12 +618,7 @@ main.swiper-wrapper>.swiper-slide {
 
 
 
-.c-section {
-  position: relative;
-  height: 100vh;
-  padding-top: 1px;
 
-}
 
 $gap-width-md: pxToRem(30px, sm);
 
@@ -913,12 +925,15 @@ $logo-layout-height-sm: 151px;
 
     li {
       margin: pxToVh(22px, md) 0;
-      padding-left: pxToVw(88px, md);
+      padding-left: 0;//pxToVw(88px, md);
     }
 
     &.cn li {
-      padding-left: 0;
+      // padding-left: 0;
       text-align: center;
+    }
+    &.en li {
+      padding-left: pxToRem(20px, sm);
     }
   }
 }
@@ -1060,9 +1075,6 @@ $logo-layout-height-sm: 151px;
     right: pxToVw(140px, xl);
     transform: scaleX(-1);
   }
-  .swiper-button-disabled{
-    opacity: 0;
-  }
 }
 
 .p1-slide-tip {
@@ -1074,7 +1086,6 @@ $logo-layout-height-sm: 151px;
     width: pxToVw(112px, md);
   }
 }
-
 
 // P1::多媒体
 .media-slide {
@@ -1088,12 +1099,14 @@ $logo-layout-height-sm: 151px;
     background-repeat: no-repeat;
     background-size: cover;
   }
+  [lang="en"] & .media-content {
+    background-position: left top;
+  }
 
   img {
     width: 100%;
   }
 }
-
 
 .p1-detail {
   position: absolute;
@@ -1208,6 +1221,9 @@ $title-font-size: pxToRem(26px);
 
   [lang="en"] & {
     height: pxToVh(80px, xl);
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
   }
 
   @include media-breakpoint-down(md) {
@@ -1247,7 +1263,7 @@ $title-font-size: pxToRem(26px);
   }
 
   @include media-breakpoint-down(md) {
-    bottom: 0;
+    bottom: pxToRem(-120px, sm);
 
     .p2-machine {
       width: pxToVw(540px, md);
@@ -1560,8 +1576,8 @@ $title-font-size: pxToRem(26px);
     column-count: auto;
 
     [lang="en"] & {
-      font-size: pxToRem(12px, sm);
-      line-height: (17px / 12px);
+      font-size: pxToRem(14px, sm);
+      line-height: (17px / 14px);
     }
     [lang="en"] & p {
       letter-spacing: normal;
@@ -1574,9 +1590,9 @@ $title-font-size: pxToRem(26px);
     text-indent: 2em;
     column-count: auto;
 
-    [lang="en"] & {
-      font-size: pxToRem(12px, sm);
-    }
+    // [lang="en"] & {
+    //   font-size: pxToRem(14px, sm);
+    // }
   }
 }
 
@@ -2896,6 +2912,7 @@ $p6-contents-height: 458px;
   position: relative;
   margin: pxToVh(282px, xl) auto 0;
   width: 100%;
+  height: pxToVh(342px, xl);
 
   .p7-prev,
   .p7-next {
@@ -2916,6 +2933,7 @@ $p6-contents-height: 458px;
 
   @include media-breakpoint-down(sm) {
     margin-top: pxToRem(180px, sm); //pxToRem(230px, sm);临界//pxToRem(164px, sm); //?????造成了media访问application的严重问题，似乎跟屏幕宽（高?）度有关
+    height: auto;
   }
 
 }
@@ -2924,6 +2942,8 @@ $p6-contents-height: 458px;
   position: relative;
   margin: 0 auto;
   width: pxToVw(1059px, xl);
+  //height: calc( + #{pxToRem(128px)});
+  
   overflow: hidden;
 
   @include media-breakpoint-down(sm) {
@@ -3046,7 +3066,7 @@ $p6-contents-height: 458px;
 
 
 
-.p8-section, footer {
+#section8, footer {
   position: relative;
   height: auto;
 
@@ -3262,7 +3282,8 @@ $p6-contents-height: 458px;
 footer {
   position: relative;
   //top: pxToVh(652px, xl);
-  margin: pxToVh(20px, xl) auto 0;
+  //margin: pxToVh(20px, xl) auto 0;
+  margin-top: pxToVh(72px, xl);
   padding-bottom: pxToRem(8px);
   width: 100vw;
   clear: both;
@@ -3281,6 +3302,7 @@ footer {
   }
 
   @include media-breakpoint-down(md) {
+    margin-top: pxToRem(20px, sm);
     // margin-top: 0;//pxToRem(85px, sm);
     //padding-bottom: pxToRem(50px, sm);
   }
@@ -3344,9 +3366,9 @@ footer {
   }
 }
 
-.shares {
-  // text-align: center;
-}
+// .shares {
+//   // text-align: center;
+// }
 
 .icon {
   margin: pxToRem(6px);

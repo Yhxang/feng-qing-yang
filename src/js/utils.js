@@ -1,27 +1,27 @@
 function cleanArray(actual) {
-    const newArray = []
-    for (let i = 0; i < actual.length; i++) {
-      if (actual[i]) {
-        newArray.push(actual[i])
-      }
+  const newArray = [];
+  for (let i = 0; i < actual.length; i += 1) {
+    if (actual[i]) {
+      newArray.push(actual[i]);
     }
-    return newArray
   }
- 
-function param(json) {
-    if (!json) return ''
-    return cleanArray(Object.keys(json).map(key => {
-        if (json[key] === undefined) return ''
-        return encodeURIComponent(key) + '=' +
-                encodeURIComponent(json[key])
-    })).join('&')
+  return newArray;
 }
 
-function formatStr (ele){
-  let text = ele.innerHTML;
-  const totalTextLen = ele.innerText.length;
+function param(json) {
+  if (!json) return '';
+  return cleanArray(Object.keys(json).map((key) => {
+    if (json[key] === undefined) return '';
+    return `${encodeURIComponent(key)}=${encodeURIComponent(json[key])}`;
+  })).join('&');
+}
+
+function formatStr(ele) {
+  const $ele = ele;
+  const text = $ele.innerHTML;
+  const totalTextLen = $ele.innerText.length;
   const lineNum = 3;
-  const base = window.getComputedStyle(ele);
+  const base = window.getComputedStyle($ele);
   const baseWidth = base.width;
   const baseFontSize = base.fontSize;
   const lineWidth = +baseWidth.slice(0, -2);
@@ -41,7 +41,7 @@ function formatStr (ele){
   } else {
     content = text;
   }
-  ele.innerHTML = content;
+  $ele.innerHTML = content;
 }
 
-export  {param, formatStr};
+export { param, formatStr };

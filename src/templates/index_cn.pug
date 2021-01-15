@@ -19,9 +19,9 @@ html(lang= language=="cn" ? "zh-CN" : language)
     <div aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
       svg(xmlns="http://www.w3.org/2000/svg")
         def
-          image(xlink:href=require("../images/model_img_1.png"),id="model_img_1" width="630" height="578")
-          image(xlink:href=require("../images/model_img_3.png"),id="model_img_3" width="577" height="391")
-          image(xlink:href=require("../images/model_img_4.png"),id="model_img_4" width="636" height="537")
+          image(xlink:href="",data-load-src=require("../images/model_img_1.png"),id="model_img_1",width="630",height="578")
+          image(xlink:href="",data-load-src=require("../images/model_img_3.png"),id="model_img_3",width="577",height="391")
+          image(xlink:href="",data-load-src=require("../images/model_img_4.png"),id="model_img_4",width="636",height="537")
       block svginc
         include ../images/models_cn_css_inc.svg
         include ../images/slogn_cn_inc.svg 
@@ -57,16 +57,16 @@ html(lang= language=="cn" ? "zh-CN" : language)
             
                     
         //- .menu-bottom
-        //-   img(src=require("../images/menu_bottom.png"))
+        //-   img(data-load-src=require("../images/menu_bottom.png"))
       //- .c-menubox-blur
 
       .o-scroll.swiper-container
-        .blueline-mobile(data-swiper-parallax="-50%" data-swiper-parallax-duration="900" data-swiper-parallax-delay="0")
+        //- .blueline-mobile(data-swiper-parallax="-50%" data-swiper-parallax-duration="900" data-swiper-parallax-delay="0")
           .blueline-mobile-img
         main.swiper-wrapper
           
           //- page0:: logo页
-          #section0.swiper-slide(data-history="" data-hash="start")
+          #section0.section-slide(data-history="" data-hash="start")
             section(class="c-section")
               .o-container
                 .p0-linebg
@@ -77,7 +77,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                     .p0-plus-image
 
                 .p0-ltlogo#p0-ltlogo
-                  img(src=require("../images/p0_ltlogo.png"))
+                  img(data-load-src=require("../images/p0_ltlogo.png"))
 
                 .o-center-wrapper-logo
                   .p0-mainlogo
@@ -100,12 +100,11 @@ html(lang= language=="cn" ? "zh-CN" : language)
                         li
                           +svguse("#slogan-p"+(index+1), region)
 
-
           //- page1:: 多媒体页
-          #section1.swiper-slide(data-history="home" data-hash="home")
+          #section1.section-slide.sm-height-auto(data-history="home" data-hash="home")
             section.c-section
               .bg-holder.p0-stripe-1.stripe-bg
-                img.p0-stripe-img.scaleable(src=require("../images/p0_blueline_bg.png"))
+                img.p0-stripe-img.scaleable(data-load-src=require("../images/p0_blueline_bg.png"))
               .p1-holder-pos
                 .p1-contents-height
                   #p1-contents.p1-contents.swiper-container
@@ -119,37 +118,37 @@ html(lang= language=="cn" ? "zh-CN" : language)
                       
                     .swiper-button-prev
                     .swiper-button-next
-                  img.p1-slide-tip(src=require("../images/p1_slide_tip.png"))
+                  img.p1-slide-tip(data-load-src=require("../images/p1_slide_tip.png"))
               .p1-ltlogo
-                img(src=require("../images/p1_lt_logo.svg"))
+                img(data-load-src=require("../images/p1_lt_logo.svg"))
               .p1-lb-icon
-                img(src=require("../images/p1_lb_icon.svg"))
-                //-img(src=require("../images/p1_lb_icon.png"))
+                img(data-load-src=require("../images/p1_lb_icon.svg"))
+                //-img(data-load-src=require("../images/p1_lb_icon.png"))
 
           //- page2:: 科技
-          #section2.swiper-slide(data-history="G-POWER" data-hash="G-POWER")
+          #section2.section-slide.sm-height-auto(data-history="G-POWER" data-hash="G-POWER")
             section.c-section.md-pad
               .p2-linebg
                 .p2-linebg-wrapper
               .p2-stripe-1.stripe-bg
-                img.p2-stripe-1-img.scaleable(src=require("../images/p2_blueline_1.png"))
+                img.p2-stripe-1-img.scaleable(data-load-src=require("../images/p2_blueline_1.png"))
               .p2-stripe-2.stripe-bg
-                img.p2-stripe-2-img(src=require("../images/p2_blueline_2.png"))
+                img.p2-stripe-2-img(data-load-src=require("../images/p2_blueline_2.png"))
               //-.p2-bg-leftside
-                img.p2-leftside-img(src=require("../images/p2_leftside.png"))
+                img.p2-leftside-img(data-load-src=require("../images/p2_leftside.png"))
 
               //- .p2-left-side
               //-   p LONG ENDURANCE
 
               .p2-content-bg
                 .p2-machine
-                  img.scaleable(src=require("../images/p2_machine.svg"))
+                  img.scaleable(data-load-src=require("../images/p2_machine.svg"))
                 .p2-machine-warn
-                  img.scaleable(src=require("../images/p2_machine_warn.svg")) 
+                  img.scaleable(data-load-src=require("../images/p2_machine_warn.svg")) 
 
               .p2-title.column-title
                 p 风氢扬科技
-                img.p2-lbbg-img.column-title-img(src=require("../images/p2_lbbg_img.svg"))
+                img.p2-lbbg-img.column-title-img(data-load-src=require("../images/p2_lbbg_img.svg"))
               .p2-contents.swiper-containers(
                 \\data-swiper-animation="animate__fadeIn" 
                 \\data-duration=".5s"
@@ -196,18 +195,18 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   .swiper-button-next-bg
                 .swiper-button-next.pretty-navigation
                   .swiper-button-next-bg
-              //- img.p2-mobile-tip(src=require("../images/p2_mobile_tip.png"))
+              //- img.p2-mobile-tip(data-load-src=require("../images/p2_mobile_tip.png"))
 
           //- page3:: 产品与服务
-          #section3.swiper-slide(data-history="products-service" data-hash="products")
+          #section3.section-slide.sm-height-auto(data-history="products-service" data-hash="products")
             section.c-section.md-pad
               .p3-stripe-1.stripe-bg
-                img.p3-stripe-img.scaleable(src=require("../images/p3_blueline_1.png"))
+                img.p3-stripe-img.scaleable(data-load-src=require("../images/p3_blueline_1.png"))
               .p3-stripe-2.stripe-bg
-                img.p3-stripe-img.scaleable(src=require("../images/p3_blueline_2.png"))
+                img.p3-stripe-img.scaleable(data-load-src=require("../images/p3_blueline_2.png"))
               .p3-title.column-title
                 p 产品与服务
-                img.column-title-img(src=require("../images/p3_title.svg")
+                img.column-title-img(data-load-src=require("../images/p3_title.svg")
                   data-scroll
                   data-scroll-speed=3
                   data-scroll-direction="horizontal")
@@ -228,7 +227,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                 .row
                   .p3-cont-left.col-sm-12.col-md-6
                     .p3-prodect-title.clearfix
-                      //- img.p3-prodect-index(src=require("../images/p3_index.svg"))
+                      //- img.p3-prodect-index(data-load-src=require("../images/p3_index.svg"))
                       .p3-prodect-index
                         include ../images/p3_index_inc.svg
                       h3.p3-prodect-tittext= productData.tit
@@ -239,19 +238,19 @@ html(lang= language=="cn" ? "zh-CN" : language)
                             svg(aria-hidden="true" viewBox="628.9,0,285,200")
                               use(xlink:href="#model3")
                               //- ???? 切换外链失败
-                            //- img(src=require("../images/p3_model_3.png"))
+                            //- img(data-load-src=require("../images/p3_model_3.png"))
                           .swiper-slide.stop-swiping
                             svg(aria-hidden="true" viewBox="324.0,0,285,200")
                               use(xlink:href="#model2")
-                            //- img(src=require("../images/p3_model_2.png"))
+                            //- img(data-load-src=require("../images/p3_model_2.png"))
                           .swiper-slide.stop-swiping
                             svg(aria-hidden="true" viewBox="0,0,285,200")
                               use(xlink:href="#model1")
-                            //- img(src=require("../images/p3_model_1.png"))
+                            //- img(data-load-src=require("../images/p3_model_1.png"))
                           .swiper-slide.stop-swiping
                             svg(aria-hidden="true" viewBox="972.0,0,285,200")
                               use(xlink:href="#model4")
-                            //- //img(src=require("../images/p3_model_4.png"))
+                            //- //img(data-load-src=require("../images/p3_model_4.png"))
                         .swiper-pagination
                       .p3-prev
                       .p3-next
@@ -262,10 +261,10 @@ html(lang= language=="cn" ? "zh-CN" : language)
                         p!= data
 
           //- page4:: 工程服务
-          #section4.swiper-slide(data-history="products-service" data-hash="service")
+          #section4.section-slide.sm-height-auto(data-history="products-service" data-hash="service")
             section.c-section.md-pad
               .p4-stripe-1.stripe-bg
-                img.p4-stripe-img.scaleable(src=require("../images/p4_blueline_1.png"))
+                img.p4-stripe-img.scaleable(data-load-src=require("../images/p4_blueline_1.png"))
               
               block serviceConts
                 -
@@ -297,10 +296,10 @@ html(lang= language=="cn" ? "zh-CN" : language)
                     p!= data.desc
 
           //- page5:: 售后支持
-          #section5.swiper-slide(data-history="products-service" data-hash="supports")
+          #section5.section-slide.sm-height-auto(data-history="products-service" data-hash="supports")
             section.c-section.md-pad
               .p5-stripe-1.stripe-bg
-                img.p5-stripe-img.scaleable(src=require("../images/p5_blueline_1.png"))
+                img.p5-stripe-img.scaleable(data-load-src=require("../images/p5_blueline_1.png"))
               block afterSaleConts
                 -
                   var afterSaleData = {
@@ -320,7 +319,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                     ]
                   }
               .p5-prodect-title.clearfix
-                //- img.p5-prodect-index(src=require("../images/p5_index.svg"))
+                //- img.p5-prodect-index(data-load-src=require("../images/p5_index.svg"))
                 .p-title-holder
                   .p5-prodect-index
                     include ../images/p5_index_inc.svg
@@ -340,31 +339,31 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   .swiper-button-next-bg
 
           //- page6:: 应用案例
-          #section6.swiper-slide(data-history="applications" data-hash="case")
+          #section6.section-slide.sm-height-auto(data-history="applications" data-hash="case")
             section.c-section.md-pad
               .p6-stripe-1.stripe-bg
-                img.p6-stripe-img.scaleable(src=require("../images/p6_blueline_1.png"))
+                img.p6-stripe-img.scaleable(data-load-src=require("../images/p6_blueline_1.png"))
               .p6-linebg
                 .p6-linebg-wrap
                   include ../images/solarsys_inc.svg
               .p6-title.column-title
                 p 市场应用
-                img.column-title-img(src=require("../images/p6_title.svg"))
+                img.column-title-img(data-load-src=require("../images/p6_title.svg"))
               .p6-contents.stop-swiping
                 .row
                   .p6-thumb.swiper-containers.col-xs-4.col-sm-3.col-md-2
 
                     .swiper-wrapper
                       .swiper-slide
-                        img(src=require("../images/p6_model_2.svg"))
+                        img(data-load-src=require("../images/p6_model_2.svg"))
                       .swiper-slide
-                        img(src=require("../images/p6_model_1.svg"))
+                        img(data-load-src=require("../images/p6_model_1.svg"))
                       .swiper-slide
-                        img(src=require("../images/p6_model_3.svg"))
+                        img(data-load-src=require("../images/p6_model_3.svg"))
                       .swiper-slide
-                        img(src=require("../images/p6_model_4.svg"))
+                        img(data-load-src=require("../images/p6_model_4.svg"))
                       //- .swiper-slide
-                      //-   img(src=require("../images/p6_model_1.svg"))
+                      //-   img(data-load-src=require("../images/p6_model_1.svg"))
                   //- .p6-borderline
                   .p6-thumb-scrollbar.swiper-scrollbar
 
@@ -405,16 +404,16 @@ html(lang= language=="cn" ? "zh-CN" : language)
                               .p6-lt-icon
                               .p6-rb-icon
                               .p6-modelimg
-                                img(src=require("../images/p6_modelimg_"+val.id+".png"))
+                                img(data-load-src=require("../images/p6_modelimg_"+val.id+".png"))
 
           //- page7:: 新闻
-          #section7.swiper-slide(data-history="media" data-hash="news")
+          #section7.section-slide.sm-height-auto(data-history="media" data-hash="news")
             section.c-section.md-pad
               .p7-stripe-1.stripe-bg
-                img.p7-stripe-img.scaleable(src=require("../images/p7_blueline_1.png"))
+                img.p7-stripe-img.scaleable(data-load-src=require("../images/p7_blueline_1.png"))
               .p7-title.column-title
                 p 媒体中心
-                img.column-title-img(src=require("../images/p7_title.svg"))
+                img.column-title-img(data-load-src=require("../images/p7_title.svg"))
               .p7-contents-pos.stop-swiping
                 .p7-contents.swiper-containers
                   .swiper-wrapper
@@ -434,13 +433,14 @@ html(lang= language=="cn" ? "zh-CN" : language)
                 .swiper-button-next.pretty-navigation.p7-next
                   .swiper-button-next-bg
 
-          #section8.swiper-slide.p8-section(data-history="partner" data-hash="partner")
+          //- 合作机构
+          #section8.section-slide.sm-height-auto(data-history="partner" data-hash="partner")
             .c-section
               block mediaConts
                 - var mediaData = {tit: "合作机构"}
               .p8-title.column-title
                 p= mediaData.tit
-                img(src=require("../images/p6_model_active.svg"))
+                img(data-load-src=require("../images/p6_model_active.svg"))
               block partnerConts
                 - var category = ["高校战略合作", "产业链战略合作"]
               .p8-contents
@@ -449,25 +449,26 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   ul
                     -for(var i=1; i<=3; i++)
                       li
-                        img(src=require("../images/p8_partner_a"+(i<10?("0"+i):i)+".png"))
+                        img(data-load-src=require("../images/p8_partner_a"+(i<10?("0"+i):i)+".png"))
                 .p8-partner-right
                   h4= category[1]
                   ul
                     -for(var j=1; j<=14; j++)
                       li
-                        img(src=require("../images/p8_partner_b"+(j<10?("0"+j):j)+".png"))
+                        img(data-load-src=require("../images/p8_partner_b"+(j<10?("0"+j):j)+".png"))
             //- .p8-rb-icon
-              img(src=require("../images/p1_lb_icon.svg"))
+              img(data-load-src=require("../images/p1_lb_icon.svg"))
 
-          footer.swiper-slide.footer(data-history="footer" data-hash="footer")
+          //- 版权
+          footer.section-slide.footer(data-history="footer" data-hash="footer")
             .c-section
               .footer-qrcode-area
                 svg.icon.weixin-icon(aria-hidden="true")
                   use(xlink:href="#icon-weixin")
                 .qrcode-box
-                  img.scaleable(src=require("../images/qrcode.png"))
+                  img.scaleable(data-load-src=require("../images/qrcode.png"))
               .footer-logo-area
-                img(src=require("../images/p1_lb_icon.svg"))
+                img(data-load-src=require("../images/p1_lb_icon.svg"))
               block copyrightCont
                 -
                   var copyrightData = [
@@ -488,9 +489,9 @@ html(lang= language=="cn" ? "zh-CN" : language)
           span.publish-date
           .news-page-body
         //- .news-rb-icon
-          img(src=require("../images/p1_lb_icon.svg"))
+          img(data-load-src=require("../images/p1_lb_icon.svg"))
 
           //- p 9月14-16日，由中国汽车工程学会和国际氢能与燃料电池协会（筹）共同主办的“第五届国际氢能与燃料电池汽车大会”（FCVC 2020）在上海汽车会展中心隆重召开，风氢扬科技携最新大功率燃料电池系统-CHIGMA 120系统参展。CHIGMA 120系统一亮相，便吸引众多参会代表前来围观交流，成为整个展馆炙手可热的展品之一。
           //- p CHIGMA 120系统，是风氢扬科技针对中国重卡车型长时间运行、高负载率及工况恶劣等运营工况开发而成的大功率燃料电池系统；CHIGMA120系统通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。
-          //- img(src=require("../images/news_proxy.png"))
+          //- img(data-load-src=require("../images/news_proxy.png"))
           //- p FCVC2020正在如火如荼的进行中，我们期待更多的新老朋友莅临B109风氢扬展台，与我们互动交流、沟通合作，共话中国氢能美好明天！
