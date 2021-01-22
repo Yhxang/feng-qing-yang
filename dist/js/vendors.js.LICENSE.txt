@@ -37,6 +37,14 @@ object-assign
  */
 
 /*!
+ * @pixi/interaction - v5.3.3
+ * Compiled Tue, 04 Aug 2020 16:23:09 UTC
+ *
+ * @pixi/interaction is licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license
+ */
+
+/*!
  * @pixi/loaders - v5.3.3
  * Compiled Tue, 04 Aug 2020 16:23:09 UTC
  *

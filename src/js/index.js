@@ -1,5 +1,7 @@
 import 'animate.css';
-import '@babel/polyfill';
+// import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import '../css/loading.css';
 import '../fonts/iconfont';
@@ -80,7 +82,6 @@ class PageSwipers {
       EffectFade,
       Thumbs,
       Autoplay]); // Install modules
-
     this.mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
     this.mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
     this.techSwiper = new Swiper('.p2-contents', techOptions);
@@ -122,6 +123,7 @@ class PageSwipers {
 
     // 初始化所有Swiper
     // console.log(swiperOptions.mainSwiperOption)
+
     AllSwipers = new PageSwipers(swiperOptions);
     window.mainSwiper = AllSwipers.mainSwiper;
     const resizeHandler = () => {
@@ -196,7 +198,7 @@ class PageSwipers {
   }).then(() => {
     // load 完成
     docEl.classList.add('is-loaded');
-    console.log('loaded');
+    console.log('Loaded');
 
     // 初始化重载 logo 演绎 gif
     // eslint-disable-next-line no-self-assign
@@ -209,6 +211,7 @@ class PageSwipers {
       return new Promise((resolve, reject) => {
         const loadSrc = $imgEle.getAttribute('data-load-src');
         const tagName = $imgEle.tagName.toLowerCase();
+        //console.log(tagName)
         if (loadSrc) {
           if (tagName === 'img') {
             $imgEle.src = loadSrc;
@@ -224,14 +227,24 @@ class PageSwipers {
     }
     const promises = Array.from(document.querySelectorAll('img')).map(loadImg);
     // promises.concat(Array.from(document.querySelectorAll('image')).map(loadImg));
-    // ios中SVG image未加载xlink:href
-    Promise.all(promises).then(() => {
+    // iPhone 6S中SVG <image>未加载xlink:href
+
+    // polyfill Promise.allsettled
+    function allsettled($promises) {
+      const wrappedPromises = $promises.map((p) => Promise.resolve(p)
+        .then(
+          (val) => ({ status: 'fulfilled', value: val }),
+          (err) => ({ status: 'rejected', reason: err }),
+        ));
+      return Promise.all(wrappedPromises);
+    }
+    allsettled(promises).then(() => {
       AllSwipers.mainSwiper.update();
       console.log('All images loaded!');
     }).catch((err) => {
       console.log(`Images load err: ${err}`);
     });
-
+    console.log(AllSwipers);
     // 初始化路由
     const router = new PageRouter(AllSwipers.mainSwiper);
     router.getPagesFromNav();

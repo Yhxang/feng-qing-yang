@@ -1,13 +1,24 @@
 doctype html
 - var language = htmlWebpackPlugin.options.lang;
+- var locHref = `http://${language == 'cn' ? '' : `${language}.`}g-powertech.com.cn/`;
 html(lang= language=="cn" ? "zh-CN" : language)
   - var PRODUCTION = htmlWebpackPlugin.options.PRODUCTION;
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
     //- , viewport-fit=cover
+    meta(http-equiv="X-UA-Compatible",content="IE=edge")
+    meta(name="renderer",content="webkit")
     title G-POWER
-    meta(name="description", content=language)
+    meta(name="description", content="风氢扬氢能科技（上海）有限公司成立于2019年，是集合燃料电池系统和控制器的研究、推广、生产为一体的科技公司。")
+    link(rel="alternate",hreflang="zh-CN",href="http://g-powertech.com.cn/")
+    link(rel="alternate",hreflang="en",href="http://en.g-powertech.com.cn/")
+    meta(property="og:type",content="website")
+    meta(property="og:url",content="http://g-powertech.com.cn/")
+    meta(property="og:site_name",content="风氢扬科技")
+    meta(property="og:title",content="G-POWER")
+    meta(property="og:description", content="风氢扬氢能科技（上海）有限公司成立于2019年，是集合燃料电池系统和控制器的研究、推广、生产为一体的科技公司。")
+    meta(property="og:image",content= locHref.replace(/\/$/,'')+require("../images/g-power-logo.png"))
     //- base(href=(PRODUCTION==true?"/":"./dist/"))
     //- base(href="/")
   body
@@ -51,11 +62,8 @@ html(lang= language=="cn" ? "zh-CN" : language)
               each val,key in menus
                 li 
                   a.text-current(href="./"+key.replace("&",""),class=key)
-                    span.menu-link(data-title=val)=val
-
-            a.langBtn(href= language=="en"?"http://g-powertech.com.cn/":"http://en.g-powertech.com.cn/")
-            
-                    
+                    span.menu-link(data-title= val)= val
+            a.langBtn(href= locHref)
         //- .menu-bottom
         //-   img(data-load-src=require("../images/menu_bottom.png"))
       //- .c-menubox-blur
@@ -112,7 +120,9 @@ html(lang= language=="cn" ? "zh-CN" : language)
                       - var multimediaNums = 1;
                       -for(var x = 1; x <= multimediaNums; x++)
                         .swiper-slide.media-slide
-                          .media-content(style={"background-image": "url("+require("../images/p1_multi_" + (language=="zh-CN"?"cn":language) + "_" + x + ".jpg")+")"})
+                          .media-content(style= {
+                            "background-image": `url(${require(`../images/p1_multi_${language}_${x}.jpg`)})`
+                          })
                           //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
                             span="P"+x+" DETAIL"
                       
@@ -474,7 +484,8 @@ html(lang= language=="cn" ? "zh-CN" : language)
                   var copyrightData = [
                     "风氢扬氢能科技（上海）有限公司版权所有",
                     "上海新能源汽车及关键零部件产业基地，恒裕路150号2栋",
-                    "电话 400 000 8100"
+                    "电话 400 000 8100",
+                    "沪ICP备2020032157号-1"
                   ]
               .copyright
                 each paragraph in copyrightData
@@ -495,3 +506,26 @@ html(lang= language=="cn" ? "zh-CN" : language)
           //- p CHIGMA 120系统，是风氢扬科技针对中国重卡车型长时间运行、高负载率及工况恶劣等运营工况开发而成的大功率燃料电池系统；CHIGMA120系统通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。
           //- img(data-load-src=require("../images/news_proxy.png"))
           //- p FCVC2020正在如火如荼的进行中，我们期待更多的新老朋友莅临B109风氢扬展台，与我们互动交流、沟通合作，共话中国氢能美好明天！
+    //- script.
+
+      (function(){
+        try{
+            // a : While a window.CustomEvent object exists, it cannot be called as a constructor.
+            // b : There is no window.CustomEvent object
+            new window.CustomEvent('T');
+        }catch(e){
+            var CustomEvent = function(event, params){
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+
+                var evt = document.createEvent('CustomEvent');
+
+                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+
+                return evt;
+            };
+
+            CustomEvent.prototype = window.Event.prototype;
+
+            window.CustomEvent = CustomEvent;
+        }
+      })();

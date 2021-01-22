@@ -38,16 +38,23 @@ const config = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /(node_modules|bower_components)/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //     options: {
-      //       presets: ['@babel/preset-env']
-      //     }
-      //   }
-      // },
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          // options: {
+          //   cacheDirectory: true,
+          //   babelrc: false,
+          //   rootMode: 'upward',
+          // },
+        },
+        // exclude: /(node_modules|bower_components)/,
+        exclude: [
+          /node_modules[\\/]core-js/,
+          /node_modules[\\/]webpack[\\/]buildin/,
+          // /node_modules\/(?!(swiper|dom7)\/).*/,
+        ],
+      },
       {
         test: /\.js$/,
         use: ['source-map-loader'],
@@ -58,7 +65,21 @@ const config = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'autoprefixer',
+                    {
+                      // options
+                    },
+                  ],
+                ],
+              },
+            },
+          },
         ],
       },
       {
@@ -71,7 +92,21 @@ const config = {
             },
           },
           'css-loader',
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'autoprefixer',
+                    {
+                      // options
+                    },
+                  ],
+                ],
+              },
+            },
+          },
           {
             loader: 'sass-loader',
             options: {
