@@ -24,7 +24,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
   body
     
     mixin svguse(svgid, vb)
-      svg(xmlns="http://www.w3.org/2000/svg", viewBox= vb[0]+" "+vb[1]+" "+vb[2]+" "+vb[3])
+      svg(xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink", viewBox= vb[0]+" "+vb[1]+" "+vb[2]+" "+vb[3])&attributes(attributes)
         use(xlink:href=svgid)
 
     <div aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
@@ -106,7 +106,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                     ul
                       each region,index in slogan.region
                         li
-                          +svguse("#slogan-p"+(index+1), region)
+                          +svguse("#slogan-p"+(index+1), region)(aria-hidden="true")
 
           //- page1:: 多媒体页
           #section1.section-slide.sm-height-auto(data-history="home" data-hash="home")
@@ -244,23 +244,38 @@ html(lang= language=="cn" ? "zh-CN" : language)
                     .p3-product-region
                       .p3-product-msg.swiper-containers
                         .swiper-wrapper
-                          .swiper-slide.stop-swiping
-                            svg(aria-hidden="true" viewBox="628.9,0,285,200")
-                              use(xlink:href="#model3")
-                              //- ???? 切换外链失败
-                            //- img(data-load-src=require("../images/p3_model_3.png"))
-                          .swiper-slide.stop-swiping
-                            svg(aria-hidden="true" viewBox="324.0,0,285,200")
-                              use(xlink:href="#model2")
-                            //- img(data-load-src=require("../images/p3_model_2.png"))
-                          .swiper-slide.stop-swiping
-                            svg(aria-hidden="true" viewBox="0,0,285,200")
-                              use(xlink:href="#model1")
-                            //- img(data-load-src=require("../images/p3_model_1.png"))
-                          .swiper-slide.stop-swiping
-                            svg(aria-hidden="true" viewBox="972.0,0,285,200")
-                              use(xlink:href="#model4")
-                            //- //img(data-load-src=require("../images/p3_model_4.png"))
+                          -
+                            var modelViewBoxs = [
+                              {
+                                mid: 3,
+                                region: [628.9, 0, 285, 200]
+                              },{
+                                mid: 2,
+                                region: [324.0, 0, 285, 200]
+                              },{
+                                mid: 1,
+                                region: [0, 0, 285, 200]
+                              },{
+                                mid: 4,
+                                region: [972.0, 0, 285, 200]
+                              }
+                            ]
+                          each mvb in modelViewBoxs
+                            .swiper-slide.stop-swiping(style=`padding-bottom:${parseFloat(mvb.region[3]) / parseFloat(mvb.region[2]) * 100}%`)
+                              +svguse("#model"+mvb.mid, mvb.region).wh100p
+                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                          //-   +svguse("#model3", [628.9,0,285,200]).wh100p
+                          //-   //- ???? 切换外链失败
+                          //-   //- img(data-load-src=require("../images/p3_model_3.png"))
+                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                          //-   +svguse("#model2", [324.0,0,285,200]).wh100p
+                          //-   //- img(data-load-src=require("../images/p3_model_2.png"))
+                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                          //-   +svguse("#model1", [0,0,285,200]).wh100p
+                          //-   //- img(data-load-src=require("../images/p3_model_1.png"))
+                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                          //-   +svguse("#model4", [972.0,0,285,200]).wh100p
+                          //-   //- img(data-load-src=require("../images/p3_model_4.png"))
                         .swiper-pagination
                       .p3-prev
                       .p3-next

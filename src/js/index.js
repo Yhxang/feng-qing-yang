@@ -13,19 +13,19 @@ import '../fonts/iconfont';
 import anime from 'animejs/lib/anime.es';
 
 import page from 'page.js';
-
-import Swiper, {
-  Scrollbar,
-  Navigation,
-  Mousewheel,
-  Parallax,
-  History,
-  HashNavigation,
-  Pagination,
-  EffectFade,
-  Thumbs,
-  Autoplay,
-} from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
+import Swiper from 'swiper';
+// import Swiper, {
+//   Scrollbar,
+//   Navigation,
+//   Mousewheel,
+//   Parallax,
+//   History,
+//   HashNavigation,
+//   Pagination,
+//   EffectFade,
+//   Thumbs,
+//   Autoplay,
+// } from 'swiper'; // Import Swiper and modules  // https://swiperjs.com/api/#custom-build
 import 'swiper/swiper.scss';
 
 // import 'swiper/components/scrollbar/scrollbar.scss';
@@ -71,17 +71,17 @@ class PageSwipers {
     modelDetailSwiperOption,
     newsSwiperOption,
   } = swiperOptions) {
-    Swiper.use([
-      Scrollbar,
-      Navigation,
-      Mousewheel,
-      Parallax,
-      History,
-      HashNavigation,
-      Pagination,
-      EffectFade,
-      Thumbs,
-      Autoplay]); // Install modules
+    // Swiper.use([
+    //   Scrollbar,
+    //   Navigation,
+    //   Mousewheel,
+    //   Parallax,
+    //   History,
+    //   HashNavigation,
+    //   Pagination,
+    //   EffectFade,
+    //   Thumbs,
+    //   Autoplay]); // Install modules
     this.mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
     this.mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
     this.techSwiper = new Swiper('.p2-contents', techOptions);

@@ -70,7 +70,7 @@
     "pixi.js-legacy": "^5.3.7",
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
-    "swiper": "^6.3.5",
+    "swiper": "^5.4.5",
     "vue": "^2.6.12"
   },
   "browserslist": "> 0.25%, not dead, not dead, IE 9-11",

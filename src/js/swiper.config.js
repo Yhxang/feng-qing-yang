@@ -45,18 +45,18 @@ const mainSwiperOption = {
     resize() {
       console.log('swiper resize!');
     },
-    slideChange(swiper) {
+    slideChange() {
       swiperAnimation.init(this).animate();
-      const { activeIndex } = swiper;
-      const slideHistory = swiper.slides[activeIndex].getAttribute('data-history');
+      const { activeIndex } = this;
+      const slideHistory = this.slides[activeIndex].getAttribute('data-history');
 
       if (pageHistory[pageHistory.length - 1] !== slideHistory) {
         pageHistory.push(slideHistory);
         window.history.pushState(null, '', slideHistory);
       }
     },
-    slideChangeTransitionStart(swiper) {
-      const { activeIndex } = swiper; // main swiper index
+    slideChangeTransitionStart() {
+      const { activeIndex } = this; // main swiper index
       if (activeIndex === 2) {
         const canvasTarget = document.querySelector('.p2-linebg-wrapper');
         if (!canvasTarget.classList.contains('has-canvas')) {
@@ -184,28 +184,28 @@ const techOptions = {
     slideChangeTransitionEnd() {
       mainSwiper.mousewheel.enable();
     },
-    transitionStart(swiper) {
+    transitionStart() {
       const {
         prevEl,
         nextEl,
-      } = swiper.params.navigation;
-      swiper.el.querySelectorAll([prevEl, nextEl].join(',')).forEach((nav) => {
+      } = this.params.navigation;
+      this.el.querySelectorAll([prevEl, nextEl].join(',')).forEach((nav) => {
         nav.classList.add('arrow-out');
       });
       // mainSwiper.destroy(false)
     },
-    transitionEnd(swiper) {
+    transitionEnd() {
       const {
         prevEl,
         nextEl,
-      } = swiper.params.navigation;
-      swiper.el.querySelectorAll([prevEl, nextEl].join(',')).forEach((nav) => {
+      } = this.params.navigation;
+      this.el.querySelectorAll([prevEl, nextEl].join(',')).forEach((nav) => {
         nav.classList.remove('arrow-out');
       });
 
-      const scrollbarDrag = swiper.el.querySelector('.swiper-scrollbar-drag');
+      const scrollbarDrag = this.el.querySelector('.swiper-scrollbar-drag');
 
-      if (swiper.activeIndex === swiper.slides.length - 1) {
+      if (this.activeIndex === this.slides.length - 1) {
         scrollbarDrag.classList.add('dragged-end');
       } else {
         scrollbarDrag.classList.remove('dragged-end');
