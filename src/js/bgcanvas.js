@@ -1,5 +1,14 @@
 import * as PIXI from 'pixi.js';
 // import * as PIXI from 'pixi.js-legacy';
+// console.log(111)
+
+// function webGLSupported() {
+//   const canvas = document.createElement('canvas');
+//   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+//   return gl;
+// }
+// console.log(webGLSupported(),22);
+
 const imgspriteSrc = require('../images/p0_canvasimg.png');
 
 // const type = "WebGL";

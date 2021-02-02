@@ -1,12 +1,17 @@
+/* eslint-disable max-len */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const request = require('request');
+
 // const tinyPngWebpackPlugin = require('tinypng-webpack-plugin');
 const {
   CleanWebpackPlugin,
 } = require('clean-webpack-plugin');
+// const { request } = require('express');
 
 const config = {
   entry: {
@@ -31,10 +36,53 @@ const config = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    // contentBase: path.join(__dirname, 'cn/'),
     // compress: true,
     port: 9000,
+    publicPath: '/dist/',
+    // index: 'cn/index.html',
     // publicPath: '/'
+    // historyApiFallback: {
+    //   rewrites: [
+    //     { from: /((?<!^en\/).)*$/, to: '/dist/cn/index.html' },
+    //     { from: /en\/.*/, to: '/dist/en/index.html' },
+    //     // { from: /^\/dist\/(home|G-POWER|products-service|applications|media|partner|footer)$/, to: 'cn/index.html' },
+    //   ],
+    // },
+    // eslint-disable-next-line no-unused-vars
+    before(app, server, compiler) {
+      app.get('/api.php', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+        res.setHeader('Access-Control-Allow-Headers', 'Authorization,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,RequestID,X-Content-Type-Options,X-Content-Type-Options,X-Frame-Options,X-Powered-By,X-Version,x-xss-protection,Strict-Transport-Security'); // If needed
+        res.setHeader('Access-Control-Allow-Credentials', true); // If neede
+
+        const redirectURL = `http://g-powertech.com.cn${req.path}`;
+        delete req.headers.host;
+        request.get({
+          url: redirectURL,
+          qs: req.query,
+        }, (error, response) => {
+          if (response) {
+            if (response.statusCode !== 200 && response.statusCode !== 201) {
+              res.status(response.statusCode).send(response.body ? response.body : '');
+            } else {
+              let resMsg = response.body;
+              console.log(req.query);
+              resMsg = resMsg.replace(new RegExp('(?=\\\\/uploadfile)', 'g'), `http:\\/\\/${req.query.lang === 'en' ? 'en.' : ''}g-powertech.com.cn`);
+              res.send(resMsg);
+            }
+          } else {
+            // next(createError(404));
+          }
+        });
+      });
+    },
+  },
+  resolve: {
+    alias: {
+      path: require.resolve('path-browserify'),
+    },
   },
   module: {
     rules: [
@@ -119,7 +167,7 @@ const config = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|webp|svg)$/,
+        test: /\.(png|jpg|gif|webp|svg|mp4)$/,
         exclude: [
           path.resolve(__dirname, 'src/fonts'),
         ],
@@ -215,6 +263,7 @@ const config = {
     //     //filename: '[name].pug'
     //     //template: path.resolve(__dirname, `../pages/${page}.html`),
     // })
+    // new BundleAnalyzerPlugin(), // 依赖分析
   ],
 };
 

@@ -191,8 +191,8 @@ body {
   font-family: $primaryFont, Helvetica;
   font-weight: normal;
   font-size: inherit;
-  background: url("../images/bg_point.png") 0 0 repeat;
-  background-attachment: fixed;
+  // background: url("../images/bg_point.png") 0 0 repeat;
+  // background-attachment: fixed;
 
   @include media-breakpoint-down(md) {
     background-size: 42px;
@@ -226,6 +226,8 @@ body {
   width: 100%;
   //height: 100vh;
   overflow: hidden;
+  background: url("../images/bg_point.png") 0 0 repeat;
+  background-attachment: fixed;
 }
 
 // .c-header-btn {
@@ -555,9 +557,10 @@ body {
   transition-duration: 0.8s;
   transition-delay: -0.1s;
   overflow: hidden;
+  z-index: auto;
 
   .is-loaded & {
-    transform: translate3d(0, 0, 0);
+    transform: none;
   }
 }
 
@@ -581,6 +584,7 @@ body {
 // }
 main.swiper-wrapper{
   height: auto;
+  z-index: auto;
 }
 @include media-breakpoint-down(md) {
   main.swiper-wrapper::after{
@@ -598,7 +602,7 @@ main.swiper-wrapper{
 }
 
 .section-slide {
-  transform: translateZ(0); // fix swiper flash
+  // transform: translateZ(0); // fix swiper flash
   //min-height: 667px;
 }
 
@@ -838,6 +842,7 @@ $logo-layout-height-sm: 151px;
   width: $wrapper-width;
   height: $wrapper-height;
   transform: translate3d(-50%, -50%, 0);
+  // mix-blend-mode: darken;
 
   @include media-breakpoint-down(md) {
     width: pxToRem($wrapper-width-md, md); //$wrapper-width * 2 / 3;
@@ -1560,6 +1565,9 @@ $title-font-size: pxToRem(26px);
   color: $logoCol;
   font-size: pxToRem(20px, xl);
   line-height: 1.2; //pxToRem(30px);
+  @media all and (-ms-high-contrast:none){
+    padding-top: 4px;
+  }
 
   strong {
     white-space: nowrap;

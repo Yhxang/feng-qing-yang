@@ -63,7 +63,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                 li 
                   a.text-current(href="./"+key.replace("&",""),class=key)
                     span.menu-link(data-title= val)= val
-            a.langBtn(href= locHref)
+            a.langBtn(href= `http://${language == 'cn' ? `en.` : '' }g-powertech.com.cn/`)
         //- .menu-bottom
         //-   img(data-load-src=require("../images/menu_bottom.png"))
       //- .c-menubox-blur
@@ -262,7 +262,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
                             ]
                           each mvb in modelViewBoxs
                             .swiper-slide.stop-swiping(style=`padding-bottom:${parseFloat(mvb.region[3]) / parseFloat(mvb.region[2]) * 100}%`)
-                              +svguse("#model"+mvb.mid, mvb.region).wh100p
+                              +svguse("#model" + mvb.mid, mvb.region).wh100p
                           //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
                           //-   +svguse("#model3", [628.9,0,285,200]).wh100p
                           //-   //- ???? 切换外链失败

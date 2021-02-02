@@ -1,4 +1,4 @@
-import 'animate.css';
+// import 'animate.css';
 // import '@babel/polyfill';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -14,6 +14,7 @@ import anime from 'animejs/lib/anime.es';
 
 import page from 'page.js';
 import Swiper from 'swiper';
+// swiper v5+ Import Swiper and modules
 // import Swiper, {
 //   Scrollbar,
 //   Navigation,
@@ -211,7 +212,6 @@ class PageSwipers {
       return new Promise((resolve, reject) => {
         const loadSrc = $imgEle.getAttribute('data-load-src');
         const tagName = $imgEle.tagName.toLowerCase();
-        //console.log(tagName)
         if (loadSrc) {
           if (tagName === 'img') {
             $imgEle.src = loadSrc;
@@ -244,7 +244,7 @@ class PageSwipers {
     }).catch((err) => {
       console.log(`Images load err: ${err}`);
     });
-    console.log(AllSwipers);
+    // console.log(AllSwipers);
     // 初始化路由
     const router = new PageRouter(AllSwipers.mainSwiper);
     router.getPagesFromNav();

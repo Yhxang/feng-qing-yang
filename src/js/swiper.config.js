@@ -54,6 +54,7 @@ const mainSwiperOption = {
         pageHistory.push(slideHistory);
         window.history.pushState(null, '', slideHistory);
       }
+      console.log(this.activeIndex, 'activeIndex');
     },
     slideChangeTransitionStart() {
       const { activeIndex } = this; // main swiper index
