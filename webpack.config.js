@@ -68,7 +68,6 @@ const config = {
               res.status(response.statusCode).send(response.body ? response.body : '');
             } else {
               let resMsg = response.body;
-              console.log(req.query);
               resMsg = resMsg.replace(new RegExp('(?=\\\\/uploadfile)', 'g'), `http:\\/\\/${req.query.lang === 'en' ? 'en.' : ''}g-powertech.com.cn`);
               res.send(resMsg);
             }

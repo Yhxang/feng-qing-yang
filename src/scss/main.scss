@@ -602,7 +602,7 @@ main.swiper-wrapper{
 }
 
 .section-slide {
-  // transform: translateZ(0); // fix swiper flash
+  transform: translateZ(0); // fix swiper flash
   //min-height: 667px;
 }
 

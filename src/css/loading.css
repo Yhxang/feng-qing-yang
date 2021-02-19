@@ -67,7 +67,8 @@
 
 @font-face {
   font-family: "Source Han Sans CN Regular";
-  src: url("../fonts/Source_Han_Sans_CN_Regular.woff2") format("woff2"),
+  src: local("Source Han Sans CN Regular"),
+    url("../fonts/Source_Han_Sans_CN_Regular.woff2") format("woff2"),
     url("../fonts/Source_Han_Sans_CN_Regular.woff") format("woff"),
     url("../fonts/Source_Han_Sans_CN_Regular.ttf") format("truetype"),
     url("../fonts/Source_Han_Sans_CN_Regular.eot") format("embedded-opentype"),
