@@ -56,7 +56,6 @@
     url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
     url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
-
 @font-face {
   font-family: 'swiper-icons';
   src: url("data:application/font-woff;charset=utf-8;base64, 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") format("woff");
@@ -3650,6 +3649,15 @@ main.swiper-wrapper {
       transform: scaleX(-1);
 }
 
+@media (max-width: 991.98px) {
+  .p1-contents .swiper-button-prev {
+    left: 5vw;
+  }
+  .p1-contents .swiper-button-next {
+    right: 5vw;
+  }
+}
+
 .p1-slide-tip {
   position: absolute;
   top: 100%;
@@ -3669,17 +3677,66 @@ main.swiper-wrapper {
 .media-slide .media-content {
   width: 100%;
   height: 100%;
-  background-position: left bottom;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.media-slide.media-slide-1 .media-content {
+  background-position: left bottom;
 }
 
 [lang="en"] .media-slide .media-content {
   background-position: left top;
 }
 
-.media-slide img {
-  width: 100%;
+.p1-msc2-left {
+  position: absolute;
+  left: 13%;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.p1-msc2-left p {
+  color: white;
+  margin-top: 8.1rem;
+  font-size: 1.1rem;
+  line-height: 1.75rem;
+}
+
+@media (max-width: 1199.98px) {
+  .p1-msc2-left p {
+    margin-top: 5.5rem;
+  }
+}
+
+@media (max-width: 749.98px) {
+  .p1-msc2-left p {
+    margin-top: 3.75rem;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .p1-msc2-lt {
+    width: 13rem;
+  }
+}
+
+@media (max-width: 749.98px) {
+  .p1-msc2-lt {
+    width: 10rem;
+  }
+}
+
+.p1-msc2-right {
+  position: absolute;
+  margin-left: -290px;
+  margin-right: -309px;
+  margin-top: -172px;
+  left: 71.3%;
+  top: 47.2%;
 }
 
 .p1-detail {
@@ -6098,4 +6155,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?995b2*/
+/*# sourceMappingURL=index.css.map?4d05e*/

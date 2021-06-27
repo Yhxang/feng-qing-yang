@@ -117,14 +117,30 @@ html(lang= language=="cn" ? "zh-CN" : language)
                 .p1-contents-height
                   #p1-contents.p1-contents.swiper-container
                     .swiper-wrapper
-                      - var multimediaNums = 1;
-                      -for(var x = 1; x <= multimediaNums; x++)
+                      //- - var multimediaNums = 1;
+                      //- -for(var x = 1; x <= multimediaNums; x++)
                         .swiper-slide.media-slide
                           .media-content(style= {
                             "background-image": `url(${require(`../images/p1_multi_${language}_${x}.jpg`)})`
                           })
-                          //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
-                            span="P"+x+" DETAIL"
+                      .swiper-slide.media-slide.media-slide-1
+                        .media-content(style= {
+                          "background-image": `url(${require(`../images/p1_multi_${language}_1.jpg`)})`
+                        })
+                        //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
+                          span="P"+x+" DETAIL"
+                      .swiper-slide.media-slide.media-slide-2
+                        .media-content(style= {
+                          "background-image": `url(${require(`../images/p1_multi_${language}_2.jpg`)})`
+                        })
+                        //- img.p1-msc2-right(src=require("../images/p1_multi_2_r.png"))
+                        .p1-msc2-left 
+                          img.p1-msc2-lt(src=require("../images/p1_multi_2_lt.png"))
+                          p.
+                            创造性的“异源同构”开发思路<br>
+                            深度差异化的“超级矩阵”开发平台<br>
+                            兼容15+电堆品牌 30+电堆产品<br>
+                            开发周期降低80%
                       
                     .swiper-button-prev
                     .swiper-button-next
