@@ -123,12 +123,6 @@ html(lang= language=="cn" ? "zh-CN" : language)
                           .media-content(style= {
                             "background-image": `url(${require(`../images/p1_multi_${language}_${x}.jpg`)})`
                           })
-                      .swiper-slide.media-slide.media-slide-1
-                        .media-content(style= {
-                          "background-image": `url(${require(`../images/p1_multi_${language}_1.jpg`)})`
-                        })
-                        //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
-                          span="P"+x+" DETAIL"
                       .swiper-slide.media-slide.media-slide-2
                         .media-content(style= {
                           "background-image": `url(${require(`../images/p1_multi_${language}_2.jpg`)})`
@@ -141,6 +135,14 @@ html(lang= language=="cn" ? "zh-CN" : language)
                             深度差异化的“超级矩阵”开发平台<br>
                             兼容15+电堆品牌 30+电堆产品<br>
                             开发周期降低80%
+                            
+                      .swiper-slide.media-slide.media-slide-1
+                        .media-content(style= {
+                          "background-image": `url(${require(`../images/p1_multi_${language}_1.jpg`)})`
+                        })
+                        //- a.p1-detail(data-swiper-parallax-x="100" data-swiper-parallax-opacity="0")
+                          span="P"+x+" DETAIL"
+                      
                       
                     .swiper-button-prev
                     .swiper-button-next
@@ -240,66 +242,99 @@ html(lang= language=="cn" ? "zh-CN" : language)
               //-   p NO CARBON EMISSION
               block productConts
                 -
-                  var productData = {
-                    tit: "/CHIGMA系列",
-                    paragraph: [
-                      '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
-                      '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。',
-                      '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并已与诸多国内主机厂商开展战略合作和产品应用落地。',
-                      '此外，体积小巧的<strong>CHIGMA 10</strong>燃料电池系统专为叉车、智能搬运等批量化轻载作业设备量身打造，使<strong>CHIGMA</strong>系列成为可为用户提供完善的全功率覆盖动力解决方案的产品系列。'
-                    ]
-                  }
-              .p3-contents.container-fluid
-                .row
-                  .p3-cont-left.col-sm-12.col-md-6
-                    .p3-prodect-title.clearfix
-                      //- img.p3-prodect-index(data-load-src=require("../images/p3_index.svg"))
-                      .p3-prodect-index
-                        include ../images/p3_index_inc.svg
-                      h3.p3-prodect-tittext= productData.tit
-                    .p3-product-region
-                      .p3-product-msg.swiper-containers
-                        .swiper-wrapper
-                          -
-                            var modelViewBoxs = [
-                              {
-                                mid: 3,
-                                region: [628.9, 0, 285, 200]
-                              },{
-                                mid: 2,
-                                region: [324.0, 0, 285, 200]
-                              },{
-                                mid: 1,
-                                region: [0, 0, 285, 200]
-                              },{
-                                mid: 4,
-                                region: [972.0, 0, 285, 200]
-                              }
-                            ]
-                          each mvb in modelViewBoxs
-                            .swiper-slide.stop-swiping(style=`padding-bottom:${parseFloat(mvb.region[3]) / parseFloat(mvb.region[2]) * 100}%`)
-                              +svguse("#model" + mvb.mid, mvb.region).wh100p
-                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
-                          //-   +svguse("#model3", [628.9,0,285,200]).wh100p
-                          //-   //- ???? 切换外链失败
-                          //-   //- img(data-load-src=require("../images/p3_model_3.png"))
-                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
-                          //-   +svguse("#model2", [324.0,0,285,200]).wh100p
-                          //-   //- img(data-load-src=require("../images/p3_model_2.png"))
-                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
-                          //-   +svguse("#model1", [0,0,285,200]).wh100p
-                          //-   //- img(data-load-src=require("../images/p3_model_1.png"))
-                          //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
-                          //-   +svguse("#model4", [972.0,0,285,200]).wh100p
-                          //-   //- img(data-load-src=require("../images/p3_model_4.png"))
-                        .swiper-pagination
-                      .p3-prev
-                      .p3-next
-                  .p3-cont-right.stop-swiping.col-sm-11.col-md-6
-                    .p3-paragraph
-                      .p3-vertical-border
-                      each data in productData.paragraph
-                        p!= data
+                  var seriesData = [
+                    {
+                      tit: "SINGULAR系列",
+                      paragraph: [
+                        'G-Power风氢扬科技的新一代产品 - <strong>SINGULAR元极</strong>，源于我们对氢能世界的不断探索，就像“奇点（Singularity）”大爆炸后形成了我们所生存的宇宙。',
+                        '<strong>SINGULAR元极</strong>，基于创造性的“异源同构” 开发策略，以及深度差异化的“超级矩阵”开发平台，采用了双层级式系统构架，从而在通用化平台下，通过快速适配层设计与交互式主动学习决策系统，实现PLUG IN/OUT型燃料电池系统的短周期开发与OTA持续迭代升级。',
+                        '它将平台化、模块化、标准化三大趋势注入产品基因，首先打通平台原理，在系统整体架构不变的条件下实现关键零部件兼容；同时通过硬件层、应用层、扩展层的三位一体分层结构实现控制策略平台化；并在各子系统领域进行模块化设计，高效解决系统匹配及终端应用问题；再从零部件、对外接口、整车应用方案三个层次树立标准化定义，无不体现出对终端需求的精准理解与响应。初代开发平台覆盖110kW-130kW系统功率范围，可满足重卡、工程机械、港口机械、市政环卫等场景应用需求，未来两年将扩展至300kW以上。机械、市政环卫等场景应用需求，未来两年将扩展至300kW以上。',
+                        '<br>'
+                      ]
+                    },{
+                      tit: "CHIGMA系列",
+                      paragraph: [
+                        '<strong>CHIGMA</strong>系列燃料电池系统是G-POWER风氢扬科技基于用户的多样化需求开发而成的65kW至125kW的中、高功率产品系列。该系列产品采用大功率单堆方案和一体式模块化设计，通过持续优化的控制策略和集成设计实现长寿命、大功率、小体积等行业领先优势。',
+                        '<strong>CHIGMA 120</strong>燃料电池系统专为重卡长时间运行、高负载率及工况恶劣等特点打造，通过整车控制策略、系统集成、核心零部件三大核心领域的技术提升，从而拥有更长寿命、更高集成度和更高可靠性，满足重卡车辆持续高速工况的需求，同时还将实现全生命周期的成本降低。',
+                        '<strong>CHIGMA 60</strong>及<strong>CHIGMA 80</strong>燃料电池系统可为市内物流、城市公交、城际货运、市政环卫、工程服务等车辆提供稳定可靠的零排动力，并已与诸多国内主机厂商开展战略合作和产品应用落地。',
+                        '此外，体积小巧的<strong>CHIGMA 10</strong>燃料电池系统专为叉车、智能搬运等批量化轻载作业设备量身打造，使<strong>CHIGMA</strong>系列成为可为用户提供完善的全功率覆盖动力解决方案的产品系列。'
+                      ]
+                    },
+                  ]
+              .p3-prodect-title
+                //- img.p3-prodect-index(data-load-src=require("../images/p3_index.svg"))
+                .p3-prodect-index
+                  include ../images/p3_index_inc.svg
+                div.swiper-container.p3-series-title
+                    .swiper-wrapper
+                      each productData in seriesData
+                        .swiper-slide
+                          h3.p3-prodect-tittext= productData.tit
+                
+              .p3-contents-swiper.swiper-container
+                .swiper-wrapper
+                  .swiper-slide.series-slide.row
+                    .p3-cont-left.col-sm-12.col-md-5
+                      .p3-product-region
+                         #p3-product-msg-2.p3-product-msg
+                          img.p3_model2.w100p(src=require("../images/p3_model2_1.png"), alt="")
+
+                    .p3-cont-right.col-sm-11.col-md-7
+                      .p3-paragraph.-stop-swiping
+                        .p3-vertical-border
+                        each data in seriesData[0].paragraph
+                          p!= data
+
+                  .swiper-slide.series-slide.row
+                    .p3-cont-left.col-sm-12.col-md-6
+                      //- .p3-prodect-title.clearfix
+                      //-   //- img.p3-prodect-index(data-load-src=require("../images/p3_index.svg"))
+                      //-   .p3-prodect-index
+                      //-     include ../images/p3_index_inc.svg
+                      //-   h3.p3-prodect-tittext= productData.tit
+                      .p3-product-region
+                        #p3-product-msg-1.p3-product-msg.swiper-container
+                          .swiper-wrapper
+                            -
+                              var modelViewBoxs = [
+                                {
+                                  mid: 3,
+                                  region: [628.9, 0, 285, 200]
+                                },{
+                                  mid: 2,
+                                  region: [324.0, 0, 285, 200]
+                                },{
+                                  mid: 1,
+                                  region: [0, 0, 285, 200]
+                                },{
+                                  mid: 4,
+                                  region: [972.0, 0, 285, 200]
+                                }
+                              ]
+                            each mvb in modelViewBoxs
+                              .swiper-slide.stop-swiping(style=`padding-bottom:${parseFloat(mvb.region[3]) / parseFloat(mvb.region[2]) * 100}%`)
+                                +svguse("#model" + mvb.mid, mvb.region).wh100p
+                            //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                            //-   +svguse("#model3", [628.9,0,285,200]).wh100p
+                            //-   //- ???? 切换外链失败
+                            //-   //- img(data-load-src=require("../images/p3_model_3.png"))
+                            //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                            //-   +svguse("#model2", [324.0,0,285,200]).wh100p
+                            //-   //- img(data-load-src=require("../images/p3_model_2.png"))
+                            //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                            //-   +svguse("#model1", [0,0,285,200]).wh100p
+                            //-   //- img(data-load-src=require("../images/p3_model_1.png"))
+                            //- .swiper-slide.stop-swiping(style=`padding-bottom:${200 / 285 * 100}%`)
+                            //-   +svguse("#model4", [972.0,0,285,200]).wh100p
+                            //-   //- img(data-load-src=require("../images/p3_model_4.png"))
+                          .swiper-pagination
+                        .p3-prev
+                        .p3-next
+                    .p3-cont-right.col-sm-11.col-md-6
+                      .p3-paragraph.-stop-swiping
+                        .p3-vertical-border
+                        each data in seriesData[1].paragraph
+                          p!= data
 
           //- page4:: 工程服务
           #section4.section-slide.sm-height-auto(data-history="products-service" data-hash="service")

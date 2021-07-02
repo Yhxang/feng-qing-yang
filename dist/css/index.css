@@ -50,11 +50,11 @@
 @font-face {
   font-family: "Source Han Sans CN Regular";
   src: local("Source Han Sans CN Regular"),
-    url(/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
-    url(/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
-    url(/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
-    url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
-    url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
+    url(/dist/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
 @font-face {
   font-family: 'swiper-icons';
@@ -2738,6 +2738,10 @@ figure {
   height: 100%;
 }
 
+.w100p {
+  width: 100%;
+}
+
 .wh100p {
   position: absolute;
   left: 0;
@@ -4256,28 +4260,33 @@ main.swiper-wrapper {
       transform-origin: left bottom;
 }
 
-.p3-contents {
+.p3-contents-swiper, .p3-contents {
   position: relative;
-  margin: 15vh auto 0;
+  margin: 29vh auto 0;
   padding: 0;
   width: 88.57143vw;
 }
 
-.p3-contents .row {
-  margin: 0;
-}
-
 @media (max-width: 749.98px) {
-  .p3-contents {
+  .p3-contents-swiper, .p3-contents {
     margin-top: 4.25rem;
+    margin-top: 0;
     width: auto;
+  }
+  .p3-contents-swiper .row, .p3-contents .row {
+    display: block;
   }
 }
 
+.series-slide {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+      align-items: flex-start;
+}
+
 .p3-cont-left {
-  width: 100vw;
-  margin-left: -1.875rem;
-  margin-right: -1.875rem;
+  overflow: hidden;
 }
 
 @media (min-width: 576px) {
@@ -4285,6 +4294,13 @@ main.swiper-wrapper {
     margin-left: auto;
     margin-right: auto;
     width: 100vw;
+  }
+}
+
+@media (min-width: 750px) {
+  .p3-cont-left {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -4297,15 +4313,26 @@ main.swiper-wrapper {
 }
 
 .p3-prodect-title {
-  position: relative;
+  position: absolute;
+  left: 5.71429vw;
+  top: 15vh;
+  width: 88.57143vw;
   overflow: hidden;
   z-index: 2;
 }
 
 @media (max-width: 749.98px) {
   .p3-prodect-title {
+    position: relative;
+    margin-top: 4.25rem;
+    left: auto;
+    top: auto;
     font-size: 0;
   }
+}
+
+.p3-series-title {
+  font-size: 0;
 }
 
 .p3-prodect-tittext,
@@ -4347,6 +4374,30 @@ main.swiper-wrapper {
   .p5-prodect-tittext br {
     display: inline;
   }
+}
+
+.p3-prodect-tittext {
+  opacity: .3;
+}
+
+@media (min-width: 576px) {
+  .p3-prodect-tittext {
+    font-size: 2.1rem;
+  }
+}
+
+.series-title-active .p3-prodect-tittext {
+  opacity: 1;
+}
+
+@media (min-width: 576px) {
+  .series-title-active .p3-prodect-tittext {
+    font-size: 2.4rem;
+  }
+}
+
+.series-title-active .p3-prodect-tittext::before {
+  content: '/';
 }
 
 @media (max-width: 749.98px) {
@@ -4423,7 +4474,6 @@ main.swiper-wrapper {
 }
 
 .p3-cont-right {
-  margin-top: 14vh;
   padding-left: 0;
   padding-right: 0;
   overflow: hidden;
@@ -4488,6 +4538,12 @@ main.swiper-wrapper {
   }
 }
 
+@media (max-width: 749.98px) {
+  .p3-cont-right {
+    overflow: hidden;
+  }
+}
+
 .p3-paragraph {
   position: relative;
   padding-left: 0.7rem;
@@ -4527,7 +4583,6 @@ main.swiper-wrapper {
 
 .p3-product-region {
   position: relative;
-  margin-top: -5.75vh;
 }
 
 @media (max-width: 749.98px) {
@@ -4541,6 +4596,17 @@ main.swiper-wrapper {
   padding-bottom: 7.5vh;
   overflow: hidden;
   text-align: center;
+}
+
+.p3-product-msg#p3-product-msg-2 {
+  position: relative;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .p3-product-msg#p3-product-msg-2 {
+    margin: auto;
+  }
 }
 
 .p3-product-msg .swiper-slide {
@@ -4600,6 +4666,12 @@ main.swiper-wrapper {
   left: auto;
   right: 0;
   background-image: url(../images/p3_next.png?515b4);
+}
+
+.p3_model2 {
+  padding-top: 5vh;
+  padding-bottom: 2.5vh;
+  max-width: none !important;
 }
 
 .p3-title {
@@ -6154,5 +6226,3 @@ footer.swiper-slide {
   opacity: .2;
 }
 
-
-/*# sourceMappingURL=index.css.map?4d05e*/

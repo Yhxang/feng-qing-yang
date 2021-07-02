@@ -6,6 +6,31 @@ const swiperAnimation = new SwiperAnimation();
 
 const pageHistory = [];
 const lineAnimCanvas = bgcanvas.app.view;
+
+function listenWheel(event) {
+  const delta = Math.sign(event.deltaY);
+  const { seriesSwiper } = window.AllSwipers;
+  if (seriesSwiper) {
+    if (seriesSwiper.realIndex === 0 && delta < 0) {
+      window.mainSwiper.allowSlidePrev = true;
+      setTimeout(() => {
+        window.mainSwiper.mousewheel.enable();
+        console.log('mousewheel enable, up');
+        window.removeEventListener('mousewheel', listenWheel, false);
+      }, 800);
+    }
+    if ((seriesSwiper.realIndex === seriesSwiper.slides.length - 1) && delta > 0) {
+      window.mainSwiper.allowSlideNext = true;
+      setTimeout(() => {
+        window.mainSwiper.mousewheel.enable();
+        console.log('mousewheel enable, down');
+        window.removeEventListener('mousewheel', listenWheel, false);
+      }, 800);
+    }
+  }
+  console.info(delta);
+}
+
 const mainSwiperOption = {
   direction: 'vertical', // 垂直切换选项
   // freeMode:true,
@@ -54,7 +79,7 @@ const mainSwiperOption = {
         pageHistory.push(slideHistory);
         window.history.pushState(null, '', slideHistory);
       }
-      console.log(this.activeIndex, 'activeIndex');
+      // console.log(this.activeIndex, 'activeIndex');
     },
     slideChangeTransitionStart() {
       const { activeIndex } = this; // main swiper index
@@ -91,6 +116,16 @@ const mainSwiperOption = {
       if (this.realIndex !== 0) {
         document.querySelector('html').classList.add('nav-on');
       }
+      if (this.realIndex === 3) {
+        this.mousewheel.disable();
+        console.log('slide end, main mousewheel disable');
+        this.allowSlideNext = false;
+        this.allowSlidePrev = false;
+        window.addEventListener('mousewheel', listenWheel, false);
+      } else {
+        this.allowSlideNext = true;
+        this.allowSlidePrev = true;
+      }
     },
   },
   // history: {
@@ -101,6 +136,7 @@ const mainSwiperOption = {
 
 const mediaSwiperOption = {
   speed: 1100,
+  initialSlide: 1,
   // loop: true,
   parallax: true,
   nested: true, // 阻止父级切换
@@ -212,6 +248,95 @@ const techOptions = {
         scrollbarDrag.classList.remove('dragged-end');
       }
     },
+  },
+};
+
+const seriesControlerSwiperOption = {
+  direction: 'vertical',
+  // autoHeight: true,
+  // loop: true,
+  nested: true,
+  resistanceRatio: 0,
+  // observer: true,
+  // observeSlideChildren: true,
+  mousewheel: true,
+  slidesPerView: 2,
+  watchSlidesVisibility: true,
+  slideToClickedSlide: true,
+  // centeredSlides: true,
+  updateOnWindowResize: true,
+};
+
+const seriesSwiperOption = {
+  // effect: 'fade',
+  // fadeEffect: {
+  //   crossFade: true,
+  // },
+  autoHeight: true,
+  direction: 'horizontal', // 'vertical',
+  resistanceRatio: 0,
+  updateOnWindowResize: true,
+  mousewheel: {
+    eventsTarged: '#section3',
+    releaseOnEdges: true,
+  },
+  nested: true,
+  thumbs: {
+    swiper: {
+      el: '.p3-series-title',
+      ...seriesControlerSwiperOption,
+    },
+    slideThumbActiveClass: 'series-title-active',
+    autoScrollOffset: 1,
+  },
+  breakpoints: {
+    768: {
+      direction: 'vertical',
+    },
+  },
+  on: {
+    slideChange() {
+      window.mainSwiper.allowSlidePrev = false;
+      window.mainSwiper.allowSlideNext = false;
+      console.log('slideChange: Do NOT allow main swiper slide Next');
+    },
+    slideChangeTransitionEnd(swiper) {
+      console.log('swiper:' + swiper);
+      if (this.activeIndex === 0) {
+        window.mainSwiper.allowSlidePrev = true;
+        console.log('Allow main swiper slide Prev');
+        // setTimeout(() => {
+        //   // window.mainSwiper.slidePrev();
+        //   window.mainSwiper.mousewheel.enable();
+        //   console.log('mousewheel enable, up');
+        //   // window.removeEventListener('mousewheel', listenWheel, false);
+        // }, 800);
+      } else if (this.activeIndex === this.slides.length - 1) {
+        window.mainSwiper.allowSlideNext = true;
+        console.log('Allow main swiper slide Next');
+      } else {
+        window.mainSwiper.allowSlidePrev = false;
+        window.mainSwiper.allowSlideNext = false;
+        console.log('slideChangeEnd: Do NOT allow main swiper slide Next');
+      }
+    },
+    // slideChangeTransitionEnd(swiper) {
+    //   console.log()
+    //   function listenWheel(event) {
+    //     const delta = Math.sign(event.deltaY);
+    //     if (swiper.realIndex === 0 && delta < 0) {
+    //       window.mainSwiper.slidePrev();
+    //       window.mainSwiper.mousewheel.enable();
+    //     }
+    //     if ((swiper.realIndex === swiper.slides.length - 1) && delta > 0) {
+    //       window.mainSwiper.slideNext();
+    //       window.mainSwiper.mousewheel.enable();
+    //     }
+    //     console.info(delta);
+    //     window.removeEventListener('mousewheel', listenWheel, false);
+    //   }
+    //   window.addEventListener('mousewheel', listenWheel, false);
+    // },
   },
 };
 
@@ -336,6 +461,8 @@ export {
   mainSwiperOption,
   mediaSwiperOption,
   techOptions,
+  seriesControlerSwiperOption,
+  seriesSwiperOption,
   produtionSwiperOption,
   supportSwiperOption,
   modelsThumbSwiperOption,

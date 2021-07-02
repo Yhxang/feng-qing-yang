@@ -66,6 +66,8 @@ class PageSwipers {
     mainSwiperOption,
     mediaSwiperOption,
     techOptions,
+    // seriesControlerSwiperOption,
+    seriesSwiperOption,
     produtionSwiperOption,
     supportSwiperOption,
     modelsThumbSwiperOption,
@@ -86,7 +88,14 @@ class PageSwipers {
     this.mainSwiper = new Swiper('.o-scroll', mainSwiperOption);
     this.mediaSwiper = new Swiper('.p1-contents', mediaSwiperOption);
     this.techSwiper = new Swiper('.p2-contents', techOptions);
-    this.produtionSwiper = new Swiper('.p3-product-msg', produtionSwiperOption);
+    // this.seriesControlerSwiper = new Swiper('.p3-series-title', seriesControlerSwiperOption);
+    // Object.assign(seriesSwiperOption, {
+    //   thumbs: {
+    //     swiper: this.seriesControlerSwiper,
+    //   },
+    // });
+    this.seriesSwiper = new Swiper('.p3-contents-swiper', seriesSwiperOption);
+    this.produtionSwiper = new Swiper('#p3-product-msg-1', produtionSwiperOption);
     this.supportSwiper = new Swiper('.p5-contents', supportSwiperOption);
     this.modelsThumbSwiper = new Swiper('.p6-thumb', modelsThumbSwiperOption);
     Object.assign(modelDetailSwiperOption, {
@@ -105,6 +114,11 @@ class PageSwipers {
   const logogif = $$('#logo-gif-img');
   const lineAnimCanvas = bgcanvas.app.view;
   let AllSwipers;
+
+  // window.addEventListener('mousewheel', (event) => {
+  //   const delta = Math.sign(event.deltaY);
+  //   console.info(delta);
+  // });
 
   const lang = docEl.getAttribute('lang');
 
@@ -126,12 +140,15 @@ class PageSwipers {
     // console.log(swiperOptions.mainSwiperOption)
 
     AllSwipers = new PageSwipers(swiperOptions);
+    window.AllSwipers = AllSwipers;
     window.mainSwiper = AllSwipers.mainSwiper;
     const resizeHandler = () => {
       // if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
       if (window.innerWidth < 768.001) {
         AllSwipers.mainSwiper.params.freeMode = true;
         swiperOptions.mainSwiperOption.freeMode = true;
+        // window.mainSwiper.allowSlidePrev = true;
+        // window.mainSwiper.allowSlideNext = true;
         console.log('Freemode true');
       } else {
         AllSwipers.mainSwiper.params.freeMode = false;
@@ -140,6 +157,7 @@ class PageSwipers {
       }
 
       AllSwipers.mainSwiper.update();
+      // AllSwipers.seriesSwiper.update();
     };
     window.addEventListener('resize', resizeHandler);
     resizeHandler();
