@@ -274,7 +274,9 @@ html(lang= language=="cn" ? "zh-CN" : language)
               .p3-contents-swiper.swiper-container
                 .swiper-wrapper
                   .swiper-slide.series-slide.row
+                    
                     .p3-cont-left.col-sm-12.col-md-5
+                      h3.p3-prodect-tittext=  seriesData[0].tit
                       .p3-product-region
                          #p3-product-msg-2.p3-product-msg
                           img.p3_model2.w100p(src=require("../images/p3_model2_1.png"), alt="")
@@ -287,6 +289,7 @@ html(lang= language=="cn" ? "zh-CN" : language)
 
                   .swiper-slide.series-slide.row
                     .p3-cont-left.col-sm-12.col-md-6
+                      h3.p3-prodect-tittext=  seriesData[1].tit
                       //- .p3-prodect-title.clearfix
                       //-   //- img.p3-prodect-index(data-load-src=require("../images/p3_index.svg"))
                       //-   .p3-prodect-index

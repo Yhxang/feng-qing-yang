@@ -50,11 +50,11 @@
 @font-face {
   font-family: "Source Han Sans CN Regular";
   src: local("Source Han Sans CN Regular"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
-    url(/dist/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
+    url(/fonts/Source_Han_Sans_CN_Regular.woff2) format("woff2"),
+    url(/fonts/Source_Han_Sans_CN_Regular.woff) format("woff"),
+    url(/fonts/Source_Han_Sans_CN_Regular.ttf) format("truetype"),
+    url(/fonts/Source_Han_Sans_CN_Regular.eot) format("embedded-opentype"),
+    url(/fonts/Source_Han_Sans_CN_Regular.svg) format("svg");
 }
 @font-face {
   font-family: 'swiper-icons';
@@ -4272,6 +4272,10 @@ main.swiper-wrapper {
     margin-top: 4.25rem;
     margin-top: 0;
     width: auto;
+    overflow: visible;
+  }
+  .p3-contents-swiper > .swiper-wrapper, .p3-contents > .swiper-wrapper {
+    display: block;
   }
   .p3-contents-swiper .row, .p3-contents .row {
     display: block;
@@ -4285,8 +4289,14 @@ main.swiper-wrapper {
       align-items: flex-start;
 }
 
+@media (max-width: 991.98px) {
+  .series-slide {
+    padding-right: 0.75rem;
+  }
+}
+
 .p3-cont-left {
-  overflow: hidden;
+  font-size: 0;
 }
 
 @media (min-width: 576px) {
@@ -4328,11 +4338,21 @@ main.swiper-wrapper {
     left: auto;
     top: auto;
     font-size: 0;
+    width: 100vw;
+    margin-left: -1.875rem;
+    margin-right: -1.875rem;
   }
 }
 
 .p3-series-title {
   font-size: 0;
+  display: none;
+}
+
+@media (min-width: 750px) {
+  .p3-series-title {
+    display: block;
+  }
 }
 
 .p3-prodect-tittext,
@@ -4377,20 +4397,43 @@ main.swiper-wrapper {
 }
 
 .p3-prodect-tittext {
+  font-size: 1.5rem;
+  line-height: 1.2;
   opacity: .3;
 }
 
-@media (min-width: 576px) {
+.p3-prodect-tittext::before {
+  content: '/';
+}
+
+@media (min-width: 750px) {
   .p3-prodect-tittext {
     font-size: 2.1rem;
+    line-height: 2.9rem;
+  }
+  .p3-prodect-tittext::before {
+    content: '_';
+    opacity: 0;
+  }
+}
+
+.p3-cont-left .p3-prodect-tittext {
+  opacity: 1;
+  margin-left: -1.875rem;
+}
+
+@media (min-width: 750px) {
+  .p3-cont-left .p3-prodect-tittext {
+    display: none;
   }
 }
 
 .series-title-active .p3-prodect-tittext {
+  font-size: 0.75rem;
   opacity: 1;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 750px) {
   .series-title-active .p3-prodect-tittext {
     font-size: 2.4rem;
   }
@@ -4398,6 +4441,7 @@ main.swiper-wrapper {
 
 .series-title-active .p3-prodect-tittext::before {
   content: '/';
+  opacity: 1;
 }
 
 @media (max-width: 749.98px) {
@@ -4507,7 +4551,7 @@ main.swiper-wrapper {
 @media (max-width: 991.98px) {
   .p3-cont-right {
     margin: auto;
-    margin-top: 0.3125rem;
+    margin-top: 0.75rem;
     overflow: visible;
   }
   .p3-cont-right p {
@@ -4522,7 +4566,7 @@ main.swiper-wrapper {
     content: "";
     position: absolute;
     left: -0.75rem;
-    top: 0;
+    top: -0.75rem;
     width: 2.75rem;
     height: 3rem;
     background-image: url(../images/bracket_up.svg?ee98d);
@@ -4540,7 +4584,7 @@ main.swiper-wrapper {
 
 @media (max-width: 749.98px) {
   .p3-cont-right {
-    overflow: hidden;
+    overflow: visible;
   }
 }
 
@@ -6226,3 +6270,5 @@ footer.swiper-slide {
   opacity: .2;
 }
 
+
+/*# sourceMappingURL=index.css.map?a199b*/

@@ -1,35 +1,12 @@
 /* eslint-disable no-undef */
 import SwiperAnimation from '@cycjimmy/swiper-animation';
 import bgcanvas from './bgcanvas';
+import * as events from './events';
 
 const swiperAnimation = new SwiperAnimation();
 
 const pageHistory = [];
 const lineAnimCanvas = bgcanvas.app.view;
-
-function listenWheel(event) {
-  const delta = Math.sign(event.deltaY);
-  const { seriesSwiper } = window.AllSwipers;
-  if (seriesSwiper) {
-    if (seriesSwiper.realIndex === 0 && delta < 0) {
-      window.mainSwiper.allowSlidePrev = true;
-      setTimeout(() => {
-        window.mainSwiper.mousewheel.enable();
-        console.log('mousewheel enable, up');
-        window.removeEventListener('mousewheel', listenWheel, false);
-      }, 800);
-    }
-    if ((seriesSwiper.realIndex === seriesSwiper.slides.length - 1) && delta > 0) {
-      window.mainSwiper.allowSlideNext = true;
-      setTimeout(() => {
-        window.mainSwiper.mousewheel.enable();
-        console.log('mousewheel enable, down');
-        window.removeEventListener('mousewheel', listenWheel, false);
-      }, 800);
-    }
-  }
-  console.info(delta);
-}
 
 const mainSwiperOption = {
   direction: 'vertical', // 垂直切换选项
@@ -112,20 +89,12 @@ const mainSwiperOption = {
       });
     },
     slideChangeTransitionEnd() {
+      console.log('TransitionEnd');
       this.slides[this.realIndex].classList.add('first-active');
       if (this.realIndex !== 0) {
         document.querySelector('html').classList.add('nav-on');
       }
-      if (this.realIndex === 3) {
-        this.mousewheel.disable();
-        console.log('slide end, main mousewheel disable');
-        this.allowSlideNext = false;
-        this.allowSlidePrev = false;
-        window.addEventListener('mousewheel', listenWheel, false);
-      } else {
-        this.allowSlideNext = true;
-        this.allowSlidePrev = true;
-      }
+      events.mainSwiperTouchMoveAndMouseWheel(this.realIndex === 3);
     },
   },
   // history: {
@@ -136,7 +105,7 @@ const mainSwiperOption = {
 
 const mediaSwiperOption = {
   speed: 1100,
-  initialSlide: 1,
+  // initialSlide: 1,
   // loop: true,
   parallax: true,
   nested: true, // 阻止父级切换
@@ -290,7 +259,7 @@ const seriesSwiperOption = {
     autoScrollOffset: 1,
   },
   breakpoints: {
-    768: {
+    750.001: {
       direction: 'vertical',
     },
   },
@@ -298,45 +267,12 @@ const seriesSwiperOption = {
     slideChange() {
       window.mainSwiper.allowSlidePrev = false;
       window.mainSwiper.allowSlideNext = false;
-      console.log('slideChange: Do NOT allow main swiper slide Next');
+      console.log('slideChange: Do NOT allow main swiper slide');
     },
     slideChangeTransitionEnd(swiper) {
-      console.log('swiper:' + swiper);
-      if (this.activeIndex === 0) {
-        window.mainSwiper.allowSlidePrev = true;
-        console.log('Allow main swiper slide Prev');
-        // setTimeout(() => {
-        //   // window.mainSwiper.slidePrev();
-        //   window.mainSwiper.mousewheel.enable();
-        //   console.log('mousewheel enable, up');
-        //   // window.removeEventListener('mousewheel', listenWheel, false);
-        // }, 800);
-      } else if (this.activeIndex === this.slides.length - 1) {
-        window.mainSwiper.allowSlideNext = true;
-        console.log('Allow main swiper slide Next');
-      } else {
-        window.mainSwiper.allowSlidePrev = false;
-        window.mainSwiper.allowSlideNext = false;
-        console.log('slideChangeEnd: Do NOT allow main swiper slide Next');
-      }
+      events.mainSwiperTouchMoveAndMouseWheel(window.mainSwiper.realIndex === 3);
+      window.addEventListener('mousewheel', events.listenWheel, false);
     },
-    // slideChangeTransitionEnd(swiper) {
-    //   console.log()
-    //   function listenWheel(event) {
-    //     const delta = Math.sign(event.deltaY);
-    //     if (swiper.realIndex === 0 && delta < 0) {
-    //       window.mainSwiper.slidePrev();
-    //       window.mainSwiper.mousewheel.enable();
-    //     }
-    //     if ((swiper.realIndex === swiper.slides.length - 1) && delta > 0) {
-    //       window.mainSwiper.slideNext();
-    //       window.mainSwiper.mousewheel.enable();
-    //     }
-    //     console.info(delta);
-    //     window.removeEventListener('mousewheel', listenWheel, false);
-    //   }
-    //   window.addEventListener('mousewheel', listenWheel, false);
-    // },
   },
 };
 

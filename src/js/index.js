@@ -50,6 +50,7 @@ import  { mainSwiperOption,
   newsSwiperOption,
 } from './swiper.config';
 */
+import * as events from './events';
 import * as swiperOptions from './swiper.config';
 import PageRouter from './router';
 import {
@@ -57,6 +58,7 @@ import {
   formatStr,
 } from './utils';
 import urls from '../mock/urls';
+
 // import '../mock/mock.js'; // sideEffects
 
 const base = process.env.NODE_ENV === 'development' ? '/dist/' : '/';
@@ -114,7 +116,6 @@ class PageSwipers {
   const logogif = $$('#logo-gif-img');
   const lineAnimCanvas = bgcanvas.app.view;
   let AllSwipers;
-
   // window.addEventListener('mousewheel', (event) => {
   //   const delta = Math.sign(event.deltaY);
   //   console.info(delta);
@@ -142,25 +143,9 @@ class PageSwipers {
     AllSwipers = new PageSwipers(swiperOptions);
     window.AllSwipers = AllSwipers;
     window.mainSwiper = AllSwipers.mainSwiper;
-    const resizeHandler = () => {
-      // if(window.innerWidth<768.001&&(window.innerWidth/window.innerHeight>360/600)){
-      if (window.innerWidth < 768.001) {
-        AllSwipers.mainSwiper.params.freeMode = true;
-        swiperOptions.mainSwiperOption.freeMode = true;
-        // window.mainSwiper.allowSlidePrev = true;
-        // window.mainSwiper.allowSlideNext = true;
-        console.log('Freemode true');
-      } else {
-        AllSwipers.mainSwiper.params.freeMode = false;
-        swiperOptions.mainSwiperOption.freeMode = false;
-        console.log('Freemode false');
-      }
 
-      AllSwipers.mainSwiper.update();
-      // AllSwipers.seriesSwiper.update();
-    };
-    window.addEventListener('resize', resizeHandler);
-    resizeHandler();
+    window.addEventListener('resize', events.resizeHandler);
+    events.resizeHandler();
 
     // 获取新闻列表
     (function getNewsList() {
