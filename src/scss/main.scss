@@ -1795,6 +1795,13 @@ $title-font-size: pxToRem(26px);
   }
 }
 
+.series-title-slide{
+  order: 1;
+  &.series-title-active{
+    order: 0;
+  }
+}
+
 .p3-prodect-tittext,
 .p4-prodect-tittext,
 .p5-prodect-tittext {
@@ -2244,7 +2251,7 @@ $title-font-size: pxToRem(26px);
 
 .p4-prodect-title {
   position: relative;
-  margin: pxToVh(187px) 0 0 pxToVw(82px);
+  margin: pxToVh(187px) 0 0 pxToVw(82px, xl);
   width: pxToVw(848px, xl);
   text-align: justify;
   text-align-last: left;
@@ -2252,6 +2259,9 @@ $title-font-size: pxToRem(26px);
   [lang="en"] & {
     text-align: left;
     line-height: pxToRem(30px, xl);
+  }
+  @include media-breakpoint-down(md) {
+    margin-left: 0;
   }
 
   @include media-breakpoint-down(sm) {

@@ -124,8 +124,8 @@ const resizeHandler = () => {
         AllSwipers.seriesSwiper.destroy();
         AllSwipers.seriesSwiper = null;
       }
-      mainSwiperTouchMoveWhenSeriesMdDown();
-      window.removeEventListener('mousewheel', listenWheel, false);
+      // mainSwiperTouchMoveWhenSeriesMdDown();
+      // window.removeEventListener('mousewheel', listenWheel, false);
       console.log('remove listener mousewheel ');
     }
   } else if (AllSwipers) {
@@ -140,7 +140,7 @@ const resizeHandler = () => {
     if (!AllSwipers.seriesSwiper) {
       console.log('ReInit swiper');
       AllSwipers.seriesSwiper = new Swiper('.p3-contents-swiper', swiperOptions.seriesSwiperOption);
-      mainSwiperTouchMoveAndMouseWheel(AllSwipers.seriesSwiper.realIndex === 3);
+      // mainSwiperTouchMoveAndMouseWheel(AllSwipers.seriesSwiper.realIndex === 3);
     }
   }
 };
