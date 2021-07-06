@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import SwiperAnimation from '@cycjimmy/swiper-animation';
 import bgcanvas from './bgcanvas';
-import * as events from './events';
 
 const swiperAnimation = new SwiperAnimation();
 
@@ -202,18 +201,15 @@ const techOptions = {
 
 const seriesControlerSwiperOption = {
   direction: 'vertical',
-  // autoHeight: true,
   // loop: true,
-  nested: true,
-  resistanceRatio: 0,
-  // observer: true,
-  // observeSlideChildren: true,
+  // nested: true, // 打开的话会出现连续滑过的bug
+  // resistanceRatio: 0,
   // mousewheel: true,
-  slidesPerView: 2,
+  slidesPerView: 'auto',
   watchSlidesVisibility: true,
   slideToClickedSlide: true,
   // centeredSlides: true,
-  updateOnWindowResize: true,
+  // updateOnWindowResize: true,
 };
 
 const seriesSwiperOption = {
@@ -221,15 +217,19 @@ const seriesSwiperOption = {
   // fadeEffect: {
   //   crossFade: true,
   // },
-  autoHeight: true,
   direction: 'vertical',
-  resistanceRatio: 0,
-  updateOnWindowResize: true,
+  autoHeight: true,
+  observer: true,
+  observeSlideChildren: true, // 必须有，否则有外部swiper的情况下不能滑动
+  slidesPerView: 'auto',
+  // resistanceRatio: 0,
+  // updateOnWindowResize: true,
+  nested: true,
+  // mousewheel: true,
   mousewheel: {
     eventsTarged: '#section3',
-    releaseOnEdges: true,
+    // releaseOnEdges: true,
   },
-  nested: true,
   thumbs: {
     swiper: {
       el: '.p3-series-title',
@@ -240,7 +240,10 @@ const seriesSwiperOption = {
   },
   on: {
     slideChange() {
-      console.log('seriesSwiper slide')
+      console.log('seriesSwiper slide');
+    },
+    transitionEnd() {
+      this.update(true);
     },
   },
   /*

@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const request = require('request');
 
@@ -295,6 +296,15 @@ module.exports = (env, argv) => {
       //   key:'nDcZv7CzHYV25bVBW6mjPDjvx3RL8PrX',
       //   //proxy:'http://user:pass@192.168.0.1:8080'
       // })
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: false,
+            pure_funcs: ['console.log'], // 移除console
+          },
+        },
+      }),
     );
   }
 

@@ -1768,7 +1768,7 @@ $title-font-size: pxToRem(26px);
   top: pxToVh(120px, xl);
   width: pxToVw(1240px, xl);
   overflow: hidden;
-  z-index: 2;
+  // z-index: 2;
 
   @include media-breakpoint-down(md) {
     // width: 100vw;

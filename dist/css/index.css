@@ -4328,7 +4328,6 @@ main.swiper-wrapper {
   top: 15vh;
   width: 88.57143vw;
   overflow: hidden;
-  z-index: 2;
 }
 
 @media (max-width: 749.98px) {
@@ -6287,4 +6286,4 @@ footer.swiper-slide {
 }
 
 
-/*# sourceMappingURL=index.css.map?e3cb1*/
+/*# sourceMappingURL=index.css.map?3eb07*/
